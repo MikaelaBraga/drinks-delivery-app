@@ -26,8 +26,8 @@ module.exports = {
         onDelete: 'CASCADE',
         field: 'seller_id',
         references: {
-          model: 'salesProducts',
-          key: 'sale_id',
+          model: 'users',
+          key: 'id',
         },
       },
       total_price: {
