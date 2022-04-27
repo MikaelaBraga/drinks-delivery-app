@@ -19,8 +19,8 @@ module.exports = {
       },
       url_image: {
         allowNull: false,
-        default: '',
-        type: Sequelize.STRING(200)
+        defaultValue: '',
+        type: Sequelize.STRING(200),
       },
     });
   },
