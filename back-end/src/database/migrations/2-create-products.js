@@ -19,6 +19,7 @@ module.exports = {
       },
       ulr_image: {
         allowNull: false,
+        default: '',
         type: Sequelize.STRING(200)
       },
     });
