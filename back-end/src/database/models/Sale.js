@@ -20,11 +20,11 @@ module.exports = (sequelize, DataTypes) => {
   Sales.init({
     userId: { type: DataTypes.INTEGER, foreignKey: true },
     sellerId: { type: DataTypes.INTEGER, foreignKey: true },
-    total_price: DataTypes.DECIMAL,
-    delivery_address: DataTypes.STRING,
-    delivery_number: DataTypes.STRING,
+    total_price: DataTypes.DECIMAL(9,2),
+    delivery_address: DataTypes.STRING(100),
+    delivery_number: DataTypes.STRING(50),
     sale_date: DataTypes.DATE,
-    status: DataTypes.STRING
+    status: DataTypes.STRING(50)
   }, {
     sequelize,
     modelName: 'Sale',
