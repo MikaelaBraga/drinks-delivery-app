@@ -4,6 +4,6 @@ const productRouter = express.Router();
 
 // Adicionar rotas:
 // -getImage
-// -post
+// -postProduct
 
 module.exports = productRouter;
