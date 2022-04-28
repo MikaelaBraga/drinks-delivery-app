@@ -12,8 +12,6 @@ const login = async (user) => {
   const userFound = await getByEmail(email);
   if (!userFound) return null;
   const { id, password, role } = userFound;
-  console.log(md5(loginPassword));
-  console.log(password);
   if (md5(loginPassword) !== password) return null;
   const token = generateToken(id, role);
   return token;
