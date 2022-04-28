@@ -2,13 +2,16 @@ const registerRouter = require('./register');
 
 const loginRouter = require('./login');
 
-const productRouter = require('./product');
+const customerRouter = require('./customer');
 
-const saleRouter = require('./sale');
+const sellerRouter = require('./seller');
+
+const adminRouter = require('./admin');
 
 module.exports = {
   registerRouter,
   loginRouter,
-  productRouter,
-  saleRouter
+  customerRouter,
+  sellerRouter,
+  adminRouter
 };
