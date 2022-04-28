@@ -23,7 +23,9 @@ module.exports = (sequelize, DataTypes) => {
     role: DataTypes.STRING(20)
   }, {
     sequelize,
+    tableName: 'users',
     modelName: 'User',
+    timestamps: false,
   });
   return User;
 };
