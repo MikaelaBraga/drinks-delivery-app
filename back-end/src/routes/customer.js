@@ -9,6 +9,6 @@ const customerRouter = express.Router();
 // - Fazer checkout (gerar uma nova venda)
 // -- postSale
 // - Consultar pedidos e acessar detalhes do mesmo.
-// -- getSale
+// -- getSalesByUserId
 
 module.exports = customerRouter;
