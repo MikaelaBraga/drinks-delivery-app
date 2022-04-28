@@ -13,5 +13,5 @@ module.exports = {
   loginRouter,
   customerRouter,
   sellerRouter,
-  adminRouter
+  adminRouter,
 };
