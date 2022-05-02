@@ -28,9 +28,9 @@ const register = async (user) => {
   const token = generateToken(id, role);
 
   return token;
-}
+};
 
 module.exports = {
   login,
-  register
+  register,
 };
