@@ -17,6 +17,20 @@ const login = async (user) => {
   return token;
 };
 
+const register = async (user) => {
+  const { email, password, role } = user;
+
+  const userFound = await getByEmail(email);
+  if (userFound) return null;
+
+  const { id } = await User.create({ ...user, password: md5(password) });
+  
+  const token = generateToken(id, role);
+
+  return token;
+}
+
 module.exports = {
   login,
+  register
 };
