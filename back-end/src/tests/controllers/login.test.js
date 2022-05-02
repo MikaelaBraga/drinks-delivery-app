@@ -63,7 +63,7 @@ describe('Integration Test User Controller', () => {
       .send(mockBodyIncorrect)
       .end((err, res) => {
         expect(err).to.be.null;
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(404);
         expect(res.body).to.not.have.property(token);
       });
   });
