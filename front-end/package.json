@@ -11,9 +11,9 @@
     "start": "react-scripts start",
     "start:build": "PORT=3000 ./node_modules/.bin/serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts test -- --runInBand --detectOpenHandles --verbose",
-    "test:coverage": "react-scripts test -- --coverage",
-    "test:coverage:json": "react-scripts test -- --coverage --coverageReporters=\"json-summary\" --watchAll=false --testFailureExitCode=0 --detectOpenHandles --runInBand --forceExit",
+    "test": "react-scripts test --runInBand --detectOpenHandles --verbose",
+    "test:coverage": "react-scripts test --coverage",
+    "test:coverage:json": "react-scripts test --coverage --coverageReporters=\"json-summary\" --watchAll=false --testFailureExitCode=0 --detectOpenHandles --runInBand --forceExit",
     "eject": "react-scripts eject",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
     "lint:styles": "stylelint **/*.css --config .stylelintrc.json --ignore-disables --allow-empty-input"
