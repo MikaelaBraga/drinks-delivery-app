@@ -11,6 +11,19 @@ const login = async (req, res) => {
   }
 };
 
+const register = async (req, res) => {
+  const { body } = req;
+  try {
+    const token = await userService.register(body);
+    if (!token) return res.status(422).json({ message: 'E-mail already registered ' });
+
+    return res.status(201).json(token);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+};
+
 module.exports = {
   login,
+  register
 };
