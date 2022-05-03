@@ -13,10 +13,16 @@ describe('Unit Test Login', () => {
     password: 'senhaerrada'
   }
 
+  const mockBodyCorrect = {
+    name: 'Delivery App Admin',
+    email: 'adm@deliveryapp.com',
+    password: '--adm2@21!!--'
+  }
+
   const mockUser = {
     name: 'Delivery App Admin',
     email: 'adm@deliveryapp.com',
-    password: '--adm2@21!!--',
+    password: 'a4c86edecc5aee06eff8fdeda69e0d04',
     role: 'administrator'
   }
 
@@ -39,6 +45,14 @@ describe('Unit Test Login', () => {
     const userStub = sinon.stub(User, 'findOne').resolves(mockUser);
     const user = await userService.login(mockBodyIncorrect);
     expect(user).to.be.equal(null);
+    userStub.restore();
+  });
+
+  it('should return token if password matches', async () => {
+    const userStub = sinon.stub(User, 'findOne').resolves(mockUser);
+    const user = await userService.login(mockBodyCorrect);
+    const { token } = user;
+    expect(token).to.not.be.equal(null);
     userStub.restore();
   });
 
