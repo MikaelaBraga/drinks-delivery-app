@@ -1,6 +1,6 @@
 const joi = require('joi');
 
-const userRegister = joi.object({
+const registerCustomer = joi.object({
   name: joi.string().min(12).required().messages({
     'string.base': 'name must be a string',
     'string.min': 'name length must be at least 12 characters long',
@@ -18,4 +18,4 @@ const userRegister = joi.object({
   }),
 });
 
-module.exports = { userRegister };
+module.exports = { registerCustomer };

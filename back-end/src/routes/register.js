@@ -11,7 +11,7 @@ const { validateBody } = require('../middlewares/validationUser');
 registerRouter.post(
   '/',
   validateBody,
-  userController.register,
+  userController.registerCustomer,
 );
 
 module.exports = registerRouter;
