@@ -3,14 +3,15 @@ const express = require('express');
 const registerRouter = express.Router();
 
 const userController = require('../controllers/user');
-const { validateBody } = require('../middlewares/validationUser');
+const { validationJoi } = require('../middlewares/validationJoi');
+const { registerCustomer } = require('../schemas');
 
 // Adicionar rotas:
 // -post
 
 registerRouter.post(
   '/',
-  validateBody,
+  validationJoi(registerCustomer),
   userController.registerCustomer,
 );
 
