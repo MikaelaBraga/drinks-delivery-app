@@ -11,7 +11,7 @@ function Login() {
 
   const onSubmit = (data) => api.post('/login', data)
     .then(() => console.log('Deu certo!'))
-    .catch(() => console.log('Deu errado!'));
+    .catch((err) => console.log(err));
 
   return (
     <form onSubmit={ handleSubmit(onSubmit) }>
