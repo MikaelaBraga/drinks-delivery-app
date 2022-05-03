@@ -4,13 +4,13 @@ const chaiHTTP = require('chai-http');
 const userController = require('../../controllers/user')
 const userService = require('../../services/user');
 const app = require('../../api/app');
-const shell = require('shelljs');
+const shell = require('shell');
+
+shell.exec('npm run db:reset');
 
 chai.use(chaiHTTP);
 
 const { expect } = chai;
-
-shell.exec('npm run db:reset')
 
 describe('Unit Test Login', () => {
 
@@ -33,38 +33,18 @@ describe('Unit Test Login', () => {
     expect(loginStub.calledWith(mockRequest.body)).to.be.true;
     loginStub.restore();
   });
-});
-
-describe('Unit Test Register', () => {
-  const mockRequest = {
-    body: {
-      name: 'Novo usuário',
-      email: 'user@deliveryapp.com',
-      password: 'user1234',
-    },
-  };
-
-  const mockResponse = {
-    json: sinon.spy(),
-    status: sinon.stub().returns({ send: sinon.spy() })
-  };
-
-  it('should call userService register method', async () => {
-    const registerStub = sinon.stub(userService, 'registerCustomer').resolves('Register');
-    await userController.registerCustomer(mockRequest, mockResponse);
-    expect(registerStub.calledWith(mockRequest.body)).to.be.true;
-    registerStub.restore();
-  });
-});
+}) 
 
 describe('Integration Test Login', () => {
 
   const mockBodyCorrect = {
+    name: 'Delivery App Admin',
     email: 'adm@deliveryapp.com',
     password: '--adm2@21!!--',
   };
 
   const mockBodyIncorrect = {
+    name: 'Delivery App Admin',
     email: 'adm@deliveryapp.com',
     password: 'senhaerrada'
   }
@@ -87,14 +67,35 @@ describe('Integration Test Login', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(404);
-        expect(res.body).to.not.have.property('token');
+        expect(res.body).to.not.have.property(token);
         expect(res.body.message).to.be.equal('Not Found');
       });
   });
 });
 
-describe('Integration Test Register', () => {
+describe('Unit Test Register', () => {
+  const mockRequest = {
+    body: {
+      name: 'Novo usuário',
+      email: 'user@deliveryapp.com',
+      password: 'user1234',
+    },
+  };
 
+  const mockResponse = {
+    json: sinon.spy(),
+    status: sinon.stub().returns({ send: sinon.spy() })
+  };
+
+  it('should call userService register method', async () => {
+    const registerStub = sinon.stub(userService, 'register').resolves('Register');
+    await userController.register(mockRequest, mockResponse);
+    expect(registerStub.calledWith(mockRequest.body)).to.be.true;
+    registerStub.restore();
+  });
+});
+
+describe('Integration Test Register', () => {
   const validEmail = {
     name: 'Novo usuário',
     email: 'user@deliveryapp.com',
