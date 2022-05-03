@@ -6,12 +6,6 @@ import Routers from './routes/routes';
 function App() {
   return (
     <Routers />
-    // <div className="App">
-    //   <span className="logo">TRYBE</span>
-    //   <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
-    //     Glass
-    //   </object>
-    // </div>
   );
 }
 
