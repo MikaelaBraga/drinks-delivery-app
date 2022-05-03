@@ -7,8 +7,9 @@ import api from '../../services/api';
 
 function Login() {
   const [invalidLogin, setInvalidLogin] = useState();
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({
     resolver: yupResolver(loginValidate),
+    mode: 'onChange',
   });
 
   const onSubmit = (data) => api.post('/login', data)
@@ -43,6 +44,7 @@ function Login() {
       <button
         data-testid="common_login__button-login"
         type="submit"
+        disabled={ !isDirty || !isValid }
       >
         Login
       </button>

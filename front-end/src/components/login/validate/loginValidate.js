@@ -5,7 +5,7 @@ const THIRTYTWO = 32;
 const SIX = 6;
 
 const loginValidate = yup.object().shape({
-  email: yup.string().email('Campo inválido!')
+  email: yup.string().email('E-mail inválido!')
     .required(' O campo email é obrigatório!')
     .max(FORTY, 'Campo inválido.'),
   password: yup.string()
