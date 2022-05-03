@@ -18,5 +18,6 @@ const login = async (user) => {
 };
 
 module.exports = {
+  getByEmail,
   login,
 };
