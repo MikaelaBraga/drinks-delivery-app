@@ -19,14 +19,14 @@ function Login() {
   return (
     <form onSubmit={ handleSubmit(onSubmit) }>
       <input
-        data-testid="common_login_input-email"
+        data-testid="common_login__input-email"
         placeholder="Insira seu email"
         name="email"
         type="text"
         { ...register('email') }
       />
       <input
-        data-testid="common_login_input-password"
+        data-testid="common_login__input-password"
         placeholder="Insira sua senha"
         name="password"
         type="password"
@@ -34,14 +34,14 @@ function Login() {
       />
 
       <button
-        data-testid="common_login_button-login"
+        data-testid="common_login__button-login"
         type="submit"
       >
         Login
       </button>
 
       <button
-        data-testid="common_login_button-register"
+        data-testid="common_login__button-register"
         type="button"
       >
         AINDA NÃO TENHO CONTA
