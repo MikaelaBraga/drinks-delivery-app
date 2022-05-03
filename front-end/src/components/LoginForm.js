@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 
 // import api from '../services/api';
 
-function Login() {
-  const [email, setEmail] = useState([]);
-  const [password, setPassword] = useState([]);
+// formState: { errors }
 
+function Login() {
+  const { register, handleSubmit } = useForm();
   // useEffect(() => {
   //   api.post('/login').then(({ data }) => {
   //     setEmail(data);
@@ -13,29 +14,28 @@ function Login() {
   //   });
   // }, []);
 
-  // fazer validação de inputs
+  const onSubmit = (data) => console.log(data);
 
   return (
-    <form>
+    <form onSubmit={ handleSubmit(onSubmit) }>
       <input
         data-testid="common_login_input-email"
         placeholder="Insira seu email"
-        value={ email }
-        onChange={ (e) => setEmail(e.target.value) }
         name="email"
+        type="text"
+        { ...register('email') }
       />
       <input
         data-testid="common_login_input-password"
         placeholder="Insira sua senha"
-        value={ password }
-        onChange={ (e) => setPassword(e.target.value) }
         name="password"
         type="password"
+        { ...register('password') }
       />
 
       <button
         data-testid="common_login_button-login"
-        type="button"
+        type="submit"
       >
         Login
       </button>
