@@ -3,11 +3,9 @@ const express = require('express');
 const app = express();
 
 const bodyParser = require('body-parser');
-
 const loginRouter = require('../routes/login');
 
 app.use(bodyParser.json());
-
 // cors
 
 app.use(function(req, res, next) {
