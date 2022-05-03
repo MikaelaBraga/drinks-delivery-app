@@ -2,21 +2,16 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import loginValidate from './validate/loginValidate';
-
-// import api from '../services/api';
+import api from '../../services/api';
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(loginValidate),
   });
-  // useEffect(() => {
-  //   api.post('/login').then(({ data }) => {
-  //     setEmail(data);
-  //     setPassword(data);
-  //   });
-  // }, []);
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => api.post('/login', data)
+    .then(() => console.log('Deu certo!'))
+    .catch(() => console.log('Deu errado!'));
 
   return (
     <form onSubmit={ handleSubmit(onSubmit) }>
