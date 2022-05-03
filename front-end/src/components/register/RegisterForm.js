@@ -5,6 +5,7 @@ import registerValidate from './validate/registerValidate';
 import api from '../../services/api';
 
 function Register() {
+  // const [_isValid, _setIsValid] = useState();
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(registerValidate),
   });
