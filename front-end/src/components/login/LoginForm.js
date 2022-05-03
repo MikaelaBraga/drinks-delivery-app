@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import loginValidate from './validate/loginValidate';
 import api from '../../services/api';
@@ -8,6 +9,8 @@ function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(loginValidate),
   });
+
+  const navigate = useNavigate();
 
   const onSubmit = (data) => api.post('/login', data)
     .then(() => console.log('Deu certo!'))
@@ -43,6 +46,7 @@ function Login() {
       </button>
 
       <button
+        onClick={ () => navigate('/register') }
         data-testid="common_login__button-register"
         type="button"
       >
