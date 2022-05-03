@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Link } from 'react-router-dom';
 import loginValidate from './validate/loginValidate';
 import api from '../../services/api';
 
@@ -11,8 +12,8 @@ function Login() {
   });
 
   const onSubmit = (data) => api.post('/login', data)
-    .then(() => console.log('Deu certo!'))
-    .catch((err) => setInvalidLogin(err.response));
+    .then(() => <Link to="/products" />)
+    .catch(({ response }) => setInvalidLogin(response.data));
 
   return (
     <form onSubmit={ handleSubmit(onSubmit) }>
@@ -37,7 +38,7 @@ function Login() {
         <p>{ errors.password?.message }</p>
       </div>
       <div>
-        <p>{ invalidLogin?.statusText }</p>
+        <p data-testid="common_login__element-invalid-email">{ invalidLogin?.message }</p>
       </div>
       <button
         data-testid="common_login__button-login"
@@ -50,7 +51,7 @@ function Login() {
         data-testid="common_login__button-register"
         type="button"
       >
-        AINDA NÃO TENHO CONTA
+        <Link to="/register">Ainda não tenho conta</Link>
       </button>
 
     </form>
