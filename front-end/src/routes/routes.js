@@ -1,13 +1,17 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from '../pages/Login';
+import Home from '../pages/Home';
 
-function Routes() {
+function Routers() {
   return (
     <Router>
-      <Route path="/login" component={ Login } />
+      <Routes>
+        <Route exact path="/" element={ <Home /> } />
+        <Route path="/login" element={ <Login /> } />
+      </Routes>
     </Router>
   );
 }
 
-export default Routes;
+export default Routers;
