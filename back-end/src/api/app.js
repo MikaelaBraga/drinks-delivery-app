@@ -3,14 +3,17 @@ const express = require('express');
 const app = express();
 
 const bodyParser = require('body-parser');
+const { errorHandler } = require('../middlewares/ErrorHandler');
 
 const loginRouter = require('../routes/login');
 const registerRouter = require('../routes/register');
 
 app.use(bodyParser.json());
+app.use(errorHandler);
 
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 
