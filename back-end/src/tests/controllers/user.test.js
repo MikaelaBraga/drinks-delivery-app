@@ -4,7 +4,7 @@ const chaiHTTP = require('chai-http');
 const userController = require('../../controllers/user')
 const userService = require('../../services/user');
 const app = require('../../api/app');
-const shell = require('shell');
+const shell = require('shelljs');
 
 shell.exec('npm run db:reset');
 
@@ -67,7 +67,7 @@ describe('Integration Test Login', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(404);
-        expect(res.body).to.not.have.property(token);
+        expect(res.body).to.not.have.property('token');
         expect(res.body.message).to.be.equal('Not Found');
       });
   });
@@ -88,8 +88,8 @@ describe('Unit Test Register', () => {
   };
 
   it('should call userService register method', async () => {
-    const registerStub = sinon.stub(userService, 'register').resolves('Register');
-    await userController.register(mockRequest, mockResponse);
+    const registerStub = sinon.stub(userService, 'registerCustomer').resolves('Register');
+    await userController.registerCustomer(mockRequest, mockResponse);
     expect(registerStub.calledWith(mockRequest.body)).to.be.true;
     registerStub.restore();
   });
