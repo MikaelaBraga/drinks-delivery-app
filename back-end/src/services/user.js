@@ -28,8 +28,8 @@ const registerCustomer = async (user) => {
     name,
     email,
     password: md5(password),
-    role: 'customer'
-  }
+    role: 'customer',
+  };
 
   const { id, role } = await User.create(newCustomer);
   const token = generateToken(id, role);
@@ -43,6 +43,7 @@ const registerCustomer = async (user) => {
 // rota na API deve considerar um token válido e referente ao usuário de categoria administrator;
 
 module.exports = {
+  getByEmail,
   login,
   registerCustomer,
 };

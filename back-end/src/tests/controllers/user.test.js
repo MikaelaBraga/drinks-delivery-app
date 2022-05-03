@@ -9,7 +9,68 @@ chai.use(chaiHTTP);
 
 const { expect } = chai;
 
-describe('Unit Test User Controller', () => {
+describe('Unit Test Login', () => {
+
+  const mockRequest = {
+    body: {
+      name: 'Delivery App Admin',
+      email: 'adm@deliveryapp.com',
+      password: '--adm2@21!!--',
+    },
+  };
+
+  const mockResponse = {
+    json: sinon.spy(),
+    status: sinon.stub().returns({ send: sinon.spy() })
+  };
+
+  it('should call userService login method', async () => {
+    const loginStub = sinon.stub(userService, 'login').resolves('Login');
+    await userController.login(mockRequest, mockResponse);
+    expect(loginStub.calledWith(mockRequest.body)).to.be.true;
+    loginStub.restore();
+  });
+}) 
+
+describe('Integration Test Login', () => {
+
+  const mockBodyCorrect = {
+    name: 'Delivery App Admin',
+    email: 'adm@deliveryapp.com',
+    password: '--adm2@21!!--',
+  };
+
+  const mockBodyIncorrect = {
+    name: 'Delivery App Admin',
+    email: 'adm@deliveryapp.com',
+    password: 'senhaerrada'
+  }
+
+  it('should return status 200 and token on correct body', () => {
+    chai.request(app)
+      .post('/login')
+      .send(mockBodyCorrect)
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property(token);
+      });
+  });
+
+  it('should return status 404 and message not found on incorrect body', () => {
+    chai.request(app)
+      .post('/login')
+      .send(mockBodyIncorrect)
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(404);
+        expect(res.body).to.not.have.property(token);
+        expect(res.body.message).to.be.equal('Not Found');
+      });
+  });
+});
+
+describe('Unit Test Register', () => {
   const mockRequest = {
     body: {
       name: 'Novo usuário',
@@ -31,7 +92,7 @@ describe('Unit Test User Controller', () => {
   });
 });
 
-describe('Integration Test User Controller', () => {
+describe('Integration Test Register', () => {
   const validEmail = {
     name: 'Novo usuário',
     email: 'user@deliveryapp.com',
