@@ -1,4 +1,4 @@
-import productService from '../services/product';
+const productService = require('../services/product');
 
 const notFound = 'products does not exist';
 
