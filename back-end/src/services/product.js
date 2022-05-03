@@ -1,4 +1,4 @@
-import { Product } from '../database/models';
+const { Product } = require('../database/models');
 
 const createNew = async (product) => {
   const newProduct = await Product.create(product);
