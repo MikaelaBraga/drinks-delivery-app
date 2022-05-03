@@ -1,20 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate, Link } from 'react-router-dom';
 import loginValidate from './validate/loginValidate';
 import api from '../../services/api';
 
 function Login() {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const [invalidLogin, setInvalidLogin] = useState();
+  const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({
     resolver: yupResolver(loginValidate),
+    mode: 'onChange',
   });
 
   const navigate = useNavigate();
 
   const onSubmit = (data) => api.post('/login', data)
-    .then(() => console.log('Deu certo!'))
-    .catch(() => console.log('Deu errado!'));
+    .then(() => navigate('/products'))
+    .catch(({ response }) => setInvalidLogin(response.data));
 
   return (
     <form onSubmit={ handleSubmit(onSubmit) }>
@@ -38,9 +41,13 @@ function Login() {
         />
         <p>{ errors.password?.message }</p>
       </div>
+      <div>
+        <p data-testid="common_login__element-invalid-email">{ invalidLogin?.message }</p>
+      </div>
       <button
         data-testid="common_login__button-login"
         type="submit"
+        disabled={ !isDirty || !isValid }
       >
         Login
       </button>
@@ -50,7 +57,7 @@ function Login() {
         data-testid="common_login__button-register"
         type="button"
       >
-        AINDA NÃO TENHO CONTA
+        <Link to="/register">Ainda não tenho conta</Link>
       </button>
 
     </form>
