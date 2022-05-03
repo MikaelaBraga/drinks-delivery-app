@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import loginValidate from './validate/loginValidate';
 import api from '../../services/api';
 
@@ -12,8 +12,10 @@ function Login() {
     mode: 'onChange',
   });
 
+  const navigate = useNavigate();
+
   const onSubmit = (data) => api.post('/login', data)
-    .then(() => <Link to="/products" />)
+    .then(() => navigate('/products'))
     .catch(({ response }) => setInvalidLogin(response.data));
 
   return (
