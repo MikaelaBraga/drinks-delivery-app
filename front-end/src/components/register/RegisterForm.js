@@ -8,6 +8,7 @@ function Register() {
   // const [_isValid, _setIsValid] = useState();
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(registerValidate),
+    mode: 'onChange',
   });
 
   const onSubmit = (data) => api.post('/register', data)

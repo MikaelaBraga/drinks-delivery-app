@@ -9,8 +9,7 @@ const registerValidate = yup.object().shape({
     .min(TWELVE, 'O campo Nome deve ter mais de 12 caracteres'),
   email: yup.string()
     .required('O campo Email é de preenchimento obrigatório!')
-    .email(/\S+@\S+\.\S+/,
-      'O endereço usado no campo Email não é um endereço de email válido'),
+    .email('O endereço usado no campo Email não é um endereço de email válido'),
   password: yup.string()
     .required('O campo Senha é de preenchimento obrigatório!')
     .min(SIX, 'Sua senha deve ter no mínimo 6 caracteres'),
