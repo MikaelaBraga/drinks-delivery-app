@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registerValidate from './validate/registerValidate';
 import api from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const [invalidRegister, setInvalidRegister] = useState();
@@ -11,8 +12,10 @@ function Register() {
     mode: 'onChange',
   });
 
+  const navigate = useNavigate();
+
   const onSubmit = (data) => api.post('/register', data)
-    .then(() => console.log('ok'))
+    .then(() => navigate('/customer/products'))
     .catch(({ response }) => setInvalidRegister(response.data));
 
   return (
