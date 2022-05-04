@@ -35,4 +35,8 @@ test('checks if the login button is rendered', () => {
 
 test('checks if the register button is rendered', () => {
   render(<App />);
+  const buttonRegister = screen.getByTestId('common_login__button-register');
+
+  expect(buttonRegister).toBeInTheDocument();
+  expect(buttonRegister).toHaveValue('Ainda não tenho conta');
 });
