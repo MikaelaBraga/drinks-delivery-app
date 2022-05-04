@@ -1,8 +1,8 @@
 const sinon = require('sinon');
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
-const userController = require('../../controllers/user')
-const userService = require('../../services/user');
+const userController = require('../../api/controllers/user')
+const userService = require('../../api/services/user');
 const app = require('../../api/app');
 const shell = require('shelljs');
 
