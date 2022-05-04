@@ -4,6 +4,10 @@ import App from '../../App';
 
 test('checks if the email field is rendered', () => {
   render(<App />);
+  const inputEmail = screen.getByLabelText('Email');
+
+  expect(inputEmail).toBeInTheDocument();
+  expect(inputEmail.type).toBe('email');
 });
 
 test('checks if the password input is rendered', () => {
