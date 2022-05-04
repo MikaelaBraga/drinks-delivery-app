@@ -6,25 +6,24 @@ const chai = require('chai');
 const { expect } = chai;
 
 describe('Unit Test Login', () => {
-
   const mockBodyIncorrect = {
     name: 'Delivery App Admin',
     email: 'adm@deliveryapp.com',
-    password: 'senhaerrada'
-  }
+    password: 'senhaerrada',
+  };
 
   const mockBodyCorrect = {
     name: 'Delivery App Admin',
     email: 'adm@deliveryapp.com',
-    password: '--adm2@21!!--'
-  }
+    password: '--adm2@21!!--',
+  };
 
   const mockUser = {
     name: 'Delivery App Admin',
     email: 'adm@deliveryapp.com',
     password: 'a4c86edecc5aee06eff8fdeda69e0d04',
-    role: 'administrator'
-  }
+    role: 'administrator',
+  };
 
   it('should call User model findOne by email on getByEmail', async () => {
     const { email } = mockUser;
@@ -55,5 +54,35 @@ describe('Unit Test Login', () => {
     expect(token).to.not.be.equal(null);
     userStub.restore();
   });
+});
 
-})
+describe('Unit Test Register', () => {
+  const newUser = {
+    name: 'Novo usuário',
+    email: 'user@deliveryapp.com',
+    password: 'user1234',
+  };
+
+  it('should call User model findOne by email on getByEmail', async () => {
+    const { email } = newUser;
+    const userStub = sinon.stub(User, 'findOne').resolves();
+    await userService.getByEmail(email);
+    expect(userStub.calledWith({ where: { email } })).to.be.true;
+    userStub.restore();
+  });
+
+  it('should return null if the email is registered', async () => {
+    const userStub = sinon.stub(User, 'findOne').resolves(newUser);
+    const user = await userService.registerCustomer(newUser);
+    expect(user).to.be.equal(null);
+    userStub.restore();
+  });
+
+  it('must return a token if the body is valid', async () => {
+    const userStub = sinon.stub(User, 'findOne').resolves(false);
+    const user = await userService.registerCustomer(newUser);
+    const { token } = user;
+    expect(token).to.not.be.equal(null);
+    userStub.restore();
+  });
+});
