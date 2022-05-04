@@ -12,6 +12,10 @@ test('checks if the email field is rendered', () => {
 
 test('checks if the password input is rendered', () => {
   render(<App />);
+  const inputPassword = screen.getByLabelText('Senha');
+
+  expect(inputPassword).toBeInTheDocument();
+  expect(inputPassword.type).toBe('email');
 });
 
 test('checks if the login button is rendered', () => {
