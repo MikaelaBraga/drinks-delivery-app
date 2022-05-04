@@ -2,9 +2,14 @@ const express = require('express');
 
 const customerRouter = express.Router();
 
+const { validationCustomer } = require('../middlewares/validationJwt');
+
+const productController = require('../controllers/product');
+
 // O fluxo do cliente deve garantir que seja possível:
 // - Navegar e escolher produtos
 // -- getAllProducts --getProductById
+customerRouter.get('/products', validationCustomer, productController.getAll);
 // --- customerRouter.get('/products', auth, productController.getAll)
 // --- customerRouter.get('/products/:id', auth, productController.getById)
 // - Adicionar produtos ao carrinho

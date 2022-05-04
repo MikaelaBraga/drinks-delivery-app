@@ -68,7 +68,7 @@ describe('Integration Test Login', () => {
         expect(err).to.be.null;
         expect(res).to.have.status(404);
         expect(res.body).to.not.have.property('token');
-        expect(res.body.message).to.be.equal('Not Found');
+        expect(res.body.message).to.be.equal('invalid email or password');
       });
   });
 });

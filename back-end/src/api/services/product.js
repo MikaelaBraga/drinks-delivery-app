@@ -6,7 +6,7 @@ const createNew = async (product) => {
 };
 
 const getAll = async () => {
-  const products = await Product.find();
+  const products = await Product.findAll();
   return products;
 };
 
