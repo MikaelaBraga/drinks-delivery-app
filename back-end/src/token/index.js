@@ -9,7 +9,7 @@ const jwtConfig = {
 const generateToken = (id, role) => {
   const secret = 'teste';
   const token = jwt.sign({ data: { id, role } }, secret, jwtConfig);
-  return { token };
+  return token;
 };
 
 module.exports = {
