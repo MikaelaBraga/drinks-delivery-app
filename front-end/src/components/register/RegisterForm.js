@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registerValidate from './validate/registerValidate';
 import api from '../../services/api';
 
 function Register() {
-  // const [_isValid, _setIsValid] = useState();
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const [invalidRegister, setInvalidRegister] = useState();
+  const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({
     resolver: yupResolver(registerValidate),
     mode: 'onChange',
   });
 
   const onSubmit = (data) => api.post('/register', data)
-    .then(() => console.log('Deu certo!'))
-    .catch(() => console.log('Deu errado!'));
+    .then(() => console.log('ok'))
+    .catch(({ response }) => setInvalidRegister(response.data));
 
   return (
     <form onSubmit={ handleSubmit(onSubmit) }>
@@ -68,9 +68,13 @@ function Register() {
       <button
         data-testid="common_register__button-register"
         type="submit"
+        disabled={ !isDirty || !isValid }
       >
         CADASTRAR
       </button>
+      <p data-testid="common_register__element-invalid_register">
+        { invalidRegister?.message }
+      </p>
     </form>
   );
 }
