@@ -15,7 +15,7 @@ const registerCustomer = async (req, res) => {
   const { body } = req;
   try {
     const token = await userService.registerCustomer(body);
-    if (!token) return res.status(422).json({ message: 'E-mail already registered' });
+    if (!token) return res.status(409).json({ message: 'E-mail already registered' });
     return res.status(201).json(token);
   } catch (e) {
     return res.status(500).send(e.message);
