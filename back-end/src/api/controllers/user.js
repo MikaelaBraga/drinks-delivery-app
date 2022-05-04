@@ -14,9 +14,9 @@ const login = async (req, res) => {
 const registerCustomer = async (req, res) => {
   const { body } = req;
   try {
-    const token = await userService.registerCustomer(body);
-    if (!token) return res.status(409).json({ message: 'E-mail already registered' });
-    return res.status(201).json(token);
+    const newUser = await userService.registerCustomer(body);
+    if (!newUser) return res.status(409).json({ message: 'E-mail already registered' });
+    return res.status(201).json(newUser);
   } catch (e) {
     return res.status(500).send(e.message);
   }
