@@ -114,13 +114,16 @@ describe('Integration Test Register', () => {
     password: 'password',
   };
 
-  it('should return status 201 and token', () => {
+  it('should return status 201 and new user with token', () => {
     chai.request(app)
       .post('/register')
       .send(validEmail)
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(201);
+        expect(res.body).to.have.property('name');
+        expect(res.body).to.have.property('email');
+        expect(res.body).to.have.property('role');
         expect(res.body).to.have.property('token');
       });
   });
@@ -132,6 +135,9 @@ describe('Integration Test Register', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(400);
+        expect(res.body).to.not.have.property('name');
+        expect(res.body).to.not.have.property('email');
+        expect(res.body).to.not.have.property('role');
         expect(res.body).to.not.have.property('token');
         expect(res.body.message).to.be.equal('email must be a valid email');
       });
@@ -144,6 +150,9 @@ describe('Integration Test Register', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(422);
+        expect(res.body).to.not.have.property('name');
+        expect(res.body).to.not.have.property('email');
+        expect(res.body).to.not.have.property('role');
         expect(res.body).to.not.have.property('token');
         expect(res.body.message).to.be.equal('E-mail already registered');
       });
