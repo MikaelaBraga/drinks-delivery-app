@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registerValidate from './validate/registerValidate';
 import api from '../../services/api';
-import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const [invalidRegister, setInvalidRegister] = useState();
