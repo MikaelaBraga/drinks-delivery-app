@@ -27,6 +27,10 @@ test('checks if 2 buttons are rendered on the screen', () => {
 
 test('checks if the login button is rendered', () => {
   render(<App />);
+  const buttonLogin = screen.getByTestId('common_login__button-login');
+
+  expect(buttonLogin).toBeInTheDocument();
+  expect(buttonLogin).toHaveValue('Login');
 });
 
 test('checks if the register button is rendered', () => {
