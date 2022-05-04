@@ -18,6 +18,13 @@ test('checks if the password input is rendered', () => {
   expect(inputPassword.type).toBe('email');
 });
 
+test('checks if 2 buttons are rendered on the screen', () => {
+  render(<App />);
+  const buttons = screen.getAllByRole('button');
+
+  expect(buttons).toHaveLength(2);
+});
+
 test('checks if the login button is rendered', () => {
   render(<App />);
 });
