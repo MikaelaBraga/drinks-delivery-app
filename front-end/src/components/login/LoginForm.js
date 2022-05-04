@@ -16,7 +16,7 @@ function Login() {
 
   const onSubmit = (datas) => api.post('/login', datas)
     .then(({ data }) => {
-      localStorage.setItem('token', JSON.stringify(data));
+      localStorage.setItem('user', JSON.stringify(data));
       return navigate('/products');
     })
     .catch(({ response }) => setInvalidLogin(response.data));
