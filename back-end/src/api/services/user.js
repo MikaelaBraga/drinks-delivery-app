@@ -1,6 +1,6 @@
 const md5 = require('md5');
 const { User } = require('../../database/models');
-const { generateToken } = require('../../token');
+const { generateToken } = require('../utils/token');
 
 const getByEmail = async (email) => {
   const user = await User.findOne({ where: { email } });
