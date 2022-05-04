@@ -2,8 +2,8 @@ const express = require('express');
 
 const app = express();
 
-const loginRouter = require('../routes/login');
-const registerRouter = require('../routes/register');
+const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/register');
 
 // Acess Control
 app.use((_req, res, next) => {
