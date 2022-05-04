@@ -18,5 +18,5 @@ const verifyToken = (token) => jwt.verify(token, JWT_KEY, { algorithms: ['HS256'
 
 module.exports = {
   generateToken,
-  verifyToken
+  verifyToken,
 };
