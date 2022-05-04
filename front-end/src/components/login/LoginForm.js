@@ -30,7 +30,7 @@ function Login() {
             data-testid="common_login__input-email"
             placeholder="Insira seu email"
             name="email"
-            type="text"
+            type="email"
             { ...register('email') }
           />
         </label>

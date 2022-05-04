@@ -4,7 +4,7 @@ import App from '../../App';
 
 test('checks if the email field is rendered', () => {
   render(<App />);
-  const inputEmail = screen.getByLabelText('Email');
+  const inputEmail = screen.getByTestId('common_login__input-email');
 
   expect(inputEmail).toBeInTheDocument();
   expect(inputEmail.type).toBe('email');
@@ -12,10 +12,10 @@ test('checks if the email field is rendered', () => {
 
 test('checks if the password input is rendered', () => {
   render(<App />);
-  const inputPassword = screen.getByLabelText('Senha');
+  const inputPassword = screen.getByTestId('common_login__input-password');
 
   expect(inputPassword).toBeInTheDocument();
-  expect(inputPassword.type).toBe('email');
+  expect(inputPassword.type).toBe('password');
 });
 
 test('checks if 2 buttons are rendered on the screen', () => {
@@ -30,7 +30,7 @@ test('checks if the login button is rendered', () => {
   const buttonLogin = screen.getByTestId('common_login__button-login');
 
   expect(buttonLogin).toBeInTheDocument();
-  expect(buttonLogin).toHaveValue('Login');
+  expect(buttonLogin).toHaveTextContent('Login')
 });
 
 test('checks if the register button is rendered', () => {
@@ -38,5 +38,5 @@ test('checks if the register button is rendered', () => {
   const buttonRegister = screen.getByTestId('common_login__button-register');
 
   expect(buttonRegister).toBeInTheDocument();
-  expect(buttonRegister).toHaveValue('Ainda não tenho conta');
+  expect(buttonRegister).toHaveTextContent('Ainda não tenho conta');
 });
