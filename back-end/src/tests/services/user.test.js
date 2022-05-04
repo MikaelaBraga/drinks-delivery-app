@@ -66,25 +66,31 @@ describe('Unit Test Register', () => {
   it('should call User model findOne by email on getByEmail', async () => {
     const { email } = newUser;
     const userStub = sinon.stub(User, 'findOne').resolves();
+    const userCreateStub = sinon.stub(User, 'create').resolves({ id: 1, role: 'customer' });
     await userService.getByEmail(email);
     expect(userStub.calledWith({ where: { email } })).to.be.true;
     userStub.restore();
+    userCreateStub.restore();
   });
 
   it('should return null if the email is registered', async () => {
     const userStub = sinon.stub(User, 'findOne').resolves(newUser);
+    const userCreateStub = sinon.stub(User, 'create').resolves({ id: 1, role: 'customer' });
     const user = await userService.registerCustomer(newUser);
     expect(user).to.be.equal(null);
     userStub.restore();
+    userCreateStub.restore();
   });
 
   it('must return new user with token if the body is valid', async () => {
     const userStub = sinon.stub(User, 'findOne').resolves(false);
+    const userCreateStub = sinon.stub(User, 'create').resolves({ id: 1, role: 'customer' });
     const user = await userService.registerCustomer(newUser);
     expect(user).to.have.property('name');
     expect(user).to.have.property('email');
     expect(user).to.have.property('role');
     expect(user).to.have.property('token');
     userStub.restore();
+    userCreateStub.restore();
   });
 });
