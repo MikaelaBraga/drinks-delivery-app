@@ -78,11 +78,13 @@ describe('Unit Test Register', () => {
     userStub.restore();
   });
 
-  it('must return a token if the body is valid', async () => {
+  it('must return new user with token if the body is valid', async () => {
     const userStub = sinon.stub(User, 'findOne').resolves(false);
     const user = await userService.registerCustomer(newUser);
-    const { token } = user;
-    expect(token).to.not.be.equal(null);
+    expect(user).to.have.property('name');
+    expect(user).to.have.property('email');
+    expect(user).to.have.property('role');
+    expect(user).to.have.property('token');
     userStub.restore();
   });
 });
