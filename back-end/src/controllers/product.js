@@ -61,7 +61,7 @@ const remove = async (req, res) => {
   }
 };
 
-export default {
+module.exports = {
   createNew,
   getAll,
   getById,

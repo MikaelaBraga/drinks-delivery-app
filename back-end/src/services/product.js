@@ -30,7 +30,7 @@ const remove = async (id) => {
   return findedProduct;
 };
 
-export default {
+module.exports = {
   createNew,
   getAll,
   getById,
