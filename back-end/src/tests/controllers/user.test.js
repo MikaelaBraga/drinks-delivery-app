@@ -4,9 +4,6 @@ const chaiHTTP = require('chai-http');
 const userController = require('../../api/controllers/user')
 const userService = require('../../api/services/user');
 const app = require('../../api/app');
-const shell = require('shelljs');
-
-shell.exec('npm run db:reset');
 
 chai.use(chaiHTTP);
 
@@ -33,7 +30,7 @@ describe('Unit Test Login', () => {
     expect(loginStub.calledWith(mockRequest.body)).to.be.true;
     loginStub.restore();
   });
-}) 
+}); 
 
 describe('Integration Test Login', () => {
 
@@ -150,9 +147,6 @@ describe('Integration Test Register', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(409);
-        expect(res.body).to.not.have.property('name');
-        expect(res.body).to.not.have.property('email');
-        expect(res.body).to.not.have.property('role');
         expect(res.body).to.not.have.property('token');
         expect(res.body.message).to.be.equal('E-mail already registered');
       });

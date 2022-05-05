@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING(50)
   }, {
     sequelize,
+    tableName: 'sales',
     modelName: 'Sale',
   });
   return Sale;
