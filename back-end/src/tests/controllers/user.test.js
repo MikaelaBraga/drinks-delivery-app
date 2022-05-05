@@ -4,9 +4,6 @@ const chaiHTTP = require('chai-http');
 const userController = require('../../api/controllers/user')
 const userService = require('../../api/services/user');
 const app = require('../../api/app');
-const shell = require('shelljs');
-
-shell.exec('npm run db:reset');
 
 chai.use(chaiHTTP);
 
@@ -33,7 +30,7 @@ describe('Unit Test Login', () => {
     expect(loginStub.calledWith(mockRequest.body)).to.be.true;
     loginStub.restore();
   });
-}) 
+}); 
 
 describe('Integration Test Login', () => {
 

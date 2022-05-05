@@ -1,10 +1,7 @@
-const productService = require('../../services/product');
+const productService = require('../../api/services/product');
 const { Product } = require('../../database/models');
 const Sinon = require('sinon');
 const chai = require('chai');
-const shell = require('shelljs');
-
-shell.exec('npm run db:reset');
 
 const { expect } = chai;
 

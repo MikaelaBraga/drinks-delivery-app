@@ -1,9 +1,6 @@
 const chaiHTTP = require('chai-http');
 const chai = require('chai');
 const app = require('../../api/app');
-const shell = require('shelljs');
-
-shell.exec('npm run db:reset');
 
 chai.use(chaiHTTP);
 
@@ -11,12 +8,26 @@ const { expect } = chai;
 
 describe('Product Controller', () => {
 
+  const customer = {
+    email: "zebirita@email.com",
+    password: "$#zebirita#$"
+  }
+
   describe('Testing getAll integration', () => {
 
-    describe('should return status 200 and products array', ()=> {
+    let customerLogged = {};
+
+    before(async () => {
+      const { body } = await chai.request(app)
+      .post('/login')
+      .send(customer);
+      customerLogged = body;
+    });
+
+    it('should return status 200 and products array', ()=> {
       chai.request(app)
-      .get('/products')
-      .send()
+      .get('/customer/products')
+      .set('Authorization', customerLogged.token)
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
@@ -24,13 +35,12 @@ describe('Product Controller', () => {
       });
     });
 
-    describe('should return status 500', ()=> {
+    it('should return status 404 without token', ()=> {
       chai.request(app)
-      .get('/products')
-      .send('')
+      .get('/customer/products')
       .end((err, res) => {
-        expect(res).to.have.status(500);
-        expect(res.body).to.be.equal(err.message);
+        expect(res).to.have.status(401);
+        expect(res.body.message).to.be.equal('Token não encontrado');
       });
     });
 
@@ -38,22 +48,31 @@ describe('Product Controller', () => {
 
   describe('Testing getById integration', () => {
 
-    describe('should return status 200 and founded product', ()=> {
+    let customerLogged = {};
+
+    before(async () => {
+      const { body } = await chai.request(app)
+      .post('/login')
+      .send(customer);
+      customerLogged = body;
+    });
+
+    it('should return status 200 and founded product', ()=> {
       chai.request(app)
-      .get('/products/:id')
-      .send('1')
+      .get('/customer/products/1')
+      .set('Authorization', customerLogged.token)
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('object');
-        expect(res.body).to.have.all.keys('name', 'price', 'url_image');
+        expect(res.body).to.have.all.keys('id', 'name', 'price', 'url_image');
       });
     });
 
-    describe('should return status 404', ()=> {
+    it('should return status 404', ()=> {
       chai.request(app)
-      .get('/products/:id')
-      .send('99999999999999')
+      .get('/customer/products/99999999999999')
+      .set('Authorization', customerLogged.token)
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(404);
@@ -61,13 +80,12 @@ describe('Product Controller', () => {
       });
     });
 
-    describe('should return status 500', ()=> {
+    describe('should return status 401 without token', ()=> {
       chai.request(app)
-      .get('/products/:id')
-      .send('')
+      .get('/customer/products/1')
       .end((err, res) => {
-        expect(res).to.have.status(500);
-        expect(res.body).to.be.equal(err.message);
+        expect(res).to.have.status(401);
+        expect(res.body.message).to.be.equal('Token não encontrado');
       });
     });
 
