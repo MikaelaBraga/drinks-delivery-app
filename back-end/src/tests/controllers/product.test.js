@@ -35,7 +35,7 @@ describe('Product Controller', () => {
       });
     });
 
-    it('should return status 404 without token', ()=> {
+    it('should return status 401 without token', ()=> {
       chai.request(app)
       .get('/customer/products')
       .end((err, res) => {
@@ -69,7 +69,7 @@ describe('Product Controller', () => {
       });
     });
 
-    it('should return status 404', ()=> {
+    it('should return status 404 and not found', ()=> {
       chai.request(app)
       .get('/customer/products/99999999999999')
       .set('Authorization', customerLogged.token)
