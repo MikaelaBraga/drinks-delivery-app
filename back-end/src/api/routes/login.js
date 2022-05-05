@@ -6,7 +6,7 @@ const userController = require('../controllers/user');
 
 const { validationJoi } = require('../middlewares/validationJoi');
 
-const { loginUser } = require('../schemas/user');
+const { loginUser } = require('../schemas');
 
 // Adicionar rotas:
 // -post
