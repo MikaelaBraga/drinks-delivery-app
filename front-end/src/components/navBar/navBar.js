@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <div class="container">
-      <ul class="ul-container">
+    <div className="container">
+      <ul className="ul-container">
         <li>
           <Link
             data-testid="customer_products__element-navbar-link-products"
