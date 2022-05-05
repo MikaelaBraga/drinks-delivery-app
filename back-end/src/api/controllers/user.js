@@ -1,9 +1,9 @@
 const userService = require('../services/user');
 
 const login = async (req, res) => {
-  const { body } = req;
+  const { body: userData } = req;
   try {
-    const userLogged = await userService.login(body);
+    const userLogged = await userService.login(userData);
     if (!userLogged) return res.status(404).json({ message: 'invalid email or password' });
     return res.status(200).json(userLogged);
   } catch (e) {
@@ -12,9 +12,9 @@ const login = async (req, res) => {
 };
 
 const registerCustomer = async (req, res) => {
-  const { body } = req;
+  const { body: userData } = req;
   try {
-    const token = await userService.registerCustomer(body);
+    const token = await userService.registerCustomer(userData);
     if (!token) return res.status(409).json({ message: 'E-mail already registered' });
     return res.status(201).json({ token });
   } catch (e) {

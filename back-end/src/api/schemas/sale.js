@@ -1,11 +1,6 @@
 const joi = require('joi');
 
 const postSale = joi.object({
-  userId: joi.number().integer().required().messages({
-    'number.base': 'userId must be a number',
-    'number.integer': 'userId must be an integer',
-    'any.required': 'userId is required',
-  }),
   sellerId: joi.number().integer().required().messages({
     'number.base': 'sellerId must be a number',
     'number.integer': 'sellerId must be an integer',
