@@ -39,12 +39,13 @@ const registerCustomer = async (userData) => {
 
   const { id, role } = await User.create(newCustomer);
   const token = generateToken(id, role);
-  return {
+  const userRegistered = {
     name,
     email,
     role,
     token,
   };
+  return userRegistered;
 };
 
 // Aqui, a rota de cadastro deve ser diferente da rota de cadastro comum,

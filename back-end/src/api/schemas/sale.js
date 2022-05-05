@@ -1,9 +1,22 @@
 const joi = require('joi');
 
 const postSale = joi.object({
-  sellerId: joi.number().integer().required().messages({
+  products: joi.array().items(
+    joi.number().integer().positive().messages({
+      'number.base': 'product must be a number',
+      'number.integer': 'product must be an integer',
+      'number.positve': 'number must be positive',
+    }),
+  ).min(1).required()
+  .messages({
+    'array.base': 'products must be an array',
+    'array.min': 'products must have at least 1 item',
+  }),
+  sellerId: joi.number().integer().positive().required()
+  .messages({
     'number.base': 'sellerId must be a number',
     'number.integer': 'sellerId must be an integer',
+    'number.positive': 'totalPrice must be positive',
     'any.required': 'sellerId is required',
   }),
   totalPrice: joi.number().positive().required().messages({
