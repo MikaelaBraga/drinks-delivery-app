@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <div className="container">
+    <nav className="container">
       <ul className="ul-container">
         <li>
           <Link
@@ -28,7 +28,7 @@ function Navbar() {
           <Link to="/"> Sair </Link>
         </li>
       </ul>
-    </div>
+    </nav>
   );
 }
 
