@@ -24,10 +24,8 @@ const update = async (product, id) => {
 };
 
 const remove = async (id) => {
-  const findedProduct = await getById(id);
-  if (!findedProduct) return null;
-  await findedProduct.destroy({ where: { id } });
-  return findedProduct;
+  const removedProduct = await Product.destroy({ where: { id } });
+  return removedProduct;
 };
 
 module.exports = {

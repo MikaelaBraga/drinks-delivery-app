@@ -134,13 +134,13 @@ describe('Integration Test Register', () => {
       });
   });
 
-  it('should return status 422 and existing email error', () => {
+  it('should return status 409 and existing email error', () => {
     chai.request(app)
       .post('/register')
       .send(existingEmail)
       .end((err, res) => {
         expect(err).to.be.null;
-        expect(res).to.have.status(422);
+        expect(res).to.have.status(409);
         expect(res.body).to.not.have.property('token');
         expect(res.body.message).to.be.equal('E-mail already registered');
       });
