@@ -41,11 +41,42 @@ function ProductsCards() {
     <div>
       { mockProducts.map((product, key) => (
         <div key={ key }>
-          <h3>{ product.name }</h3>
-          <img src={ product.url_image } alt="imagem do produto" />
-          <h5>{ product.price }</h5>
+          <h3 data-testid="customer_products__element-card-title-">{ product.name }</h3>
+          <img
+            data-testid="customer_products__img-card-bg-image-"
+            src={ product.url_image }
+            alt="imagem do produto"
+          />
+          <h5
+            data-testid="customer_products__element-card-price-"
+          >
+            { `R$${product.price}` }
+
+          </h5>
+          <button
+            data-testid="customer_products__button-card-add-item-"
+            type="button"
+          >
+            +
+          </button>
+          <p data-testid="customer_products__input-card-quantity-">0</p>
+          <button
+            data-testid="customer_products__button-card-rm-item-"
+            type="button"
+          >
+            -
+          </button>
         </div>
       )) }
+
+      <div>
+        <button
+          data-testid="customer_products__checkout-bottom-value"
+          type="button"
+        >
+          Ver carrinho: preço dinâmico
+        </button>
+      </div>
     </div>
   );
 }
