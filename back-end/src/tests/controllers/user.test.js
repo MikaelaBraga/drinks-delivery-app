@@ -35,13 +35,11 @@ describe('Unit Test Login', () => {
 describe('Integration Test Login', () => {
 
   const mockBodyCorrect = {
-    name: 'Delivery App Admin',
     email: 'adm@deliveryapp.com',
     password: '--adm2@21!!--',
   };
 
   const mockBodyIncorrect = {
-    name: 'Delivery App Admin',
     email: 'adm@deliveryapp.com',
     password: 'senhaerrada'
   }
