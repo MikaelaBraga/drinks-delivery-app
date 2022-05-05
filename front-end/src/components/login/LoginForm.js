@@ -14,8 +14,11 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data) => api.post('/login', data)
-    .then(() => navigate('/products'))
+  const onSubmit = (datas) => api.post('/login', datas)
+    .then(({ data }) => {
+      localStorage.setItem('user', JSON.stringify(data));
+      return navigate('/customer/products');
+    })
     .catch(({ response }) => setInvalidLogin(response.data));
 
   return (
