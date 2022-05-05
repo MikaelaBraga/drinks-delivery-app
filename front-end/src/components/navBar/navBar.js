@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './navBar.style.css';
+import styles from './navBar.module.css';
 
 function Navbar() {
   return (
@@ -23,7 +23,9 @@ function Navbar() {
           </Link>
         </li>
         <li
-          className={ styles.item } data-testid="customer_products__element-navbar-user-full-name">
+          className={ styles.item }
+          data-testid="customer_products__element-navbar-user-full-name"
+        >
           nome
         </li>
         <li className={ styles.item }>

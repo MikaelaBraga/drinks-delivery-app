@@ -1,8 +1,9 @@
 .navBar {
   display: flex;
   justify-content: space-between;
-  background-color: #036B52;
+  width: 100%;
   padding: 1em;
+  background-color: #036B52;
 }
 
 .list {
@@ -12,11 +13,12 @@
 }
 
 .item {
-  margin-left: left;
+  margin-left: right;
 }
 
 .item a {
   color: black;
+  text-decoration: none
 }
 
 .item a:hover {
