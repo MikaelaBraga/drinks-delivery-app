@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styles from './navBar.style.css';
 
 function Navbar() {
   return (
-    <nav className="container">
-      <ul className="ul-container">
-        <li>
+    <nav className={ styles.navBar }>
+      <ul className={ styles.list }>
+        <li className={ styles.item }>
           <Link
             data-testid="customer_products__element-navbar-link-products"
             to="/customer/products"
@@ -13,7 +14,7 @@ function Navbar() {
             Produtos
           </Link>
         </li>
-        <li>
+        <li className={ styles.item }>
           <Link
             data-testid="customer_products__element-navbar-link-orders"
             to="/customer/orders"
@@ -21,10 +22,11 @@ function Navbar() {
             Meus pedidos
           </Link>
         </li>
-        <li data-testid="customer_products__element-navbar-user-full-name">
+        <li
+          className={ styles.item } data-testid="customer_products__element-navbar-user-full-name">
           nome
         </li>
-        <li>
+        <li className={ styles.item }>
           <Link to="/"> Sair </Link>
         </li>
       </ul>
