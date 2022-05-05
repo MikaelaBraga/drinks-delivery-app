@@ -26,15 +26,17 @@ module.exports = (sequelize, DataTypes) => {
   Sale.init({
     userId: { type: DataTypes.INTEGER, foreignKey: true },
     sellerId: { type: DataTypes.INTEGER, foreignKey: true },
-    total_price: DataTypes.DECIMAL(9, 2),
-    delivery_address: DataTypes.STRING(100),
-    delivery_number: DataTypes.STRING(50),
-    sale_date: DataTypes.DATE,
+    totalPrice: DataTypes.DECIMAL(9, 2),
+    deliveryAddress: DataTypes.STRING(100),
+    deliveryNumber: DataTypes.STRING(50),
+    saleDate: DataTypes.DATE,
     status: DataTypes.STRING(50)
   }, {
     sequelize,
     tableName: 'sales',
     modelName: 'Sale',
+    timestamps: false,
+    underscored: true,
   });
   return Sale;
 };

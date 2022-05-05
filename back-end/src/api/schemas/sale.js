@@ -11,9 +11,9 @@ const postSale = joi.object({
     'number.integer': 'sellerId must be an integer',
     'any.required': 'sellerId is required',
   }),
-  totalPrice: joi.number().min(0).required().messages({
+  totalPrice: joi.number().positive().required().messages({
     'number.base': 'totalPrice must be a number',
-    'number.min': 'totalPrice must be greater than 0',
+    'number.positive': 'totalPrice must be positive',
     'any.required': 'totalPrice is required',
   }),
   deliveryAddress: joi.string().required().messages({
