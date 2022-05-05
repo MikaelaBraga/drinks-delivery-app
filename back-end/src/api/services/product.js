@@ -1,4 +1,4 @@
-const { Product } = require('../../database/models');
+const { Product } = require('../database/models');
 
 const createNew = async (product) => {
   const newProduct = await Product.create(product);
@@ -26,7 +26,7 @@ const update = async (product, id) => {
 const remove = async (id) => {
   const findedProduct = await getById(id);
   if (!findedProduct) return null;
-  await Product.delete({ where: { id } });
+  await findedProduct.destroy({ where: { id } });
   return findedProduct;
 };
 

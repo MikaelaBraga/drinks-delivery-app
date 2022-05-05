@@ -1,6 +1,6 @@
 const productService = require('../services/product');
 
-const notFound = 'products does not exist';
+const notFound = 'not found';
 
 const createNew = async (req, res) => {
   const { body } = req;
