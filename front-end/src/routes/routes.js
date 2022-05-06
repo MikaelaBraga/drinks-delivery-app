@@ -10,11 +10,8 @@ function Routers() {
       <Routes>
         <Route exact path="/" element={ <Navigate to="/login" /> } />
         <Route path="/login" element={ <Login /> } />
-<<<<<<< HEAD
-        <Route path="/customer/products" element={ <CustomerProductsCards /> } />
-=======
         <Route path="/register" element={ <Register /> } />
->>>>>>> 0fe4f669b9c95b4744c02994189c1eb116fbd2c1
+        <Route path="/customer/products" element={ <CustomerProductsCards /> } />
       </Routes>
     </BrowserRouter>
   );
