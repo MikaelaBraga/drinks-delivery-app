@@ -12,11 +12,11 @@ const JWT_CONFIG = {
   algorithm: 'HS256',
 };
 
-const generateToken = (id, role) => {
-  const token = jwt.sign({ data: { id, role } }, JWT_KEY, JWT_CONFIG);
-  return token;
-};
+const generateToken = (id, role) => jwt.sign({ data: { id, role } }, JWT_KEY, JWT_CONFIG);
+
+const verifyToken = (token) => jwt.verify(token, JWT_KEY, { algorithms: ['HS256'] });
 
 module.exports = {
   generateToken,
+  verifyToken,
 };

@@ -7,8 +7,8 @@ const getByEmail = async (email) => {
   return user;
 };
 
-const login = async (user) => {
-  const { email, password: loginPassword } = user;
+const login = async (userData) => {
+  const { email, password: loginPassword } = userData;
   const userFound = await getByEmail(email);
   if (!userFound) return null;
 
@@ -25,8 +25,8 @@ const login = async (user) => {
   return userLogged;
 };
 
-const registerCustomer = async (user) => {
-  const { name, email, password } = user;
+const registerCustomer = async (userData) => {
+  const { name, email, password } = userData;
   const userFound = await getByEmail(email);
   if (userFound) return null;
 
@@ -39,7 +39,13 @@ const registerCustomer = async (user) => {
 
   const { id, role } = await User.create(newCustomer);
   const token = generateToken(id, role);
-  return token;
+  const userRegistered = {
+    name,
+    email,
+    role,
+    token,
+  };
+  return userRegistered;
 };
 
 // Aqui, a rota de cadastro deve ser diferente da rota de cadastro comum,

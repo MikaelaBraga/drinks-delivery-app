@@ -61,6 +61,7 @@ function Login() {
       </button>
 
       <button
+        onClick={ () => navigate('/register') }
         data-testid="common_login__button-register"
         type="button"
       >
