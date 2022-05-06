@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductCounterButtons from './ProductCounterButtons';
 // import api from '../../services/api';
 
 const mockProducts = [{
@@ -52,19 +53,7 @@ function ProductCard() {
           >
             { `R$${product.price}` }
           </h5>
-          <button
-            data-testid="customer_products__button-card-add-item-"
-            type="button"
-          >
-            +
-          </button>
-          <p data-testid="customer_products__input-card-quantity-">0</p>
-          <button
-            data-testid="customer_products__button-card-rm-item-"
-            type="button"
-          >
-            -
-          </button>
+          <ProductCounterButtons />
         </div>
       )) }
 
