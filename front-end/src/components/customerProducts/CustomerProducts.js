@@ -26,7 +26,7 @@ const mockProducts = [{
   url_image: 'http://localhost:3001/images/brahma_600ml.jpg',
 }];
 
-function ProductsCards() {
+function ProductCard() {
   // const [products, setProducts] = useState([]);
 
   // useEffect(() => {
@@ -39,8 +39,8 @@ function ProductsCards() {
 
   return (
     <div>
-      { mockProducts.map((product, key) => (
-        <div key={ key }>
+      { mockProducts.map((product, index) => (
+        <div key={ index }>
           <h3 data-testid="customer_products__element-card-title-">{ product.name }</h3>
           <img
             data-testid="customer_products__img-card-bg-image-"
@@ -51,7 +51,6 @@ function ProductsCards() {
             data-testid="customer_products__element-card-price-"
           >
             { `R$${product.price}` }
-
           </h5>
           <button
             data-testid="customer_products__button-card-add-item-"
@@ -81,4 +80,4 @@ function ProductsCards() {
   );
 }
 
-export default ProductsCards;
+export default ProductCard;

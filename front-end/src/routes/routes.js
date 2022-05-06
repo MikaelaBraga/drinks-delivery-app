@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import CustomerProductsCards from '../pages/CustomerProductsCrads';
+import CustomerProductsCards from '../pages/CustomerProductsCards';
 import Login from '../pages/Login';
 
 function Routers() {
