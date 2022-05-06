@@ -3,16 +3,16 @@ const { verifyToken } = require('../utils/token');
 const validationCustomer = (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    if (!token) return res.status(401).json({ message: 'Token não encontrado' });
+    if (!token) return res.status(401).json({ message: 'Unauthorized, token not found' });
     const decoded = verifyToken(token);
     const { data: { id, role } } = decoded;
     res.locals.userId = id;
     if (role !== 'customer') {
-      return res.status(401).json({ message: 'Não autorizado por não ser cliente' });
+      return res.status(401).json({ message: 'Unauthorized, not customer' });
     }
     next();
   } catch (e) {
-    return res.status(401).json('Não autorizado');
+    return res.status(401).json('Unauthorized');
   }
 };
 

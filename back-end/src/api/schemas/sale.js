@@ -22,6 +22,7 @@ const postSale = joi.object({
   .messages({
     'array.base': 'products must be an array',
     'array.min': 'products must have at least 1 item',
+    'any.required': 'products is required',
   }),
   sellerId: joi.number().integer().positive().required()
   .messages({

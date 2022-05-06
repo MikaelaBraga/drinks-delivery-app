@@ -17,7 +17,7 @@ customerRouter.get('/products', validationCustomer, productController.getAll);
 customerRouter.get('/products/:id', validationCustomer, productController.getById);
 // - Adicionar produtos ao carrinho
 // - Fazer checkout (gerar uma nova venda)
-customerRouter.post('/checkout', validationCustomer, validationJoi(postSale), saleController.post);
+customerRouter.post('/order', validationCustomer, validationJoi(postSale), saleController.post);
 // -- postSale
 // - Consultar pedidos e acessar detalhes do mesmo.
 // -- getSalesByUserId
