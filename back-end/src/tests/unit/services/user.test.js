@@ -1,5 +1,5 @@
-const userService = require('../../api/services/user');
-const { User } = require('../../database/models');
+const userService = require('../../../api/services/user');
+const { User } = require('../../../database/models');
 const sinon = require('sinon');
 const chai = require('chai');
 

@@ -1,5 +1,5 @@
-const productService = require('../../api/services/product');
-const { Product } = require('../../database/models');
+const productService = require('../../../api/services/product');
+const { Product } = require('../../../database/models');
 const Sinon = require('sinon');
 const chai = require('chai');
 
