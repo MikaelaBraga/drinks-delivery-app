@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import api from '../../services/api';
+import { CartContext } from '../../context/CartProvider';
 
 function ProductCard() {
   const [products, setProducts] = useState([]);
+  const { addCheckoutItem, removeCheckoutItem, cart = [] } = useContext(CartContext);
+  console.log(cart);
 
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user'));
@@ -35,17 +38,20 @@ function ProductCard() {
           <button
             data-testid={ `customer_products__button-card-add-item-${product.id}` }
             type="button"
+            onClick={ () => addCheckoutItem(product.id, product.name, product.price) }
           >
             +
           </button>
           <p
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
           >
-            { 0 }
+            { cart.find((c) => c.item === product.id)
+              ? cart.find((c) => c.item === product.id)?.quantity : 0 }
           </p>
           <button
             data-testid={ `customer_products__button-card-rm-item-${product.id}` }
             type="button"
+            onClick={ () => removeCheckoutItem(product.id) }
           >
             -
           </button>
