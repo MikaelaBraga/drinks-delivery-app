@@ -1,4 +1,6 @@
 const express = require('express');
+// https://www.w3schools.com/nodejs/met_path_join.asp
+const path = require('path');
 
 const app = express();
 
@@ -19,6 +21,7 @@ app.use(express.json());
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/customer', customerRouter);
+app.use('/images', express.static(path.join(__dirname, '../../public/uploads/')));
 app.get('/coffee', (_req, res) => res.status(418).end());
 
 module.exports = app;
