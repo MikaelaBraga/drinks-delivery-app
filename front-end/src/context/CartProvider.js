@@ -5,20 +5,25 @@ export const CartContext = createContext();
 
 function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
-  // const [totalPrice, setTotalPrice] = useState();
+  const [totalPrice, setTotalPrice] = useState(0);
+  localStorage.setItem('carrinho', JSON.stringify(cart));
 
-  function addCheckoutItem(id, name, price) {
+  function addCheckoutItem(id, title, price) {
     const newCart = [...cart];
 
     const product = newCart.find((p) => p.item === id);
 
     if (!product) {
-      newCart.push({ item: id, description: name, quantity: 1, price, subtotal: price });
+      newCart.push({
+        productId: id,
+        name: title,
+        quantity: 1,
+        unitPrice: price,
+        subtotal: Number(price) });
     } else {
       product.quantity += 1;
-      product.subtotal = product.price * product.quantity;
+      product.subtotal = product.unitPrice * product.quantity;
     }
-
     setCart(newCart);
   }
 
@@ -29,7 +34,7 @@ function CartProvider({ children }) {
 
     if (product && product.quantity > 1) {
       product.quantity -= 1;
-      product.subtotal = product.price * product.quantity;
+      product.subtotal = product.unitPrice * product.quantity;
       setCart(newCart);
     } else {
       const arrayFiltered = newCart.filter((p) => p.item !== id);
@@ -42,6 +47,8 @@ function CartProvider({ children }) {
     setCart,
     addCheckoutItem,
     removeCheckoutItem,
+    totalPrice,
+    setTotalPrice,
   };
 
   return (

@@ -1,9 +1,12 @@
 import React from 'react';
 import ProductCard from '../components/customerProducts/CustomerProducts';
+import CartProvider from '../context/CartProvider';
 
 function CustomerProductsCards() {
   return (
-    <ProductCard />
+    <CartProvider>
+      <ProductCard />
+    </CartProvider>
   );
 }
 

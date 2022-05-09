@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import { CartContext } from '../../context/CartProvider';
 
 function ProductCard() {
   const [products, setProducts] = useState([]);
-  const { addCheckoutItem, removeCheckoutItem, cart = [] } = useContext(CartContext);
-  console.log(cart);
+  const { addCheckoutItem,
+    removeCheckoutItem, totalPrice, cart = [] } = useContext(CartContext);
 
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user'));
@@ -33,7 +34,7 @@ function ProductCard() {
           <h5
             data-testid={ `customer_products__element-card-price-${product.id}` }
           >
-            { `R$${product.price}` }
+            { `${product.price}`.replace('.', ',') }
           </h5>
           <button
             data-testid={ `customer_products__button-card-add-item-${product.id}` }
@@ -42,12 +43,12 @@ function ProductCard() {
           >
             +
           </button>
-          <p
+          <input
+            type="number"
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
-          >
-            { cart.find((c) => c.item === product.id)
+            value={ cart.find((c) => c.item === product.id)
               ? cart.find((c) => c.item === product.id)?.quantity : 0 }
-          </p>
+          />
           <button
             data-testid={ `customer_products__button-card-rm-item-${product.id}` }
             type="button"
@@ -59,12 +60,14 @@ function ProductCard() {
       )) }
 
       <div>
-        <button
-          data-testid="customer_products__checkout-bottom-value"
-          type="button"
-        >
-          Ver carrinho: preço dinâmico
-        </button>
+        <Link to="/customer/checkout">
+          <button
+            data-testid="customer_products__checkout-bottom-value"
+            type="button"
+          >
+            {`${parseFloat(totalPrice).toFixed(2)}`.replace('.', ',')}
+          </button>
+        </Link>
       </div>
     </div>
   );
