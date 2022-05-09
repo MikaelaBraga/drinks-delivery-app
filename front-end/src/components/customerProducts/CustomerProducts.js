@@ -2,11 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import { CartContext } from '../../context/CartProvider';
+import CartTotalPrice from '../../hooks/CartTotalPrice';
 
 function ProductCard() {
   const [products, setProducts] = useState([]);
-  const { addCheckoutItem,
-    removeCheckoutItem, totalPrice, cart = [] } = useContext(CartContext);
+  const { addCheckoutItem, removeCheckoutItem, cart = [] } = useContext(CartContext);
+  const [totalPrice] = CartTotalPrice();
 
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user'));

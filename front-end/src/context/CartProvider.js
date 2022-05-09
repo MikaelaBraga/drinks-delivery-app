@@ -5,7 +5,6 @@ export const CartContext = createContext();
 
 function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
   localStorage.setItem('carrinho', JSON.stringify(cart));
 
   function addCheckoutItem(id, title, price) {
@@ -25,12 +24,6 @@ function CartProvider({ children }) {
       product.subTotal = product.unitPrice * product.quantity;
     }
     setCart(newCart);
-
-    const newPrice = newCart.reduce((acc, crr) => {
-      acc += crr.subTotal;
-      return acc;
-    }, 0);
-    setTotalPrice(newPrice);
   }
 
   function removeCheckoutItem(id) {
@@ -46,12 +39,6 @@ function CartProvider({ children }) {
       const arrayFiltered = newCart.filter((p) => p.productId !== id);
       setCart(arrayFiltered);
     }
-
-    const newPrice = newCart.reduce((acc, crr) => {
-      acc += crr.subTotal;
-      return acc;
-    }, 0);
-    setTotalPrice(newPrice);
   }
 
   const contextValue = {
@@ -59,7 +46,6 @@ function CartProvider({ children }) {
     setCart,
     addCheckoutItem,
     removeCheckoutItem,
-    totalPrice,
   };
 
   return (
