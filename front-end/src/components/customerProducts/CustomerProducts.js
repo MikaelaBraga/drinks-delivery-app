@@ -65,6 +65,7 @@ function ProductCard() {
           <button
             data-testid="customer_products__checkout-bottom-value"
             type="button"
+            disabled={ totalPrice === 0 }
           >
             {`${parseFloat(totalPrice).toFixed(2)}`.replace('.', ',')}
           </button>
