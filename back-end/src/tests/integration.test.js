@@ -266,4 +266,4 @@ describe('Integration Test Order', () => {
     });
   })
 
-})
+});

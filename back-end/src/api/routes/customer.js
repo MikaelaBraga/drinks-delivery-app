@@ -21,5 +21,6 @@ customerRouter.post('/order', validationCustomer, validationJoi(postSale), saleC
 // -- postSale
 // - Consultar pedidos e acessar detalhes do mesmo.
 // -- getSalesByUserId
+customerRouter.get('/orders', validationCustomer, saleController.getSalesByUser);
 
 module.exports = customerRouter;
