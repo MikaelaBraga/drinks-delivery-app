@@ -14,30 +14,39 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data) => api.post('/login', data)
-    .then(() => navigate('/products'))
+  const onSubmit = (datas) => api.post('/login', datas)
+    .then(({ data }) => {
+      localStorage.setItem('user', JSON.stringify(data));
+      return navigate('/customer/products');
+    })
     .catch(({ response }) => setInvalidLogin(response.data));
 
   return (
     <form onSubmit={ handleSubmit(onSubmit) }>
       <div>
-        <input
-          data-testid="common_login__input-email"
-          placeholder="Insira seu email"
-          name="email"
-          type="text"
-          { ...register('email') }
-        />
+        <label htmlFor="email">
+          Email
+          <input
+            data-testid="common_login__input-email"
+            placeholder="Insira seu email"
+            name="email"
+            type="email"
+            { ...register('email') }
+          />
+        </label>
         <p>{ errors.email?.message }</p>
       </div>
       <div>
-        <input
-          data-testid="common_login__input-password"
-          placeholder="Insira sua senha"
-          name="password"
-          type="password"
-          { ...register('password') }
-        />
+        <label htmlFor="password">
+          Senha
+          <input
+            data-testid="common_login__input-password"
+            placeholder="Insira sua senha"
+            name="password"
+            type="password"
+            { ...register('password') }
+          />
+        </label>
         <p>{ errors.password?.message }</p>
       </div>
       <div>
