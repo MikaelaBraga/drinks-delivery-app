@@ -11,7 +11,7 @@ function CartProvider({ children }) {
   function addCheckoutItem(id, title, price) {
     const newCart = [...cart];
 
-    const product = newCart.find((p) => p.item === id);
+    const product = newCart.find((p) => p.productId === id);
 
     if (!product) {
       newCart.push({
@@ -19,27 +19,39 @@ function CartProvider({ children }) {
         name: title,
         quantity: 1,
         unitPrice: price,
-        subtotal: Number(price) });
+        subTotal: Number(price) });
     } else {
       product.quantity += 1;
-      product.subtotal = product.unitPrice * product.quantity;
+      product.subTotal = product.unitPrice * product.quantity;
     }
     setCart(newCart);
+
+    const newPrice = newCart.reduce((acc, crr) => {
+      acc += crr.subTotal;
+      return acc;
+    }, 0);
+    setTotalPrice(newPrice);
   }
 
   function removeCheckoutItem(id) {
     const newCart = [...cart];
 
-    const product = newCart.find((p) => p.item === id);
+    const product = newCart.find((p) => p.productId === id);
 
     if (product && product.quantity > 1) {
       product.quantity -= 1;
-      product.subtotal = product.unitPrice * product.quantity;
+      product.subTotal = product.unitPrice * product.quantity;
       setCart(newCart);
     } else {
-      const arrayFiltered = newCart.filter((p) => p.item !== id);
+      const arrayFiltered = newCart.filter((p) => p.productId !== id);
       setCart(arrayFiltered);
     }
+
+    const newPrice = newCart.reduce((acc, crr) => {
+      acc += crr.subTotal;
+      return acc;
+    }, 0);
+    setTotalPrice(newPrice);
   }
 
   const contextValue = {
@@ -48,7 +60,6 @@ function CartProvider({ children }) {
     addCheckoutItem,
     removeCheckoutItem,
     totalPrice,
-    setTotalPrice,
   };
 
   return (

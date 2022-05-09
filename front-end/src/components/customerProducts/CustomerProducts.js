@@ -46,8 +46,8 @@ function ProductCard() {
           <input
             type="number"
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
-            value={ cart.find((c) => c.item === product.id)
-              ? cart.find((c) => c.item === product.id)?.quantity : 0 }
+            value={ cart.find((c) => c.productId === product.id)
+              ? cart.find((c) => c.productId === product.id)?.quantity : 0 }
           />
           <button
             data-testid={ `customer_products__button-card-rm-item-${product.id}` }
