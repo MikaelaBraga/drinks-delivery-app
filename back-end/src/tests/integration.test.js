@@ -7,7 +7,7 @@ chai.use(chaiHTTP);
 
 const { expect } = chai;
 
-describe('Integration Test Register', () => {
+describe('Integration Test POST /register', () => {
   const validEmail = {
     name: 'Novo usuário',
     email: 'user@deliveryapp.com',
@@ -68,7 +68,7 @@ describe('Integration Test Register', () => {
   });
 });
 
-describe('Integration Test Login', () => {
+describe('Integration Test POST /login', () => {
 
   const mockBodyCorrect = {
     email: 'adm@deliveryapp.com',
@@ -105,7 +105,7 @@ describe('Integration Test Login', () => {
   });
 });
 
-describe('Integration Test Products', () => {
+describe('Integration Test GET /customer/products', () => {
 
   const customer = {
     email: "zebirita@email.com",
@@ -192,7 +192,7 @@ describe('Integration Test Products', () => {
 
 });
 
-describe('Integration Test Order', () => {
+describe('Integration Test POST /customer/order', () => {
 
   const customer = {
     email: "zebirita@email.com",
@@ -268,7 +268,7 @@ describe('Integration Test Order', () => {
 
 });
 
-describe('Integration Test Get Sellers', () => {
+describe('Integration Test Get /customer/sellers', () => {
 
   const customer = {
     email: "zebirita@email.com",

@@ -37,4 +37,12 @@ describe('Unit Test Sale', () => {
     expect(postStub.calledWith({ userId, ...body })).to.be.true;
     postStub.restore();
   });
+
+  it('should call saleService getSalesByUser method with userId', async () => {
+    const getSalesByUserStub = sinon.stub(saleService, 'getSalesByUser').resolves('Sales');
+    await saleController.getSalesByUser(mockRequest, mockResponse);
+    const { userId } = mockResponse.locals;
+    expect(getSalesByUserStub.calledWith(userId)).to.be.true;
+    getSalesByUserStub.restore();
+  });
 });
