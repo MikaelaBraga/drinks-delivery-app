@@ -1,28 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './navBar.module.css';
 
 function Navbar() {
-  const {
-    name,
-    role,
-    isUser,
-    isAdmin,
-    isSeller,
-    setIsUser,
-    setIsSeller,
-    setIsAdmin,
-  } = useContext(Context);
+  const [isUser, setIsUser] = useState('');
+  const [isSeller, setIsSeller] = useState('');
+  const [isAdmin, setIsAdmin] = useState('');
+
+  const { name, role } = localStorage.getItem(JSON.parse('data'));
 
   useEffect(() => {
     switch (role) {
-    case 'user':
+    case 'customer':
       setIsUser(true);
       break;
     case 'seller':
       setIsSeller(true);
       break;
-    case 'admin':
+    case 'administrator':
       setIsAdmin(true);
       break;
     default:
