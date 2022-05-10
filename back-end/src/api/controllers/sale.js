@@ -23,7 +23,18 @@ const getById = async (req, res) => {
   }
 };
 
+const getSalesByUser = async (req, res) => {
+  try {
+    const { userId } = res.locals;
+    const sales = await saleService.getSalesByUser(userId);
+    return res.status(200).json(sales);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+};
+
 module.exports = {
   post,
   getById,
+  getSalesByUser,
 };

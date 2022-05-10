@@ -7,7 +7,7 @@ chai.use(chaiHTTP);
 
 const { expect } = chai;
 
-describe('Integration Test Register', () => {
+describe('Integration Test POST /register', () => {
   const validEmail = {
     name: 'Novo usuário',
     email: 'user@deliveryapp.com',
@@ -68,7 +68,7 @@ describe('Integration Test Register', () => {
   });
 });
 
-describe('Integration Test Login', () => {
+describe('Integration Test POST /login', () => {
 
   const mockBodyCorrect = {
     email: 'adm@deliveryapp.com',
@@ -105,7 +105,7 @@ describe('Integration Test Login', () => {
   });
 });
 
-describe('Integration Test Products', () => {
+describe('Integration Test GET /customer/products', () => {
 
   const customer = {
     email: "zebirita@email.com",
@@ -192,7 +192,7 @@ describe('Integration Test Products', () => {
 
 });
 
-describe('Integration Test Order', () => {
+describe('Integration Test POST /customer/order', () => {
 
   const customer = {
     email: "zebirita@email.com",
@@ -264,6 +264,45 @@ describe('Integration Test Order', () => {
       expect(res).to.have.status(401);
       expect(res.body.message).to.be.equal('Unauthorized, token not found');
     });
+  });
+
+});
+
+describe('Integration Test Get /customer/sellers', () => {
+
+  const customer = {
+    email: "zebirita@email.com",
+    password: "$#zebirita#$"
+  }
+
+  let tokenSession;
+
+  before(async () => {
+    const { body } = await chai.request(app)
+    .post('/login')
+    .send(customer);
+    tokenSession = body.token;
+  });
+
+  it('should return 200 and array of sellers', () => {
+    chai.request(app)
+    .get('/customer/sellers')
+    .set('authorization', tokenSession)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(200);
+      expect(res.body).to.not.be.undefined;
+    });
+  });
+
+  it('should return 404 without token', () => {
+    chai.request(app)
+    .get('/customer/sellers')
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(401);
+      expect(res.body.message).to.be.equal('Unauthorized, token not found');
+    });
   })
 
-})
+});
