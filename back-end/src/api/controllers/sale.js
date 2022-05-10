@@ -14,9 +14,8 @@ const post = async (req, res) => {
 const getById = async (req, res) => {
   const { id } = req.params;
   try {
-    const { userId } = res.locals;
-    const sale = await saleService.getById(id, userId);
-    if (!sale) return res.status(401).json({ message: 'Not the user who ordered' });
+    const sale = await saleService.getById(id);
+    if (!sale) return res.status(400).json({ message: 'Not Found' });
     return res.status(200).json(sale);
   } catch (e) {
     return res.status(500).send(e.message);

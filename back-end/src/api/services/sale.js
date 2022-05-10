@@ -19,7 +19,7 @@ const post = async (sale) => {
   return saleId;
 };
 
-const getById = async (id, userId) => {
+const getById = async (id) => {
   const sale = await Sale.findOne({
     attributes: { exclude: ['sellerId', 'user_id', 'seller_id'] },
     where: { id },
@@ -35,8 +35,6 @@ const getById = async (id, userId) => {
         },
       }],
   });
-  // sale not from user that's requesting
-  if (sale.userId !== userId) return null;
   return sale;
 };
 
