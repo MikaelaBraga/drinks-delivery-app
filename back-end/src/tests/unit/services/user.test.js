@@ -94,3 +94,16 @@ describe('Unit Test Register', () => {
     userCreateStub.restore();
   });
 });
+
+describe('Unit Test GetSellers', () => {
+  const query = {
+    attributes: { exclude: ['password', 'email'] },
+    where: { role: 'seller' },
+  };
+  it('should call userModel findAll with query', async () => {
+    const findAllStub = sinon.stub(User, 'findAll').resolves('Sellers');
+    await userService.getSellers();
+    expect(findAllStub.calledWith(query)).to.be.true;
+    findAllStub.restore();
+  });
+});
