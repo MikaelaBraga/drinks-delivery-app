@@ -7,7 +7,7 @@ function Navbar() {
   const [isSeller, setIsSeller] = useState('');
   const [isAdmin, setIsAdmin] = useState('');
 
-  const { name, role } = localStorage.getItem(JSON.parse('data'));
+  const { name, role } = JSON.parse(localStorage.getItem(('data')));
 
   useEffect(() => {
     switch (role) {
