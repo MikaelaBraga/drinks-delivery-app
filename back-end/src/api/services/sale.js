@@ -27,9 +27,9 @@ const getSalesByUser = async (userId) => {
   return sales;
 };
 
-const updateCustomerOrder = async (orderId) => {
-  return await Sale.update({ status: 'Entregue' }, { where: { id: orderId } });
-};
+const updateCustomerOrder = async (orderId) => (
+  Sale.update({ status: 'Entregue' }, { where: { id: orderId } })
+);
 
 module.exports = {
   post,
