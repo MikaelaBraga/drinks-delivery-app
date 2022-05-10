@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import styles from './navBar.module.css';
 
 function Navbar() {
-  const [isUser, setIsUser] = useState('');
-  const [isSeller, setIsSeller] = useState('');
-  const [isAdmin, setIsAdmin] = useState('');
+  const [isUser, setIsUser] = useState(false);
+  const [isSeller, setIsSeller] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const { name, role } = JSON.parse(localStorage.getItem(('data')));
 
