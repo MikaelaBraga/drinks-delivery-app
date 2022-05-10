@@ -15,7 +15,10 @@ function Register() {
   const navigate = useNavigate();
 
   const onSubmit = (data) => api.post('/register', data)
-    .then(() => navigate('/customer/products'))
+    .then((response) => {
+      localStorage.setItem('data', JSON.stringify(response.data));
+      navigate('/customer/products');
+    })
     .catch(({ response }) => setInvalidRegister(response.data));
 
   return (
