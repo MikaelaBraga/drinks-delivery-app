@@ -264,6 +264,45 @@ describe('Integration Test Order', () => {
       expect(res).to.have.status(401);
       expect(res.body.message).to.be.equal('Unauthorized, token not found');
     });
+  });
+
+});
+
+describe('Integration Test Order', () => {
+
+  const customer = {
+    email: "zebirita@email.com",
+    password: "$#zebirita#$"
+  }
+
+  let tokenSession;
+
+  before(async () => {
+    const { body } = await chai.request(app)
+    .post('/login')
+    .send(customer);
+    tokenSession = body.token;
+  });
+
+  it('should return 200 and array of sellers', () => {
+    chai.request(app)
+    .get('/customer/sellers')
+    .set('authorization', tokenSession)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(200);
+      expect(res.body).to.not.be.undefined;
+    });
+  });
+
+  it('should return 404 without token', () => {
+    chai.request(app)
+    .get('/customer/sellers')
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(401);
+      expect(res.body.message).to.be.equal('Unauthorized, token not found');
+    });
   })
 
-})
+});

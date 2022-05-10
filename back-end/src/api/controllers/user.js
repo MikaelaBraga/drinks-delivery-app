@@ -25,7 +25,6 @@ const registerCustomer = async (req, res) => {
 const getSellers = async (req, res) => {
   try {
     const sellers = await userService.getSellers();
-    if (!sellers) return res.status(404).json({ message: 'not found' });
     return res.status(200).json(sellers);
   } catch (e) {
     return res.status(500).send(e.message);
