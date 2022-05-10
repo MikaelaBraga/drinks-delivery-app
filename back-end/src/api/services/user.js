@@ -54,8 +54,17 @@ const registerCustomer = async (userData) => {
 // Essa é uma rota específica para pessoa administradora, portanto a mesma
 // rota na API deve considerar um token válido e referente ao usuário de categoria administrator;
 
+const getSellers = async () => {
+  const sellers = User.findAll({
+    attributes: { exclude: ['password', 'email'] },
+    where: { role: 'seller' },
+  });
+  return sellers;
+};
+
 module.exports = {
   getByEmail,
   login,
   registerCustomer,
+  getSellers,
 };

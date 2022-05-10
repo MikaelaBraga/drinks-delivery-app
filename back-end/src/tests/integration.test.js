@@ -264,11 +264,11 @@ describe('Integration Test POST /customer/order', () => {
       expect(res).to.have.status(401);
       expect(res.body.message).to.be.equal('Unauthorized, token not found');
     });
-  })
+  });
 
 });
 
-describe('Integration Test GET /customer/orders', () => {
+describe('Integration Test Get /customer/sellers', () => {
 
   const customer = {
     email: "zebirita@email.com",
@@ -277,17 +277,6 @@ describe('Integration Test GET /customer/orders', () => {
 
   let tokenSession;
 
-  const mockBodyOrderCorrect = {
-    products: [{
-      productId: 1,
-      quantity: 1
-    }],
-    sellerId: 1,
-    totalPrice: 100,
-    deliveryAddress: 'Rua teste',
-    deliveryNumber: 123
-  };
-
   before(async () => {
     const { body } = await chai.request(app)
     .post('/login')
@@ -295,9 +284,9 @@ describe('Integration Test GET /customer/orders', () => {
     tokenSession = body.token;
   });
 
-  it('should return 200 and orders in an array', () => {
+  it('should return 200 and array of sellers', () => {
     chai.request(app)
-    .get('/customer/orders')
+    .get('/customer/sellers')
     .set('authorization', tokenSession)
     .end((err, res) => {
       expect(err).to.be.null;
@@ -306,14 +295,14 @@ describe('Integration Test GET /customer/orders', () => {
     });
   });
 
-  it('should return 401 without token', () => {
+  it('should return 404 without token', () => {
     chai.request(app)
-    .get('/customer/orders')
+    .get('/customer/sellers')
     .end((err, res) => {
       expect(err).to.be.null;
       expect(res).to.have.status(401);
       expect(res.body.message).to.be.equal('Unauthorized, token not found');
     });
-  });
+  })
 
 });

@@ -52,3 +52,23 @@ describe('Unit Test Register', () => {
     registerStub.restore();
   });
 });
+
+describe('Unit Test Get Sellers', () => {
+
+  const mockRequest = {};
+
+  const mockResponse = {
+    json: sinon.spy(),
+    status: sinon.stub().returns({ send: sinon.spy() })
+  };
+
+  it('should call userService getSellers method', async () => {
+    const getSellersStub = sinon.stub(userService, 'getSellers').resolves('Sellers');
+    await userController.getSellers(mockRequest, mockResponse);
+    expect(getSellersStub.calledWith()).to.be.true;
+    getSellersStub.restore();
+  });
+
+});
+
+

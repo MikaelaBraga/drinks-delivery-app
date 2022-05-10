@@ -22,7 +22,17 @@ const registerCustomer = async (req, res) => {
   }
 };
 
+const getSellers = async (req, res) => {
+  try {
+    const sellers = await userService.getSellers();
+    return res.status(200).json(sellers);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+};
+
 module.exports = {
   login,
   registerCustomer,
+  getSellers,
 };
