@@ -14,21 +14,10 @@ function Register() {
 
   const navigate = useNavigate();
 
-  function checkRole(role) {
-    if (role === 'user') {
-      navigate('/customer/products');
-    } else if (role === 'seller') {
-      navigate('/seller/orders');
-    } else {
-      navigate('/admin/manage');
-    }
-  }
-
   const onSubmit = (data) => api.post('/register', data)
     .then((response) => {
-      console.log(response);
-      localStorage.setItem('data', response.data);
-      checkRole(response.data.role);
+      localStorage.setItem('data', JSON.stringify(response.data));
+      navigate('/customer/products');
     })
     .catch(({ response }) => setInvalidRegister(response.data));
 
