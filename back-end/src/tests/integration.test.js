@@ -349,8 +349,8 @@ describe('Integration Test GET /customer/orders', () => {
 describe('Integration Test GET /customer/orders/:id', () => {
 
   const customer = {
-    email: "zebirita@email.com",
-    password: "$#zebirita#$"
+    email: "user@deliveryapp.com",
+    password: "user1234"
   }
 
   const mockOrder = {
@@ -409,6 +409,17 @@ describe('Integration Test GET /customer/orders/:id', () => {
       expect(err).to.be.null;
       expect(res).to.have.status(400);
       expect(res.body.message).to.be.equal('Not Found');
+    });
+  });
+
+  it('should return 401 on requesting sale from another user', () => {
+    chai.request(app)
+    .get(`/customer/orders/1`)
+    .set('authorization', tokenSession)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(401);
+      expect(res.body.message).to.be.equal('Not the customer who ordered');
     });
   });
 
