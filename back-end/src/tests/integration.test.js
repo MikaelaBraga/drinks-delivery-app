@@ -268,7 +268,7 @@ describe('Integration Test Order', () => {
 
 });
 
-describe('Integration Test Order', () => {
+describe('Integration Test Get Sellers', () => {
 
   const customer = {
     email: "zebirita@email.com",
