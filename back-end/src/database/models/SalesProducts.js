@@ -14,11 +14,15 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   SalesProducts.init({
+    saleId: { type: DataTypes.INTEGER, primaryKey: true },
+    productId: { type: DataTypes.INTEGER, primaryKey: true },
     quantity: DataTypes.INTEGER
   }, {
     sequelize,
     tableName: 'salesProducts',
     modelName: 'SalesProducts',
+    timestamps: false,
+    underscored: true,
   });
   return SalesProducts;
 };
