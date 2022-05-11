@@ -268,7 +268,7 @@ describe('Integration Test POST /customer/order', () => {
 
 });
 
-describe('Integration Test Get /customer/sellers', () => {
+describe('Integration Test GET /customer/sellers', () => {
 
   const customer = {
     email: "zebirita@email.com",
@@ -295,7 +295,7 @@ describe('Integration Test Get /customer/sellers', () => {
     });
   });
 
-  it('should return 404 without token', () => {
+  it('should return 401 without token', () => {
     chai.request(app)
     .get('/customer/sellers')
     .end((err, res) => {
@@ -304,5 +304,123 @@ describe('Integration Test Get /customer/sellers', () => {
       expect(res.body.message).to.be.equal('Unauthorized, token not found');
     });
   })
+
+});
+
+describe('Integration Test GET /customer/orders', () => {
+
+  const customer = {
+    email: "zebirita@email.com",
+    password: "$#zebirita#$"
+  }
+
+  let tokenSession;
+
+  before(async () => {
+    const { body } = await chai.request(app)
+    .post('/login')
+    .send(customer);
+    tokenSession = body.token;
+  });
+
+  it('should return 200 and array of orders', () => {
+    chai.request(app)
+    .get('/customer/orders')
+    .set('authorization', tokenSession)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(200);
+      expect(res.body).to.not.be.undefined;
+    });
+  });
+
+  it('should return 401 without token', () => {
+    chai.request(app)
+    .get('/customer/sellers')
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(401);
+      expect(res.body.message).to.be.equal('Unauthorized, token not found');
+    });
+  })
+
+});
+
+describe('Integration Test GET /customer/orders/:id', () => {
+
+  const customer = {
+    email: "user@deliveryapp.com",
+    password: "user1234"
+  }
+
+  const mockOrder = {
+    products: [{
+      productId: 1,
+      quantity: 1
+    }],
+    sellerId: 1,
+    totalPrice: 100,
+    deliveryAddress: 'Rua teste',
+    deliveryNumber: 123
+  };
+
+  let tokenSession;
+
+  let saleId;
+
+  before(async () => {
+    const { body: bodyLogin } = await chai.request(app)
+    .post('/login')
+    .send(customer);
+    tokenSession = bodyLogin.token;
+    const { body: bodyOrder } = await chai.request(app)
+    .post('/customer/order')
+    .set('authorization', tokenSession)
+    .send(mockOrder);
+    saleId = bodyOrder.saleId;
+  });
+
+  it('should return 200 and array of sellers', () => {
+    chai.request(app)
+    .get(`/customer/orders/${saleId}`)
+    .set('authorization', tokenSession)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(200);
+      expect(res.body).to.not.be.undefined;
+    });
+  });
+
+  it('should return 401 without token', () => {
+    chai.request(app)
+    .get(`/customer/orders/${saleId}`)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(401);
+      expect(res.body.message).to.be.equal('Unauthorized, token not found');
+    });
+  });
+
+  it('should return 400 on requesting sale that does exist', () => {
+    chai.request(app)
+    .get(`/customer/orders/9999`)
+    .set('authorization', tokenSession)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(400);
+      expect(res.body.message).to.be.equal('Not Found');
+    });
+  });
+
+  it('should return 401 on requesting sale from another user', () => {
+    chai.request(app)
+    .get(`/customer/orders/1`)
+    .set('authorization', tokenSession)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(401);
+      expect(res.body.message).to.be.equal('Not the customer who ordered');
+    });
+  });
 
 });
