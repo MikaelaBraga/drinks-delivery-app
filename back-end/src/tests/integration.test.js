@@ -444,7 +444,7 @@ describe('Integration Test GET /seller/orders', () => {
 
   const path = '/seller/orders';
 
-  const seller = {
+  const sellerLogin = {
     email: "fulana@deliveryapp.com",
     password: "fulana@123"
   }
@@ -454,7 +454,7 @@ describe('Integration Test GET /seller/orders', () => {
   before(async () => {
     const { body } = await chai.request(app)
     .post('/login')
-    .send(seller);
+    .send(sellerLogin);
     tokenSession = body.token;
   });
 
