@@ -33,8 +33,8 @@ describe('Unit Test Sale', () => {
     const postStub = sinon.stub(saleService, 'post').resolves('Posted');
     await saleController.post(mockRequest, mockResponse);
     const { userId } = mockResponse.locals;
-    const { body } = mockRequest;
-    expect(postStub.calledWith({ userId, ...body })).to.be.true;
+    const { body: sale } = mockRequest;
+    expect(postStub.calledWith({ userId, ...sale })).to.be.true;
     postStub.restore();
   });
 
