@@ -14,8 +14,6 @@ function ProductCard() {
     removeCheckoutItem,
     cart = [], handleChangeItem } = useContext(CartContext);
 
-  // cart.find((c) => c.productId === product.id) ? cart.find((c) => c.productId === product.id)?.quantity : 0
-
   return (
     <div>
       <div className="products">
