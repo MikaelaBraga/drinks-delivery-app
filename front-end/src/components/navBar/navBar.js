@@ -1,30 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import useCheckRole from '../hooks/navBar/checkRole';
 import styles from './navBar.module.css';
 
 function Navbar() {
-  const [isUser, setIsUser] = useState(false);
-  const [isSeller, setIsSeller] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  const { name, role } = JSON.parse(localStorage.getItem(('data')));
-
-  useEffect(() => {
-    switch (role) {
-    case 'customer':
-      setIsUser(true);
-      break;
-    case 'seller':
-      setIsSeller(true);
-      break;
-    case 'administrator':
-      setIsAdmin(true);
-      break;
-    default:
-      break;
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const [isUser, isSeller, isAdmin] = useCheckRole();
+  const { name } = JSON.parse(localStorage.getItem(('user')));
 
   function navBarUser() {
     return (
@@ -87,13 +68,17 @@ function Navbar() {
         >
           { name }
         </li>
-        <li
+      </ul>
+      <Link to="/">
+        <button
           className={ styles.item }
           data-testid="customer_products__element-navbar-link-logout"
+          type="button"
+          onClick={ () => localStorage.clear() }
         >
-          <Link to="/"> Sair </Link>
-        </li>
-      </ul>
+          Sair
+        </button>
+      </Link>
     </nav>
   );
 }
