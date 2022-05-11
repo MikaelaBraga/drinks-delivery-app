@@ -1,54 +1,57 @@
-.App {
+/* div de todos os produtos */
+.products {
+  border: solid black 1px;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(6, 1fr);
+  justify-content: center;
+}
+
+/* botão do carrinho */
+.cart-button {
+  bottom: 90px;
+  margin-bottom: 0;
+  padding: 15px;
+  position: fixed;
+  right: 50px;
+  z-index: 997;
+}
+
+/* card de produto */
+.card {
   align-items: center;
-  background: #0fa36b;
-  color: #464646;
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
-  font-family: sans-serif;
-  height: 100vh;
-  justify-content: center;
-  width: 100%;
+  height: 250px;
+  margin: auto;
+  padding: 5px;
+  width: 200px;
 }
 
-.App > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
+/* nome do produto e preço estão com h3 */
+
+.card h3 {
+  padding: 1px;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
+/* imagem do produto */
+.card img {
+  height: 150px;
+  object-fit: cover;
+  width: 100px;
 }
 
-@keyframes shake {
-
-  0% {
-    transform: rotate(5deg);
-  }
-
-  50% {
-    transform: rotate(-5deg);
-  }
-
-  100% {
-    transform: rotate(5deg);
-  }
+/* div do contador de produtos */
+.counter-product {
+  padding: 1px;
 }
 
-@keyframes clink {
+.counter-product button {
+  padding: 2px;
 
-  0% {
-    transform: rotate(-10deg);
-  }
+}
 
-  50% {
-    transform: rotate(20deg);
-  }
-
-  100% {
-    transform: rotate(-10deg);
-  }
+.counter-product input {
+  width: 20px;
 }
