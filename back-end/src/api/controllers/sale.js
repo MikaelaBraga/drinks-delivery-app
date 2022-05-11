@@ -16,7 +16,7 @@ const getSaleByIdCustomer = async (req, res) => {
   try {
     const { userId } = res.locals;
     const sale = await saleService.getById(id);
-    if (!sale) return res.status(400).json({ message: 'Not Found' });
+    if (!sale) return res.status(404).json({ message: 'Not Found' });
     if (sale.userId !== userId) {
       return res.status(401).json({ message: 'Not the customer who ordered' });
     }
@@ -31,7 +31,7 @@ const getSaleByIdSeller = async (req, res) => {
   try {
     const { sellerId } = res.locals;
     const sale = await saleService.getById(id);
-    if (!sale) return res.status(400).json({ message: 'Not Found' });
+    if (!sale) return res.status(404).json({ message: 'Not Found' });
     if (sale.sellerId !== sellerId) {
       return res.status(401).json({ message: 'Not the seller who sold' });
     }
@@ -67,7 +67,7 @@ const updateSaleStatusSeller = async (req, res) => {
   try {
     const { sellerId } = res.locals;
     const saleUpdated = await saleService.updateSaleStatusSeller(id, body);
-    if (!saleUpdated) return res.status(400).json({ message: 'Not Found' });
+    if (!saleUpdated) return res.status(404).json({ message: 'Not Found' });
     if (saleUpdated.sellerId !== sellerId) {
       return res.status(401).json({ message: 'Not the seller who sold' });
     }

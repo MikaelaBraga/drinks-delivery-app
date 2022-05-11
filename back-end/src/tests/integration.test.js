@@ -7,6 +7,8 @@ chai.use(chaiHTTP);
 
 const { expect } = chai;
 
+const { SaleStatus } = require('../api/enums/SaleStatus');
+
 describe('Integration Test POST /register', () => {
 
   const path = '/register';
@@ -97,13 +99,13 @@ describe('Integration Test POST /login', () => {
       });
   });
 
-  it('should return status 404 and message not found on incorrect body', () => {
+  it('should return status 400 and message not found on incorrect body', () => {
     chai.request(app)
       .post(path)
       .send(mockBodyIncorrect)
       .end((err, res) => {
         expect(err).to.be.null;
-        expect(res).to.have.status(404);
+        expect(res).to.have.status(400);
         expect(res.body).to.not.have.property('token');
         expect(res.body.message).to.be.equal('invalid email or password');
       });
@@ -416,13 +418,13 @@ describe('Integration Test GET /customer/orders/:id', () => {
     });
   });
 
-  it('should return 400 on requesting sale that does exist', () => {
+  it('should return 404 on requesting sale that does exist', () => {
     chai.request(app)
     .get(`${path}/9999`)
     .set('authorization', tokenSession)
     .end((err, res) => {
       expect(err).to.be.null;
-      expect(res).to.have.status(400);
+      expect(res).to.have.status(404);
       expect(res.body.message).to.be.equal('Not Found');
     });
   });
@@ -520,13 +522,13 @@ describe('Integration Test GET /seller/orders/:id', () => {
     });
   });
 
-  it('should return 400 on requesting sale that does exist', () => {
+  it('should return 404 on requesting sale that does exist', () => {
     chai.request(app)
     .get(`${path}/9999`)
     .set('authorization', tokenSession)
     .end((err, res) => {
       expect(err).to.be.null;
-      expect(res).to.have.status(400);
+      expect(res).to.have.status(404);
       expect(res.body.message).to.be.equal('Not Found');
     });
   });
@@ -554,7 +556,11 @@ describe('Integration Test PUT /seller/orders/:id', () => {
   }
 
   const statusPreparing = {
-    status: 'PREPARANDO',
+    status: SaleStatus.PREPARANDO,
+  }
+
+  const statusOutForDelivery = {
+    status: SaleStatus.A_CAMINHO
   }
 
   let tokenSession;
@@ -566,20 +572,60 @@ describe('Integration Test PUT /seller/orders/:id', () => {
     tokenSession = bodyLogin.token;
   });
 
-  it('should return 200 and sale updated with correct body', () => {
+  it('should return 200 and sale updated with status preparing', () => {
     chai.request(app)
-    .get(`${path}/2`)
+    .put(`${path}/2`)
     .set('authorization', tokenSession)
+    .send(statusPreparing)
     .end((err, res) => {
       expect(err).to.be.null;
       expect(res).to.have.status(200);
       expect(res.body).to.not.be.undefined;
+      expect(res.body.status).to.be.equal(SaleStatus.PREPARANDO);
+    });
+  });
+
+  it('should return 200 and sale updated with status out for delivery', () => {
+    chai.request(app)
+    .put(`${path}/2`)
+    .set('authorization', tokenSession)
+    .send(statusOutForDelivery)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(200);
+      expect(res.body).to.not.be.undefined;
+      expect(res.body.status).to.be.equal(SaleStatus.A_CAMINHO);
+    });
+  });
+
+  it('should return 400 and error message without status on body', () => {
+    chai.request(app)
+    .put(`${path}/2`)
+    .set('authorization', tokenSession)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(400);
+      expect(res.body).to.not.be.undefined;
+      expect(res.body.message).to.be.equal('status is required');
+    });
+  });
+
+  it('should return 400 and error message with status not from enum', () => {
+    chai.request(app)
+    .put(`${path}/2`)
+    .set('authorization', tokenSession)
+    .send({ status: 'bad status'})
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(400);
+      expect(res.body).to.not.be.undefined;
+      expect(res.body.message).to.be.equal('status must be either PREPARANDO OR A CAMINHO');
     });
   });
 
   it('should return 401 without token', () => {
     chai.request(app)
-    .get(`${path}/1`)
+    .put(`${path}/1`)
     .end((err, res) => {
       expect(err).to.be.null;
       expect(res).to.have.status(401);
@@ -587,21 +633,23 @@ describe('Integration Test PUT /seller/orders/:id', () => {
     });
   });
 
-  it('should return 400 on requesting sale that does exist', () => {
+  it('should return 404 on requesting sale that does exist', () => {
     chai.request(app)
-    .get(`${path}/9999`)
+    .put(`${path}/9999`)
     .set('authorization', tokenSession)
+    .send(statusPreparing)
     .end((err, res) => {
       expect(err).to.be.null;
-      expect(res).to.have.status(400);
+      expect(res).to.have.status(404);
       expect(res.body.message).to.be.equal('Not Found');
     });
   });
 
-  it('should return 401 on requesting sale from another seller', () => {
+  it('should return 401 on requesting update Sale from another seller', () => {
     chai.request(app)
-    .get(`${path}/1`)
+    .put(`${path}/1`)
     .set('authorization', tokenSession)
+    .send(statusPreparing)
     .end((err, res) => {
       expect(err).to.be.null;
       expect(res).to.have.status(401);

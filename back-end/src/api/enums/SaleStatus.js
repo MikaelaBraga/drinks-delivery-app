@@ -5,4 +5,4 @@ const SaleStatus = {
   ENTREGUE: 'ENTREGUE'
 }
 
-export default SaleStatus;
+module.exports = { SaleStatus };
