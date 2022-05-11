@@ -1,23 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
+import '../../App.css';
+
 import { Link } from 'react-router-dom';
-import api from '../../services/api';
 import { CartContext } from '../../context/CartProvider';
 import CartTotalPrice from '../../hooks/CartTotalPrice';
-import './CustomerProducts.css';
+import RequestProducts from '../../hooks/RequestProducts';
 
 function ProductCard() {
-  const [products, setProducts] = useState([]);
-  const { addCheckoutItem, removeCheckoutItem, cart = [] } = useContext(CartContext);
+  const [products] = RequestProducts();
   const [totalPrice] = CartTotalPrice();
+  const {
+    addCheckoutItem,
+    removeCheckoutItem,
+    cart = [], handleChangeItem } = useContext(CartContext);
 
-  useEffect(() => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
-    api.get('/customer/products', { headers: { Authorization: token } })
-      .then((response) => {
-        setProducts(response.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // cart.find((c) => c.productId === product.id) ? cart.find((c) => c.productId === product.id)?.quantity : 0
 
   return (
     <div>
@@ -29,11 +26,11 @@ function ProductCard() {
               src={ product.url_image }
               alt="imagem do produto"
             />
-            <h3
+            <h5
               data-testid={ `customer_products__element-card-title-${product.id}` }
             >
               { product.name }
-            </h3>
+            </h5>
             <h5
               data-testid={ `customer_products__element-card-price-${product.id}` }
             >
@@ -48,8 +45,11 @@ function ProductCard() {
                 +
               </button>
               <input
-                type="number"
+                type="text"
+                id={ product.id }
+                name={ product.name }
                 data-testid={ `customer_products__input-card-quantity-${product.id}` }
+                onChange={ (e) => handleChangeItem(e, product.price) }
                 value={ cart.find((c) => c.productId === product.id)
                   ? cart.find((c) => c.productId === product.id)?.quantity : 0 }
               />
@@ -64,16 +64,18 @@ function ProductCard() {
           </div>
         )) }
       </div>
-      <button
-        className="cart-button"
-        data-testid="customer_products__checkout-bottom-value"
-        type="button"
-        disabled={ totalPrice === 0 }
-      >
-        <Link to="/customer/checkout">
-          {`${parseFloat(totalPrice).toFixed(2)}`.replace('.', ',')}
-        </Link>
-      </button>
+      <Link to="/customer/checkout">
+        <button
+          className="cart-button"
+          data-testid="customer_products__button-cart"
+          type="button"
+          disabled={ totalPrice === 0 }
+        >
+          <span data-testid="customer_products__checkout-bottom-value">
+            {`${parseFloat(totalPrice).toFixed(2)}`.replace('.', ',')}
+          </span>
+        </button>
+      </Link>
     </div>
   );
 }
