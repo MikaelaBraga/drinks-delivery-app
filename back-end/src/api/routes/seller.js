@@ -17,7 +17,6 @@ sellerRouter.get('/orders', validationSeller, saleController.getSalesBySeller);
 sellerRouter.put('/orders/:id',
 validationSeller,
 validationJoi(updateSale),
-saleController.updateSaleStatusSeller
-);
+saleController.updateSaleStatusSeller);
 
 module.exports = sellerRouter;

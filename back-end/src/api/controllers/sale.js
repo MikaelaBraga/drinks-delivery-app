@@ -75,7 +75,7 @@ const updateSaleStatusSeller = async (req, res) => {
   } catch (e) {
     return res.status(500).send(e.message);
   }
-}
+};
 
 module.exports = {
   post,
@@ -83,5 +83,5 @@ module.exports = {
   getSaleByIdSeller,
   getSalesByUser,
   getSalesBySeller,
-  updateSaleStatusSeller
+  updateSaleStatusSeller,
 };

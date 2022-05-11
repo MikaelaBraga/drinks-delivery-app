@@ -53,6 +53,6 @@ const updateSale = joi.object({
     'any.only': 'status must be either PREPARANDO OR SAIU PARA ENTREGA',
     'any.required': 'status is required',
   }),
-})
+});
 
 module.exports = { postSale, updateSale };

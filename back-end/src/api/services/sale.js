@@ -59,7 +59,7 @@ const updateSaleStatusSeller = async (id, data) => {
   sale.status = data.status;
   await sale.save();
   return sale;
-}
+};
 
 module.exports = {
   post,
