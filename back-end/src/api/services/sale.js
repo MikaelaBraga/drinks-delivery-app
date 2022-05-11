@@ -21,7 +21,7 @@ const post = async (sale) => {
 
 const getById = async (id) => {
   const sale = await Sale.findOne({
-    attributes: { exclude: ['sellerId', 'user_id', 'seller_id'] },
+    attributes: { exclude: ['user_id', 'seller_id'] },
     where: { id },
     include: [
       { model: User, as: 'seller', attributes: { exclude: ['password', 'email', 'role', 'id'] } },

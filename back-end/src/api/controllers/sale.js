@@ -11,7 +11,7 @@ const post = async (req, res) => {
   }
 };
 
-const getById = async (req, res) => {
+const getSaleByIdCustomer = async (req, res) => {
   const { id } = req.params;
   try {
     const { userId } = res.locals;
@@ -19,6 +19,21 @@ const getById = async (req, res) => {
     if (!sale) return res.status(400).json({ message: 'Not Found' });
     if (sale.userId !== userId) {
       return res.status(401).json({ message: 'Not the customer who ordered' });
+    }
+    return res.status(200).json(sale);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+};
+
+const getSaleByIdSeller = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const { sellerId } = res.locals;
+    const sale = await saleService.getById(id);
+    if (!sale) return res.status(400).json({ message: 'Not Found' });
+    if (sale.sellerId !== sellerId) {
+      return res.status(401).json({ message: 'Not the seller who sold' });
     }
     return res.status(200).json(sale);
   } catch (e) {
@@ -48,7 +63,8 @@ const getSalesBySeller = async (req, res) => {
 
 module.exports = {
   post,
-  getById,
+  getSaleByIdCustomer,
+  getSaleByIdSeller,
   getSalesByUser,
   getSalesBySeller,
 };
