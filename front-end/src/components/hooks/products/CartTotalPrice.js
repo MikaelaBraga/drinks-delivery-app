@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { CartContext } from '../context/CartProvider';
+import { CartContext } from '../../../context/CartProvider';
 
 function CartTotalPrice() {
   const [totalPrice, setTotalPrice] = useState(0);

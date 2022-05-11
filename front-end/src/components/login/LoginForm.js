@@ -17,7 +17,19 @@ function Login() {
   const onSubmit = (datas) => api.post('/login', datas)
     .then(({ data }) => {
       localStorage.setItem('user', JSON.stringify(data));
-      return navigate('/customer/products');
+      switch (data.role) {
+      case 'customer':
+        navigate('/customer/products');
+        break;
+      case 'seller':
+        navigate('/seller/orders');
+        break;
+      case 'administrator':
+        navigate('/admin/manage');
+        break;
+      default:
+        break;
+      }
     })
     .catch(({ response }) => setInvalidLogin(response.data));
 

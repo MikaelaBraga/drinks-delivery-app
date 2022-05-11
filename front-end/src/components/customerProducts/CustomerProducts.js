@@ -3,8 +3,8 @@ import '../../App.css';
 
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartProvider';
-import CartTotalPrice from '../../hooks/CartTotalPrice';
-import RequestProducts from '../../hooks/RequestProducts';
+import CartTotalPrice from '../hooks/products/CartTotalPrice';
+import RequestProducts from '../hooks/products/RequestProducts';
 
 function ProductCard() {
   const [products] = RequestProducts();
