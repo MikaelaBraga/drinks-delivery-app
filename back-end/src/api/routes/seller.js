@@ -2,6 +2,8 @@ const express = require('express');
 
 const saleController = require('../controllers/sale');
 const { validationSeller } = require('../middlewares/validationJwt');
+const { validationJoi } = require('../middlewares/validationJoi');
+const { updateSale } = require('../schemas');
 
 const sellerRouter = express.Router();
 
@@ -12,5 +14,10 @@ sellerRouter.get('/orders/:id', validationSeller, saleController.getSaleByIdSell
 sellerRouter.get('/orders', validationSeller, saleController.getSalesBySeller);
 // - Manipular o status desses pedidos.
 // -- putSales
+sellerRouter.put('/orders/:id',
+validationSeller,
+validationJoi(updateSale),
+saleController.updateSaleStatusSeller
+);
 
 module.exports = sellerRouter;

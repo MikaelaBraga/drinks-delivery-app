@@ -47,4 +47,12 @@ const postSale = joi.object({
   }),
 });
 
-module.exports = { postSale };
+const updateSale = joi.object({
+  status: joi.string().valid('PREPARANDO', 'SAIU PARA ENTREGA').required().messages({
+    'string.base': 'status must be a string',
+    'any.only': 'status must be either PREPARANDO OR SAIU PARA ENTREGA',
+    'any.required': 'status is required',
+  }),
+})
+
+module.exports = { postSale, updateSale };

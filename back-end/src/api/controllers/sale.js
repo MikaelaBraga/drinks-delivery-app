@@ -61,10 +61,27 @@ const getSalesBySeller = async (req, res) => {
   }
 };
 
+const updateSaleStatusSeller = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+  try {
+    const { sellerId } = res.locals;
+    const saleUpdated = await saleService.updateSaleStatusSeller(id, body);
+    if (!saleUpdated) return res.status(400).json({ message: 'Not Found' });
+    if (saleUpdated.sellerId !== sellerId) {
+      return res.status(401).json({ message: 'Not the seller who sold' });
+    }
+    return res.status(200).json(saleUpdated);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+}
+
 module.exports = {
   post,
   getSaleByIdCustomer,
   getSaleByIdSeller,
   getSalesByUser,
   getSalesBySeller,
+  updateSaleStatusSeller
 };

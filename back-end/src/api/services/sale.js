@@ -54,9 +54,17 @@ const getSalesBySeller = async (sellerId) => {
   return sales;
 };
 
+const updateSaleStatusSeller = async (id, data) => {
+  const sale = await Sale.findOne({ where: { id } });
+  sale.status = data.status;
+  await sale.save();
+  return sale;
+}
+
 module.exports = {
   post,
   getById,
   getSalesByUser,
   getSalesBySeller,
+  updateSaleStatusSeller,
 };
