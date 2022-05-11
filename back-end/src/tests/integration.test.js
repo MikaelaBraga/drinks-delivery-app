@@ -373,7 +373,7 @@ describe('Integration Test GET /customer/orders/:id', () => {
       productId: 1,
       quantity: 1
     }],
-    sellerId: 1,
+    sellerId: 2,
     totalPrice: 100,
     deliveryAddress: 'Rua teste',
     deliveryNumber: 123
@@ -444,7 +444,7 @@ describe('Integration Test GET /seller/orders', () => {
 
   const path = '/seller/orders';
 
-  const sellerLogin = {
+  const seller = {
     email: "fulana@deliveryapp.com",
     password: "fulana@123"
   }
@@ -454,7 +454,7 @@ describe('Integration Test GET /seller/orders', () => {
   before(async () => {
     const { body } = await chai.request(app)
     .post('/login')
-    .send(sellerLogin);
+    .send(seller);
     tokenSession = body.token;
   });
 
@@ -476,6 +476,69 @@ describe('Integration Test GET /seller/orders', () => {
       expect(err).to.be.null;
       expect(res).to.have.status(401);
       expect(res.body.message).to.be.equal('Unauthorized, token not found');
+    });
+  });
+
+});
+
+describe('Integration Test GET /seller/orders/:id', () => {
+
+  const path = '/seller/orders';
+
+  const seller = {
+    email: "fulana@deliveryapp.com",
+    password: "fulana@123"
+  }
+
+  let tokenSession;
+
+  before(async () => {
+    const { body: bodyLogin } = await chai.request(app)
+    .post('/login')
+    .send(seller);
+    tokenSession = bodyLogin.token;
+  });
+
+  it('should return 200 and array of sellers', () => {
+    chai.request(app)
+    .get(`${path}/2`)
+    .set('authorization', tokenSession)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(200);
+      expect(res.body).to.not.be.undefined;
+    });
+  });
+
+  it('should return 401 without token', () => {
+    chai.request(app)
+    .get(`${path}/1`)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(401);
+      expect(res.body.message).to.be.equal('Unauthorized, token not found');
+    });
+  });
+
+  it('should return 400 on requesting sale that does exist', () => {
+    chai.request(app)
+    .get(`${path}/9999`)
+    .set('authorization', tokenSession)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(400);
+      expect(res.body.message).to.be.equal('Not Found');
+    });
+  });
+
+  it('should return 401 on requesting sale from another seller', () => {
+    chai.request(app)
+    .get(`${path}/1`)
+    .set('authorization', tokenSession)
+    .end((err, res) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(401);
+      expect(res.body.message).to.be.equal('Not the seller who sold');
     });
   });
 
