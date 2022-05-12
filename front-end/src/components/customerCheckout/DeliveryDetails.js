@@ -1,6 +1,4 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 // import { useNavigate, Link } from 'react-router-dom';
 // import api from '../../services/api';
 // import GetCheckout from '../hooks/checkout/GetCheckout';
@@ -26,12 +24,14 @@ function DeliveryDetails() {
       <h1>Detalhes e Endereço para Entrega</h1>
 
       <form>
-        <select name="seller">
+        <label htmlFor="seller">
           P. Vendedora Responsável:
-          { sellers.map((seller, index) => (
-            <option key={ index } value={ seller.name }>{ seller.name }</option>
-          )) }
-        </select>
+          <select name="seller">
+            { sellers.map((seller, index) => (
+              <option key={ index } value={ seller.name }>{ seller.name }</option>
+            )) }
+          </select>
+        </label>
 
         <label htmlFor="adress">
           Endereço
