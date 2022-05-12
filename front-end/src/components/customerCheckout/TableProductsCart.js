@@ -47,7 +47,7 @@ function TableProductsCart() {
                   `customer_checkout__element-order-table-unit-price-${index}`
                 }
               >
-                { product.unitPrice }
+                { `${parseFloat(product.unitPrice).toFixed(2)}`.replace('.', ',') }
               </td>
               <td
                 data-testid={
@@ -69,7 +69,11 @@ function TableProductsCart() {
         </tbody>
       </table>
 
-      <h2 data-testid="customer_checkout__element-order-total-price">{ totalPrice }</h2>
+      <h2
+        data-testid="customer_checkout__element-order-total-price"
+      >
+        { `${parseFloat(totalPrice).toFixed(2)}`.replace('.', ',') }
+      </h2>
     </div>
   );
 }
