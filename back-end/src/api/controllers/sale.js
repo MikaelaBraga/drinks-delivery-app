@@ -11,14 +11,29 @@ const post = async (req, res) => {
   }
 };
 
-const getById = async (req, res) => {
+const getSaleByIdCustomer = async (req, res) => {
   const { id } = req.params;
   try {
     const { userId } = res.locals;
     const sale = await saleService.getById(id);
-    if (!sale) return res.status(400).json({ message: 'Not Found' });
+    if (!sale) return res.status(404).json({ message: 'Not Found' });
     if (sale.userId !== userId) {
       return res.status(401).json({ message: 'Not the customer who ordered' });
+    }
+    return res.status(200).json(sale);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+};
+
+const getSaleByIdSeller = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const { sellerId } = res.locals;
+    const sale = await saleService.getById(id);
+    if (!sale) return res.status(404).json({ message: 'Not Found' });
+    if (sale.sellerId !== sellerId) {
+      return res.status(401).json({ message: 'Not the seller who sold' });
     }
     return res.status(200).json(sale);
   } catch (e) {
@@ -36,7 +51,17 @@ const getSalesByUser = async (req, res) => {
   }
 };
 
-const updateCustomerOrder = async (req, res) => {
+const getSalesBySeller = async (req, res) => {
+  try {
+    const { sellerId } = res.locals;
+    const sales = await saleService.getSalesBySeller(sellerId);
+    return res.status(200).json(sales);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+};
+
+const updateSaleStatusCustomer = async (req, res) => {
   try {
     const { id } = req.params;
     await saleService.updateCustomerOrder(id);
@@ -46,9 +71,28 @@ const updateCustomerOrder = async (req, res) => {
   }
 };
 
+const updateSaleStatusSeller = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+  try {
+    const { sellerId } = res.locals;
+    const saleUpdated = await saleService.updateSaleStatusSeller(id, body);
+    if (!saleUpdated) return res.status(404).json({ message: 'Not Found' });
+    if (saleUpdated.sellerId !== sellerId) {
+      return res.status(401).json({ message: 'Not the seller who sold' });
+    }
+    return res.status(200).json(saleUpdated);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+};
+
 module.exports = {
   post,
-  getById,
+  getSaleByIdCustomer,
+  getSaleByIdSeller,
   getSalesByUser,
-  updateCustomerOrder,
+  getSalesBySeller,
+  updateSaleStatusCustomer,
+  updateSaleStatusSeller,
 };

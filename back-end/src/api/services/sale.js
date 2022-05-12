@@ -21,7 +21,7 @@ const post = async (sale) => {
 
 const getById = async (id) => {
   const sale = await Sale.findOne({
-    attributes: { exclude: ['sellerId', 'user_id', 'seller_id'] },
+    attributes: { exclude: ['user_id', 'seller_id'] },
     where: { id },
     include: [
       { model: User, as: 'seller', attributes: { exclude: ['password', 'email', 'role', 'id'] } },
@@ -46,13 +46,31 @@ const getSalesByUser = async (userId) => {
   return sales;
 };
 
-const updateCustomerOrder = async (saleId) => (
+const getSalesBySeller = async (sellerId) => {
+  const sales = await Sale.findAll({
+    attributes: ['id', 'status', 'saleDate', 'totalPrice', 'deliveryAddress', 'deliveryNumber'],
+    where: { sellerId },
+  });
+  return sales;
+};
+
+const updateSaleStatusCustomer = async (saleId) => (
   Sale.update({ status: 'Entregue' }, { where: { id: saleId } })
 );
+
+const updateSaleStatusSeller = async (id, data) => {
+  const sale = await Sale.findOne({ where: { id } });
+  if (!sale) return sale;
+  sale.status = data.status;
+  await sale.save();
+  return sale;
+};
 
 module.exports = {
   post,
   getById,
   getSalesByUser,
-  updateCustomerOrder,
+  getSalesBySeller,
+  updateSaleStatusCustomer,
+  updateSaleStatusSeller,
 };

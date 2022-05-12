@@ -1,5 +1,7 @@
 const joi = require('joi');
 
+const { SaleStatus } = require('../enums/SaleStatus');
+
 const postSale = joi.object({
   products: joi.array().items(
     joi.object({
@@ -47,4 +49,12 @@ const postSale = joi.object({
   }),
 });
 
-module.exports = { postSale };
+const updateSale = joi.object({
+  status: joi.string().valid(SaleStatus.PREPARANDO, SaleStatus.A_CAMINHO).required().messages({
+    'string.base': 'status must be a string',
+    'any.only': 'status must be either PREPARANDO OR A CAMINHO',
+    'any.required': 'status is required',
+  }),
+});
+
+module.exports = { postSale, updateSale };

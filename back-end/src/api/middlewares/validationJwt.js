@@ -16,6 +16,23 @@ const validationCustomer = (req, res, next) => {
   }
 };
 
+const validationSeller = (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    if (!token) return res.status(401).json({ message: 'Unauthorized, token not found' });
+    const decoded = verifyToken(token);
+    const { data: { id, role } } = decoded;
+    res.locals.sellerId = id;
+    if (role !== 'seller') {
+      return res.status(401).json({ message: 'Unauthorized, not seller' });
+    }
+    next();
+  } catch (e) {
+    return res.status(401).json('Unauthorized');
+  }
+};
+
 module.exports = {
   validationCustomer,
+  validationSeller,
 };
