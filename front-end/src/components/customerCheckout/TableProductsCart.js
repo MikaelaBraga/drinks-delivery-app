@@ -25,14 +25,41 @@ function TableProductsCart() {
         <tbody>
           { cartCheckout && cartCheckout.map((product, index) => (
             <tr key={ index }>
-              <td>{ index + 1 }</td>
-              <td>{ product.name }</td>
-              <td>{ product.quantity }</td>
-              <td>{ product.unitPrice }</td>
-              <td>{ product.subTotal }</td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-item-number-${index}`
+                }
+              >
+                { index + 1 }
+              </td>
+              <td
+                data-testid={ `customer_checkout__element-order-table-name-${index}` }
+              >
+                { product.name }
+              </td>
+              <td
+                data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
+              >
+                { product.quantity }
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-unit-price-${index}`
+                }
+              >
+                { product.unitPrice }
+              </td>
+              <td
+                data-testid={
+                  `customer_checkout__element-order-table-sub-total-${index}`
+                }
+              >
+                { product.subTotal }
+              </td>
               <td>
                 <button
                   type="button"
+                  data-testid={ `customer_checkout__element-order-table-remove-${index}` }
                 >
                   Remover
                 </button>
@@ -42,7 +69,7 @@ function TableProductsCart() {
         </tbody>
       </table>
 
-      <h2>{ totalPrice }</h2>
+      <h2 data-testid="customer_checkout__element-order-total-price">{ totalPrice }</h2>
     </div>
   );
 }
