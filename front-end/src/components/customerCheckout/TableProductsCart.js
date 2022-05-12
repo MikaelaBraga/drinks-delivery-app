@@ -1,10 +1,11 @@
 import React from 'react';
-import GetCartCheckout from '../hooks/checkout/GetCartCheckout';
 import CartTotalPrice from '../hooks/products/CartTotalPrice';
 
 function TableProductsCart() {
-  const [cart] = GetCartCheckout();
+  const cart = JSON.parse(localStorage.getItem('carrinho'));
   const [totalPrice] = CartTotalPrice();
+
+  const cartCheckout = [...cart];
 
   return (
     <div>
@@ -22,7 +23,7 @@ function TableProductsCart() {
           </tr>
         </thead>
         <tbody>
-          { cart && cart.map((product, index) => (
+          { cartCheckout && cartCheckout.map((product, index) => (
             <tr key={ index }>
               <td>{ index + 1 }</td>
               <td>{ product.name }</td>
@@ -32,7 +33,6 @@ function TableProductsCart() {
               <td>
                 <button
                   type="button"
-                  onClick={ cart.splice(index, 1) }
                 >
                   Remover
                 </button>

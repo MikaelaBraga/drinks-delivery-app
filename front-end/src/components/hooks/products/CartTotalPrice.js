@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
-import { CartContext } from '../../../context/CartProvider';
+import { useEffect, useState } from 'react';
 
 function CartTotalPrice() {
   const [totalPrice, setTotalPrice] = useState(0);
-  const { cart } = useContext(CartContext);
+  const cart = JSON.parse(localStorage.getItem('carrinho'));
 
   useEffect(() => {
     const newPrice = cart.reduce((acc, crr) => {
