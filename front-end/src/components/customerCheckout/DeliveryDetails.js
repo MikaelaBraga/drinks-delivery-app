@@ -1,4 +1,6 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+// import { yupResolver } from '@hookform/resolvers/yup';
 // import { useNavigate, Link } from 'react-router-dom';
 // import api from '../../services/api';
 // import GetCheckout from '../hooks/checkout/GetCheckout';
@@ -8,7 +10,10 @@ function DeliveryDetails() {
   // const { token } = JSON.parse(localStorage.getItem('user'));
   // const [cartCheckout] = GetCheckout();
   const [sellers] = GetSellers();
-  console.log(sellers);
+  const { register, handleSubmit } = useForm({
+    // resolver: yupResolver(loginValidate),
+    mode: 'onChange',
+  });
 
   // function sendOrders(datas) {
   //   console.log(datas);
@@ -19,14 +24,33 @@ function DeliveryDetails() {
   //   { headers: { Authorization: token } }).then().catch();
   // }
 
+  // {
+  //   "products": [
+  //     {
+  //       "productId": 0,
+  //       "quantity": 0
+  //     }
+  //   ],
+  //   "sellerId": 0,
+  //   "totalPrice": 0,
+  //   "deliveryAddress": "string",
+  //   "deliveryNumber": 0
+  // }
+
+  const onSubmit = (datas) => console.log(datas);
+
   return (
     <>
       <h1>Detalhes e Endereço para Entrega</h1>
 
-      <form>
+      <form onSubmit={ handleSubmit(onSubmit) }>
         <label htmlFor="seller">
           P. Vendedora Responsável:
-          <select name="seller">
+          <select
+            name="seller"
+            { ...register('seller') }
+          >
+            <option value="" selected disabled hidden>Escolha um vendedor...</option>
             { sellers.map((seller, index) => (
               <option key={ index } value={ seller.name }>{ seller.name }</option>
             )) }
@@ -39,6 +63,7 @@ function DeliveryDetails() {
             type="text"
             name="adress"
             placeholder="Rua Xablau, Bairro Xablauzinho"
+            { ...register('adress') }
           />
         </label>
         <label htmlFor="numberAdress">
@@ -47,10 +72,11 @@ function DeliveryDetails() {
             type="number"
             name="numberAdress"
             placeholder="198"
+            { ...register('numberAdress') }
           />
         </label>
 
-        <button type="button">FINALIZAR PEDIDO</button>
+        <button type="submit">FINALIZAR PEDIDO</button>
       </form>
     </>
   );
