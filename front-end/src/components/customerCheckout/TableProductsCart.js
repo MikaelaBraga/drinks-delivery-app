@@ -1,11 +1,18 @@
 import React from 'react';
+import GetCheckout from '../hooks/checkout/GetCheckout';
 import CartTotalPrice from '../hooks/products/CartTotalPrice';
 
 function TableProductsCart() {
-  const cart = JSON.parse(localStorage.getItem('carrinho'));
+  const [cartCheckout] = GetCheckout();
   const [totalPrice] = CartTotalPrice();
 
-  const cartCheckout = [...cart];
+  const cart = [...cartCheckout];
+
+  function handleClick(id) {
+    const newCart = cartCheckout.filter((p) => p.productId !== id);
+
+    localStorage.setItem('carrinho', JSON.stringify(newCart));
+  }
 
   return (
     <div>
@@ -23,7 +30,7 @@ function TableProductsCart() {
           </tr>
         </thead>
         <tbody>
-          { cartCheckout && cartCheckout.map((product, index) => (
+          { cart && cart.map((product, index) => (
             <tr key={ index }>
               <td
                 data-testid={
@@ -54,12 +61,13 @@ function TableProductsCart() {
                   `customer_checkout__element-order-table-sub-total-${index}`
                 }
               >
-                { product.subTotal }
+                { `${parseFloat(product.subTotal).toFixed(2)}`.replace('.', ',') }
               </td>
               <td>
                 <button
                   type="button"
                   data-testid={ `customer_checkout__element-order-table-remove-${index}` }
+                  onClick={ () => handleClick(product.productId) }
                 >
                   Remover
                 </button>
