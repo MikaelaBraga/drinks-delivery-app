@@ -28,4 +28,6 @@ customerRouter.post('/order', validationCustomer, validationJoi(postSale), saleC
 customerRouter.get('/orders/:id', validationCustomer, saleController.getById);
 customerRouter.get('/orders', validationCustomer, saleController.getSalesByUser);
 
+customerRouter.put('/orders/:id', validationCustomer, saleController.updateCustomerOrder);
+
 module.exports = customerRouter;

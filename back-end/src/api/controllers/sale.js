@@ -36,8 +36,19 @@ const getSalesByUser = async (req, res) => {
   }
 };
 
+const updateCustomerOrder = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await saleService.updateCustomerOrder(id);
+    return res.status(200).end();
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+};
+
 module.exports = {
   post,
   getById,
   getSalesByUser,
+  updateCustomerOrder,
 };

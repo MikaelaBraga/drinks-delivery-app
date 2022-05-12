@@ -46,8 +46,13 @@ const getSalesByUser = async (userId) => {
   return sales;
 };
 
+const updateCustomerOrder = async (saleId) => (
+  Sale.update({ status: 'Entregue' }, { where: { id: saleId } })
+);
+
 module.exports = {
   post,
   getById,
   getSalesByUser,
+  updateCustomerOrder,
 };
