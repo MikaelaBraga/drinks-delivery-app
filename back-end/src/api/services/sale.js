@@ -54,6 +54,10 @@ const getSalesBySeller = async (sellerId) => {
   return sales;
 };
 
+const updateSaleStatusCustomer = async (saleId) => (
+  Sale.update({ status: 'Entregue' }, { where: { id: saleId } })
+);
+
 const updateSaleStatusSeller = async (id, data) => {
   const sale = await Sale.findOne({ where: { id } });
   if (!sale) return sale;
@@ -67,5 +71,6 @@ module.exports = {
   getById,
   getSalesByUser,
   getSalesBySeller,
+  updateSaleStatusCustomer,
   updateSaleStatusSeller,
 };

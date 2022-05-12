@@ -1,12 +1,12 @@
-import React from 'react';
-import { screen } from '@testing-library/react';
-// import Register from '../components/register/RegisterForm';
-import renderWithRouter from '../tests/helper/renderWithRouter'
-import App from '../App';
+import React from "react";
+import App from "../App";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-it('deve renderizar o componente Register', () => {
-  renderWithRouter(<App />, { route: '/register' })
+test("Register button gets click", () => {
+  render(<App />);
+  const onClick = jest.fn()
 
-  const inputName = screen.getByRole('textbox', { name: /name/i})
-  expect(inputName).toBeInTheDocument();
+  userEvent.click(screen.getByText(/Ainda não tenho conta/i));
+  expect(onClick).toHaveBeenCalledTimes(1);
 });
