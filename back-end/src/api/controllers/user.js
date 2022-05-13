@@ -11,6 +11,15 @@ const login = async (req, res) => {
   }
 };
 
+const getAll = async (_req, res) => {
+  try {
+    const users = await userService.getAll();
+    return res.status(200).json(users);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+}
+
 const registerCustomer = async (req, res) => {
   const { body: userData } = req;
   try {
@@ -33,6 +42,7 @@ const getSellers = async (req, res) => {
 
 module.exports = {
   login,
+  getAll,
   registerCustomer,
   getSellers,
 };
