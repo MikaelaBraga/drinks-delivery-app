@@ -1,14 +1,14 @@
 const { verifyToken } = require('../utils/token');
 
-const validationCustomer = (req, res, next) => {
+const validations = (req, res, next, roleValidate) => {
   try {
     const token = req.headers.authorization;
     if (!token) return res.status(401).json({ message: 'Unauthorized, token not found' });
     const decoded = verifyToken(token);
     const { data: { id, role } } = decoded;
-    res.locals.userId = id;
-    if (role !== 'customer') {
-      return res.status(401).json({ message: 'Unauthorized, not customer' });
+    res.locals[`${roleValidate}Id`] = id;
+    if (role !== roleValidate) {
+      return res.status(401).json({ message: `Unauthorized, not ${roleValidate}` });
     }
     next();
   } catch (e) {
@@ -16,23 +16,14 @@ const validationCustomer = (req, res, next) => {
   }
 };
 
-const validationSeller = (req, res, next) => {
-  try {
-    const token = req.headers.authorization;
-    if (!token) return res.status(401).json({ message: 'Unauthorized, token not found' });
-    const decoded = verifyToken(token);
-    const { data: { id, role } } = decoded;
-    res.locals.sellerId = id;
-    if (role !== 'seller') {
-      return res.status(401).json({ message: 'Unauthorized, not seller' });
-    }
-    next();
-  } catch (e) {
-    return res.status(401).json('Unauthorized');
-  }
-};
+const validationCustomer = (req, res, next) => validations(req, res, next, 'customer');
+
+const validationSeller = (req, res, next) => validations(req, res, next, 'seller');
+
+const validationAdmin = (req, res, next) => validations(req, res, next, 'administrator');
 
 module.exports = {
   validationCustomer,
   validationSeller,
+  validationAdmin,
 };

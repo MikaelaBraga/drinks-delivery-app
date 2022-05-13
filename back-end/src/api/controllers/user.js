@@ -11,10 +11,29 @@ const login = async (req, res) => {
   }
 };
 
-const registerCustomer = async (req, res) => {
+const getAll = async (_req, res) => {
+  try {
+    const users = await userService.getAll();
+    return res.status(200).json(users);
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+};
+
+const removeUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await userService.removeUser(id);
+    return res.status(204).end();
+  } catch (e) {
+    return res.status(500).send(e.message);
+  }
+};
+
+const register = async (req, res) => {
   const { body: userData } = req;
   try {
-    const userRegistered = await userService.registerCustomer(userData);
+    const userRegistered = await userService.register(userData);
     if (!userRegistered) return res.status(409).json({ message: 'E-mail already registered' });
     return res.status(201).json(userRegistered);
   } catch (e) {
@@ -33,6 +52,8 @@ const getSellers = async (req, res) => {
 
 module.exports = {
   login,
-  registerCustomer,
+  getAll,
+  register,
   getSellers,
+  removeUser,
 };

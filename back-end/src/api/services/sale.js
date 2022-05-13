@@ -54,13 +54,17 @@ const getSalesBySeller = async (sellerId) => {
   return sales;
 };
 
-const updateSaleStatusCustomer = async (saleId) => (
-  Sale.update({ status: 'Entregue' }, { where: { id: saleId } })
-);
+const updateSaleStatusCustomer = async (id) => {
+  const sale = await Sale.findOne({ where: { id } });
+  if (!sale) return null;
+  sale.status = 'ENTREGUE';
+  await sale.save();
+  return sale;
+};
 
 const updateSaleStatusSeller = async (id, data) => {
   const sale = await Sale.findOne({ where: { id } });
-  if (!sale) return sale;
+  if (!sale) return null;
   sale.status = data.status;
   await sale.save();
   return sale;

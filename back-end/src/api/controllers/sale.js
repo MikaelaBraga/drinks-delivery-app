@@ -62,10 +62,11 @@ const getSalesBySeller = async (req, res) => {
 };
 
 const updateSaleStatusCustomer = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
-    await saleService.updateCustomerOrder(id);
-    return res.status(200).end();
+    const saleUpdated = await saleService.updateSaleStatusCustomer(id);
+    if (!saleUpdated) return res.status(404).json({ message: 'Not Found' });
+    return res.status(200).json(saleUpdated);
   } catch (e) {
     return res.status(500).send(e.message);
   }
