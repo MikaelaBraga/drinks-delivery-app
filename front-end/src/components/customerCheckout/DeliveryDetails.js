@@ -54,6 +54,7 @@ function DeliveryDetails() {
           P. Vendedora Responsável:
           <select
             name="seller"
+            data-testid="customer_checkout__select-seller"
             { ...register('seller') }
           >
             <option value="" selected disabled hidden>Escolha um vendedor...</option>
@@ -68,6 +69,7 @@ function DeliveryDetails() {
           <input
             type="text"
             name="adress"
+            data-testid="customer_checkout__input-address"
             placeholder="Rua Xablau, Bairro Xablauzinho"
             { ...register('adress') }
           />
@@ -77,6 +79,7 @@ function DeliveryDetails() {
           <input
             type="number"
             name="numberAdress"
+            data-testid="customer_checkout__input-addressNumber"
             placeholder="198"
             { ...register('numberAdress') }
           />
@@ -88,7 +91,12 @@ function DeliveryDetails() {
           || errors.numberAdress?.message }
         </strong>
 
-        <button type="submit">FINALIZAR PEDIDO</button>
+        <button
+          type="submit"
+          data-testid="customer_checkout__button-submit-order"
+        >
+          FINALIZAR PEDIDO
+        </button>
       </form>
     </>
   );
