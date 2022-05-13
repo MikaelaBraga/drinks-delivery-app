@@ -7,6 +7,11 @@ const getByEmail = async (email) => {
   return user;
 };
 
+const getAll = async () => {
+  const users = await User.findAll();
+  return users;
+}
+
 const login = async (userData) => {
   const { email, password: loginPassword } = userData;
   const userFound = await getByEmail(email);
@@ -65,6 +70,7 @@ const getSellers = async () => {
 module.exports = {
   getByEmail,
   login,
+  getAll,
   registerCustomer,
   getSellers,
 };
