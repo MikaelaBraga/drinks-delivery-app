@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { CartContext } from '../../context/CartProvider';
-import useCartTotalPrice from '../hooks/products/CartTotalPrice';
+import useCartTotalPrice from '../hooks/products/useTotalPrice';
 
 function TableProductsCart() {
   const { cart, setCart } = useContext(CartContext);

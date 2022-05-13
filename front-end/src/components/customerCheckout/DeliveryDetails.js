@@ -1,43 +1,49 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-// import { useNavigate, Link } from 'react-router-dom';
-// import api from '../../services/api';
+import { useNavigate } from 'react-router-dom';
+import api from '../../services/api';
 import useGetSellers from '../hooks/checkout/useGetSellers';
 import deliveryDetailsValidate from './validate/deliveryDetailsValidate';
+import { CartContext } from '../../context/CartProvider';
+import useCartTotalPrice from '../hooks/products/useTotalPrice';
 
 function DeliveryDetails() {
   const [sellers] = useGetSellers();
-
+  const { cart } = useContext(CartContext);
+  const [totalPrice] = useCartTotalPrice();
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(deliveryDetailsValidate),
     mode: 'onChange',
   });
 
-  // const { token } = JSON.parse(localStorage.getItem('user'));
+  const navigate = useNavigate();
 
-  // function sendOrders(datas) {
-  // const { adress, numberAdress, seller } = datas;
-  // const order = { products: [] };
+  function sendOrders(datas) {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const productsCart = cart.map(({ productId, quantity }) => {
+      const newObj = { productId, quantity };
+      return newObj;
+    });
 
-  // api.post('/customer/order', datas,
-  //   { headers: { Authorization: token } }).then().catch();
-  // }
+    const { adress, numberAdress, seller } = datas;
+    const idSeller = sellers.find(({ name }) => name === seller)?.id;
 
-  // {
-  //   "products": [
-  //     {
-  //       "productId": 0,
-  //       "quantity": 0
-  //     }
-  //   ],
-  //   "sellerId": 0,
-  //   "totalPrice": 0,
-  //   "deliveryAddress": "string",
-  //   "deliveryNumber": 0
-  // }
+    const orders = {
+      products: productsCart,
+      sellerId: idSeller,
+      totalPrice,
+      deliveryAddress: adress,
+      deliveryNumber: numberAdress,
+    };
 
-  const onSubmit = (datas) => console.log(datas);
+    api.post('/customer/order', orders,
+      { headers: { Authorization: token } })
+      .then(() => navigate('/customer/finished'))
+      .catch(({ response }) => console.log(response));
+  }
+
+  const onSubmit = (datas) => sendOrders(datas);
 
   return (
     <>
