@@ -1,17 +1,18 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-// import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 // import { useNavigate, Link } from 'react-router-dom';
 // import api from '../../services/api';
 // import GetCheckout from '../hooks/checkout/GetCheckout';
 import GetSellers from '../hooks/checkout/GetSellers';
+import deliveryDetailsValidate from './validate/deliveryDetailsValidate';
 
 function DeliveryDetails() {
   // const { token } = JSON.parse(localStorage.getItem('user'));
   // const [cartCheckout] = GetCheckout();
   const [sellers] = GetSellers();
-  const { register, handleSubmit } = useForm({
-    // resolver: yupResolver(loginValidate),
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: yupResolver(deliveryDetailsValidate),
     mode: 'onChange',
   });
 
@@ -75,6 +76,12 @@ function DeliveryDetails() {
             { ...register('numberAdress') }
           />
         </label>
+
+        <strong>
+          { errors.seller?.message
+          || errors.adress?.message
+          || errors.numberAdress?.message }
+        </strong>
 
         <button type="submit">FINALIZAR PEDIDO</button>
       </form>
