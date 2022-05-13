@@ -3,12 +3,12 @@ import '../../App.css';
 
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartProvider';
-import CartTotalPrice from '../hooks/products/CartTotalPrice';
-import RequestProducts from '../hooks/products/RequestProducts';
+import useCartTotalPrice from '../hooks/products/useTotalPrice';
+import useRequestProducts from '../hooks/products/useRequesProducts';
 
 function ProductCard() {
-  const [products] = RequestProducts();
-  const [totalPrice] = CartTotalPrice();
+  const [products] = useRequestProducts();
+  const [totalPrice] = useCartTotalPrice();
   const {
     addCheckoutItem,
     removeCheckoutItem,

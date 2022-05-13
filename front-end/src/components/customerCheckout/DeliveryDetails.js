@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // import { useNavigate, Link } from 'react-router-dom';
 // import api from '../../services/api';
-import getSellers from '../hooks/checkout/GetSellers';
+import useGetSellers from '../hooks/checkout/useGetSellers';
 import deliveryDetailsValidate from './validate/deliveryDetailsValidate';
 
 function DeliveryDetails() {
-  const [sellers] = getSellers();
+  const [sellers] = useGetSellers();
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(deliveryDetailsValidate),

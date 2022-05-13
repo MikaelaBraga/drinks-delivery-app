@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import api from '../../../services/api';
 
-function RequestProducts() {
-  const [products, setProducts] = useState([]);
+function useGetSellers() {
+  const [sellers, setSellers] = useState([]);
 
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user'));
-    api.get('/customer/products', { headers: { Authorization: token } })
+    api.get('/customer/sellers', { headers: { Authorization: token } })
       .then((response) => {
-        setProducts(response.data);
+        setSellers(response.data);
       })
       .catch((err) => console.log(err));
   }, []);
 
-  return [products];
+  return [sellers];
 }
 
-export default RequestProducts;
+export default useGetSellers;
