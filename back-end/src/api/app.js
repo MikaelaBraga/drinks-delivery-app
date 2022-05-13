@@ -9,6 +9,7 @@ const registerRouter = require('./routes/register');
 const customerRouter = require('./routes/customer');
 const sellerRouter = require('./routes/seller');
 const userRouter = require('./routes/user');
+const adminRouter = require('./routes/admin');
 
 // Acess Control
 app.use((_req, res, next) => {
@@ -25,6 +26,7 @@ app.use('/register', registerRouter);
 app.use('/customer', customerRouter);
 app.use('/user', userRouter);
 app.use('/seller', sellerRouter);
+app.use('/admin', adminRouter);
 app.use('/images', express.static(path.join(__dirname, '../../public/uploads/')));
 app.get('/coffee', (_req, res) => res.status(418).end());
 
