@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 
-function GetCheckout() {
-  const [cartCheckout, setCartCheckout] = useState([]);
-  const cart = JSON.parse(localStorage.getItem('carrinho'));
+// function GetCheckout() {
+//   const [cartCheckout, setCartCheckout] = useState([]);
+//   const cart = JSON.parse(localStorage.getItem('carrinho'));
 
-  useEffect(() => {
-    setCartCheckout(cart);
-  }, [cart, cartCheckout]);
+//   useEffect(() => {
+//     setCartCheckout(cart);
+//   }, []);
 
-  return [cartCheckout, setCartCheckout];
-}
+//   return [cartCheckout];
+// }
 
-export default GetCheckout;
+// export default GetCheckout;

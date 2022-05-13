@@ -1,18 +1,27 @@
-import React from 'react';
-import GetCheckout from '../hooks/checkout/GetCheckout';
-import CartTotalPrice from '../hooks/products/CartTotalPrice';
+import React, { useContext, useEffect } from 'react';
+import { CartContext } from '../../context/CartProvider';
+import useCartTotalPrice from '../hooks/products/CartTotalPrice';
 
 function TableProductsCart() {
-  const [cartCheckout] = GetCheckout();
-  const [totalPrice] = CartTotalPrice();
-
-  const cart = [...cartCheckout];
+  const { cart, setCart } = useContext(CartContext);
+  const [totalPrice] = useCartTotalPrice();
 
   function handleClick(id) {
-    const newCart = cartCheckout.filter((p) => p.productId !== id);
+    const newCart = cart.filter((p) => p.productId !== id);
 
-    localStorage.setItem('carrinho', JSON.stringify(newCart));
+    setCart(newCart);
   }
+
+  useEffect(() => {
+    const cartLocalStorage = JSON.parse(localStorage.getItem('carrinho'));
+
+    setCart(cartLocalStorage);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('carrinho', JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <div>

@@ -3,22 +3,21 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // import { useNavigate, Link } from 'react-router-dom';
 // import api from '../../services/api';
-// import GetCheckout from '../hooks/checkout/GetCheckout';
-import GetSellers from '../hooks/checkout/GetSellers';
+import getSellers from '../hooks/checkout/GetSellers';
 import deliveryDetailsValidate from './validate/deliveryDetailsValidate';
 
 function DeliveryDetails() {
-  // const { token } = JSON.parse(localStorage.getItem('user'));
-  // const [cartCheckout] = GetCheckout();
-  const [sellers] = GetSellers();
+  const [sellers] = getSellers();
+
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(deliveryDetailsValidate),
     mode: 'onChange',
   });
 
+  // const { token } = JSON.parse(localStorage.getItem('user'));
+
   // function sendOrders(datas) {
-  //   console.log(datas);
-  // const { adress, number } = datas;
+  // const { adress, numberAdress, seller } = datas;
   // const order = { products: [] };
 
   // api.post('/customer/order', datas,

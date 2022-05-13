@@ -12,8 +12,8 @@ function Routers() {
         <Route exact path="/" element={ <Navigate to="/login" /> } />
         <Route path="/login" element={ <Login /> } />
         <Route path="/register" element={ <Register /> } />
-        <Route exact path="/customer/products" element={ <CustomerProductsCards /> } />
         <Route exact path="/customer/checkout" element={ <CustomerCheckout /> } />
+        <Route exact path="/customer/products" element={ <CustomerProductsCards /> } />
       </Routes>
     </BrowserRouter>
   );
