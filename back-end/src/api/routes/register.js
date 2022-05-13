@@ -12,7 +12,7 @@ const { registerCustomer } = require('../schemas');
 registerRouter.post(
   '/',
   validationJoi(registerCustomer),
-  userController.registerCustomer,
+  userController.register,
 );
 
 module.exports = registerRouter;

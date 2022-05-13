@@ -12,7 +12,7 @@ const getAll = async () => {
   return users;
 };
 
-const removeUser = async (id) => await User.destroy({ where: { id } });
+const removeUser = async (id) => User.destroy({ where: { id } });
 
 const login = async (userData) => {
   const { email, password: loginPassword } = userData;

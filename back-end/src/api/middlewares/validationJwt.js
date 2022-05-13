@@ -7,7 +7,6 @@ const validations = (req, res, next, roleValidate) => {
     const decoded = verifyToken(token);
     const { data: { id, role } } = decoded;
     res.locals[`${roleValidate}Id`] = id;
-    console.log(res.locals);
     if (role !== roleValidate) {
       return res.status(401).json({ message: `Unauthorized, not ${roleValidate}` });
     }
@@ -26,5 +25,5 @@ const validationAdmin = (req, res, next) => validations(req, res, next, 'adminis
 module.exports = {
   validationCustomer,
   validationSeller,
-  validationAdmin
+  validationAdmin,
 };
