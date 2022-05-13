@@ -4,7 +4,7 @@ const login = async (req, res) => {
   const { body: userData } = req;
   try {
     const userLogged = await userService.login(userData);
-    if (!userLogged) return res.status(400).json({ message: 'invalid email or password' });
+    if (!userLogged) return res.status(404).json({ message: 'invalid email or password' });
     return res.status(200).json(userLogged);
   } catch (e) {
     return res.status(500).send(e.message);
