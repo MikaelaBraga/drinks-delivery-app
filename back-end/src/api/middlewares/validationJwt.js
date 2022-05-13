@@ -15,19 +15,13 @@ const validations = (req, res, next, roleValidate) => {
   } catch (e) {
     return res.status(401).json('Unauthorized');
   }
-}
-
-const validationCustomer = (req, res, next) => {
-  return validations(req, res, next, 'customer');
 };
 
-const validationSeller = (req, res, next) => {
-  return validations(req, res, next, 'seller');
-};
+const validationCustomer = (req, res, next) => validations(req, res, next, 'customer');
 
-const validationAdmin = (req, res, next) => {
-  return validations(req, res, next, 'administrator');
-};
+const validationSeller = (req, res, next) => validations(req, res, next, 'seller');
+
+const validationAdmin = (req, res, next) => validations(req, res, next, 'administrator');
 
 module.exports = {
   validationCustomer,
