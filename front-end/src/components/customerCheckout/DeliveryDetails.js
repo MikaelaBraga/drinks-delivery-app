@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,6 @@ function DeliveryDetails() {
   const [sellers] = useGetSellers();
   const { cart } = useContext(CartContext);
   const [totalPrice] = useCartTotalPrice();
-  const [sellerState, setSellerState] = useState('Fulana Pereira');
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(deliveryDetailsValidate),
     mode: 'onChange',
@@ -21,18 +20,18 @@ function DeliveryDetails() {
   const navigate = useNavigate();
 
   function sendOrders(datas) {
+    console.log(datas);
     const { token } = JSON.parse(localStorage.getItem('user'));
     const productsCart = cart.map(({ productId, quantity }) => {
       const newObj = { productId, quantity };
       return newObj;
     });
 
-    const { adress, numberAdress } = datas;
-    const idSeller = sellers.find(({ name }) => name === sellerState)?.id;
+    const { adress, numberAdress, seller } = datas;
 
     const orders = {
       products: productsCart,
-      sellerId: idSeller,
+      sellerId: seller,
       totalPrice,
       deliveryAddress: adress,
       deliveryNumber: numberAdress,
@@ -52,28 +51,26 @@ function DeliveryDetails() {
     <>
       <h1>Detalhes e Endereço para Entrega</h1>
 
-      <label htmlFor="seller">
-        P. Vendedora Responsável:
-        <select
-          name="seller"
-          data-testid="customer_checkout__select-seller"
-          onChange={ ({ target }) => setSellerState(target.value) }
-          value={ sellerState }
-        >
-          {
-            sellers.map((seller, index) => (
-              <option
-                key={ index }
-                value={ seller.name }
-              >
-                { seller.name }
-              </option>
-            ))
-          }
-        </select>
-      </label>
-
       <form onSubmit={ handleSubmit(onSubmit) }>
+        <label htmlFor="seller">
+          P. Vendedora Responsável:
+          <select
+            name="seller"
+            data-testid="customer_checkout__select-seller"
+            { ...register('seller') }
+          >
+            {
+              sellers.map((seller, index) => (
+                <option
+                  key={ index }
+                  value={ seller.id }
+                >
+                  { seller.name }
+                </option>
+              ))
+            }
+          </select>
+        </label>
         <label htmlFor="adress">
           Endereço
           <input
