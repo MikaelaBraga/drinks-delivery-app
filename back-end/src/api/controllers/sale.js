@@ -3,8 +3,8 @@ const saleService = require('../services/sale');
 const post = async (req, res) => {
   const { body: sale } = req;
   try {
-    const { userId } = res.locals;
-    const saleId = await saleService.post({ userId, ...sale });
+    const { customerId } = res.locals;
+    const saleId = await saleService.post({ customerId, ...sale });
     return res.status(201).json({ saleId });
   } catch (e) {
     return res.status(500).send(e.message);
@@ -14,10 +14,10 @@ const post = async (req, res) => {
 const getSaleByIdCustomer = async (req, res) => {
   const { id } = req.params;
   try {
-    const { userId } = res.locals;
+    const { customerId } = res.locals;
     const sale = await saleService.getById(id);
     if (!sale) return res.status(404).json({ message: 'Not Found' });
-    if (sale.userId !== userId) {
+    if (sale.userId !== customerId) {
       return res.status(401).json({ message: 'Not the customer who ordered' });
     }
     return res.status(200).json(sale);
