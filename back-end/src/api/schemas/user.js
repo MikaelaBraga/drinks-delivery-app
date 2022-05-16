@@ -29,9 +29,12 @@ const registerCustomer = joi.object({
     'string.min': 'password must be longer than 6 characters',
     'any.required': 'password is required',
   }),
+  role: joi.string().optional().messages({
+    'string.base': 'role must be a string',
+  }),
 });
 
 module.exports = { 
   loginUser,
-  registerCustomer, 
+  registerCustomer,
 };
