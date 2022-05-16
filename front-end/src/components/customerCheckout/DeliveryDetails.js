@@ -12,7 +12,7 @@ function DeliveryDetails() {
   const [sellers] = useGetSellers();
   const { cart } = useContext(CartContext);
   const [totalPrice] = useCartTotalPrice();
-  const [sellerState, setSellerState] = useState('Fulana Pereira');
+  const [sellerState, setSellerState] = useState(2);
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(deliveryDetailsValidate),
     mode: 'onChange',
@@ -28,11 +28,11 @@ function DeliveryDetails() {
     });
 
     const { adress, numberAdress } = datas;
-    const idSeller = sellers.find(({ name }) => name === sellerState)?.id;
+    // const idSeller = sellers.find(({ name }) => name === sellerState)?.id;
 
     const orders = {
       products: productsCart,
-      sellerId: idSeller,
+      sellerId: sellerState,
       totalPrice,
       deliveryAddress: adress,
       deliveryNumber: numberAdress,
@@ -64,7 +64,7 @@ function DeliveryDetails() {
             sellers.map((seller, index) => (
               <option
                 key={ index }
-                value={ seller.name }
+                value={ seller.id }
               >
                 { seller.name }
               </option>
