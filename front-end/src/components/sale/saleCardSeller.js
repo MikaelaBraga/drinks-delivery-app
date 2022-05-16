@@ -17,7 +17,7 @@ function SaleCardSeller(props) {
         <h1>{saleDate}</h1>
       </div>
       <div data-testid={ `seller_orders__element-card-price-${id}` }>
-        <h1>{totalPrice}</h1>
+        <h1>{`${totalPrice}`.replace('.', ',')}</h1>
       </div>
       <div data-testid={ `seller_orders__element-card-address-${id}` }>
         <h3>{ `${deliveryAddress}, ${deliveryNumber}`}</h3>
