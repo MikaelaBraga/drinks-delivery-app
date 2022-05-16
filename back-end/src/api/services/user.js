@@ -7,6 +7,13 @@ const getByEmail = async (email) => {
   return user;
 };
 
+const getAll = async () => {
+  const users = await User.findAll();
+  return users;
+};
+
+const removeUser = async (id) => User.destroy({ where: { id } });
+
 const login = async (userData) => {
   const { email, password: loginPassword } = userData;
   const userFound = await getByEmail(email);
@@ -25,19 +32,18 @@ const login = async (userData) => {
   return userLogged;
 };
 
-const registerCustomer = async (userData) => {
-  const { name, email, password } = userData;
+const register = async (userData) => {
+  const { name, email, password, role = 'customer' } = userData;
   const userFound = await getByEmail(email);
   if (userFound) return null;
-
   const newCustomer = {
     name,
     email,
     password: md5(password),
-    role: 'customer',
+    role,
   };
 
-  const { id, role } = await User.create(newCustomer);
+  const { id } = await User.create(newCustomer);
   const token = generateToken(id, role);
   const userRegistered = {
     name,
@@ -65,6 +71,8 @@ const getSellers = async () => {
 module.exports = {
   getByEmail,
   login,
-  registerCustomer,
+  removeUser,
+  getAll,
+  register,
   getSellers,
 };
