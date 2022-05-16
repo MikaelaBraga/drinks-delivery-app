@@ -20,7 +20,6 @@ function DeliveryDetails() {
   const navigate = useNavigate();
 
   function sendOrders(datas) {
-    console.log(datas);
     const { token } = JSON.parse(localStorage.getItem('user'));
     const productsCart = cart.map(({ productId, quantity }) => {
       const newObj = { productId, quantity };
