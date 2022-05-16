@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../../../services/api';
 
-function RequestProducts() {
+function useRequestProducts() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -16,4 +16,4 @@ function RequestProducts() {
   return [products];
 }
 
-export default RequestProducts;
+export default useRequestProducts;
