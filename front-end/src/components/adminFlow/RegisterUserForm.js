@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 function RegisterUserFormAdmin() {
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(deliveryDetailsValidate),
+    resolver: yupResolver(),
     mode: 'onChange',
   });
 
