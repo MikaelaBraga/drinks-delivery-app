@@ -21,6 +21,7 @@ function RegisterUserFormAdmin() {
           <input
             type="text"
             name="name"
+            data-testid="admin_manage__input-name"
             { ...register('name') }
           />
         </label>
@@ -29,6 +30,7 @@ function RegisterUserFormAdmin() {
           <input
             type="text"
             name="email"
+            data-testid="admin_manage__input-email"
             { ...register('email') }
           />
         </label>
@@ -37,17 +39,27 @@ function RegisterUserFormAdmin() {
           <input
             type="password"
             name="password"
+            data-testid="admin_manage__input-password"
             { ...register('password') }
           />
         </label>
         <label htmlFor="role">
           Tipo
-          <select name="role" { ...register('role') }>
+          <select
+            name="role"
+            data-testid="admin_manage__select-role"
+            { ...register('role') }
+          >
             <option value="Vendedor">Vendedor</option>
             <option valeu="Cliente">Cliente</option>
           </select>
         </label>
-        <button type="submit">CADASTRAR</button>
+        <button
+          type="submit"
+          data-testid="admin_manage__button-register"
+        >
+          CADASTRAR
+        </button>
         <strong>
           { errors.name?.message
           || errors.email?.message
