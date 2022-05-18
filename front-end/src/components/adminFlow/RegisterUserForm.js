@@ -1,10 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import registerUserValidate from './validate/registerUserValidate';
 
 function RegisterUserFormAdmin() {
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(),
+    resolver: yupResolver(registerUserValidate),
     mode: 'onChange',
   });
 
