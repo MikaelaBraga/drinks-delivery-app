@@ -16,12 +16,17 @@ function UserList() {
 
         <tbody>
           <tr>
-            <td>1</td>
-            <td>Fulana Pereira</td>
-            <td>fuana@deliveryapp.com</td>
-            <td>P. Vendedora</td>
+            <td data-testid="admin_manage__element-user-table-item-number-">1</td>
+            <td data-testid="admin_manage__element-user-table-name-">Fulana Pereira</td>
+            <td data-testid="admin_manage__element-user-table-email-">fulana@deliveryapp.com</td>
+            <td data-testid="admin_manage__element-user-table-role-">P. Vendedora</td>
             <td>
-              <button type="button">Excluir</button>
+              <button
+                type="button"
+                data-testid="admin_manage__element-user-table-remove-"
+              >
+                Excluir
+              </button>
             </td>
           </tr>
         </tbody>
