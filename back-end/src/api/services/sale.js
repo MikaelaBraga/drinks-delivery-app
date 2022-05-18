@@ -1,9 +1,9 @@
 const { Sale, SalesProducts, User, Product } = require('../../database/models');
 
 const post = async (sale) => {
-  const { products, userId, sellerId, totalPrice, deliveryAddress, deliveryNumber } = sale;
+  const { products, customerId, sellerId, totalPrice, deliveryAddress, deliveryNumber } = sale;
   const newSale = {
-    userId,
+    userId: customerId,
     sellerId,
     totalPrice,
     deliveryAddress,
@@ -11,6 +11,7 @@ const post = async (sale) => {
     saleDate: new Date(),
     status: 'Pendente',
   };
+  console.log(newSale);
   const { id: saleId } = await Sale.create(newSale);
   products.forEach(async ({ productId, quantity }) => {
     // Associate Sale <--> Product

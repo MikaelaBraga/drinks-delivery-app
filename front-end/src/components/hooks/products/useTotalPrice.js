@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../../../context/CartProvider';
 
-function CartTotalPrice() {
+function useCartTotalPrice() {
   const [totalPrice, setTotalPrice] = useState(0);
   const { cart } = useContext(CartContext);
 
@@ -16,4 +16,4 @@ function CartTotalPrice() {
   return [totalPrice];
 }
 
-export default CartTotalPrice;
+export default useCartTotalPrice;
