@@ -31,7 +31,7 @@ const registerCustomer = joi.object({
     'string.min': 'password must be longer than 6 characters',
     'any.required': 'password is required',
   }),
-  role: joi.string().valid(UserRole.CUSTOMER, UserRole.SELLER).required().messages({
+  role: joi.string().valid(UserRole.CUSTOMER, UserRole.SELLER).optional().messages({
     'string.base': 'role must be a string',
     'any.only': 'role must be either customer or seller',
     'any.required': 'role is required',
