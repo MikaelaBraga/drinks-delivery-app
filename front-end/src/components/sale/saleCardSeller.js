@@ -7,20 +7,20 @@ function SaleCardSeller(props) {
   return (
     <div className="saleCard" key={ index }>
       <div data-testid={ `seller_orders__element-order-id-${id}` }>
-        <h1>Pedido</h1>
-        <h2>{id}</h2>
+        <p>Pedido</p>
+        <span>{id}</span>
       </div>
       <div data-testid={ `seller_orders__element-delivery-status-${id}` }>
-        <h1>{status}</h1>
+        <h2>{status}</h2>
       </div>
       <div data-testid={ `seller_orders__element-order-date-${id}` }>
-        <h1>{saleDate}</h1>
+        <h3>{saleDate}</h3>
       </div>
       <div data-testid={ `seller_orders__element-card-price-${id}` }>
-        <h1>{`${totalPrice}`.replace('.', ',')}</h1>
+        <h2>{`${totalPrice}`.replace('.', ',')}</h2>
       </div>
       <div data-testid={ `seller_orders__element-card-address-${id}` }>
-        <h3>{ `${deliveryAddress}, ${deliveryNumber}`}</h3>
+        <p>{ `${deliveryAddress}, ${deliveryNumber}`}</p>
       </div>
     </div>
   );
