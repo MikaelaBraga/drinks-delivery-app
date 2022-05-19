@@ -1,5 +1,6 @@
 import React from 'react';
 import RegisterUserFormAdmin from '../components/adminFlow/RegisterUserForm';
+import UserList from '../components/adminFlow/UserList';
 import Navbar from '../components/navBar/navBar';
 
 function AdminPage() {
@@ -7,6 +8,7 @@ function AdminPage() {
     <>
       <Navbar />
       <RegisterUserFormAdmin />
+      <UserList />
     </>
   );
 }

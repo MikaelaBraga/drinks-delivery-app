@@ -5,7 +5,8 @@ function useRequestUsers() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    api.get('/user').then(({ data }) => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    api.get('/user', { headers: { Authorization: token } }).then(({ data }) => {
       setUsers(data);
     }).catch((err) => console.log(err));
   }, []);
