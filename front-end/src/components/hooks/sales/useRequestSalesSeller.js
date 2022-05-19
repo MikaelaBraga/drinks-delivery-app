@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../../../services/api';
 
-function RequestSalesSeller() {
+function useRequestSalesSeller() {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
@@ -16,4 +16,4 @@ function RequestSalesSeller() {
   return [sales];
 }
 
-export default RequestSalesSeller;
+export default useRequestSalesSeller;
