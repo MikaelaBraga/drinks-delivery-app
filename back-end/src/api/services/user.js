@@ -36,12 +36,7 @@ const register = async (userData) => {
   const { name, email, password, role = 'customer' } = userData;
   const userFound = await getByEmail(email);
   if (userFound) return null;
-  const newCustomer = {
-    name,
-    email,
-    password: md5(password),
-    role,
-  };
+  const newCustomer = { name, email, password: md5(password), role };
 
   const { id } = await User.create(newCustomer);
   const token = generateToken(id, role);
@@ -52,7 +47,7 @@ const register = async (userData) => {
     role,
     token,
   };
-  
+
   return userRegistered;
 };
 
