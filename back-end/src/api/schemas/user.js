@@ -1,5 +1,7 @@
 const joi = require('joi');
 
+const { UserRole } = require('../enums/UserRole');
+
 const loginUser = joi.object({
   email: joi.string().required().email().messages({
     'string.base': 'email must be a string',
@@ -29,8 +31,10 @@ const registerCustomer = joi.object({
     'string.min': 'password must be longer than 6 characters',
     'any.required': 'password is required',
   }),
-  role: joi.string().optional().messages({
+  role: joi.string().valid(UserRole.CUSTOMER, UserRole.SELLER).required().messages({
     'string.base': 'role must be a string',
+    'any.only': 'role must be either customer or seller',
+    'any.required': 'role is required',
   }),
 });
 
