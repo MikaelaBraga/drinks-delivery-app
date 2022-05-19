@@ -46,19 +46,15 @@ const register = async (userData) => {
   const { id } = await User.create(newCustomer);
   const token = generateToken(id, role);
   const userRegistered = {
+    id,
     name,
     email,
     role,
     token,
   };
+  
   return userRegistered;
 };
-
-// Aqui, a rota de cadastro deve ser diferente da rota de cadastro comum,
-// pois também é possível definir a categoria de usuário aqui (role);
-
-// Essa é uma rota específica para pessoa administradora, portanto a mesma
-// rota na API deve considerar um token válido e referente ao usuário de categoria administrator;
 
 const getSellers = async () => {
   const sellers = User.findAll({
