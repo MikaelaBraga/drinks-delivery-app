@@ -33,7 +33,7 @@ const registerCustomer = joi.object({
   }),
   role: joi.string().valid(UserRole.CUSTOMER, UserRole.SELLER).optional().messages({
     'string.base': 'role must be a string',
-    'any.only': 'role must be either customer or seller'
+    'any.only': 'role must be either customer or seller',
   }),
 });
 
