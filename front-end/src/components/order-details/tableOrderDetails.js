@@ -101,7 +101,7 @@ function TableOrderDetails() {
                 </td>
                 <td
                   data-testid={
-                    `customer_order_details__element-order-table-sub-total-${index}`
+                    `customer_order_details__element-order-table-unit-price-${index}`
                   }
                 >
                   { op.price }
@@ -109,7 +109,7 @@ function TableOrderDetails() {
                 </td>
                 <td
                   data-testid={
-                    `customer_order_details__element-order-total-price-${index}`
+                    `customer_order_details__element-order-sub-total-${index}`
                   }
                 >
                   { (op.quantity.quantity) * (op.price) }
