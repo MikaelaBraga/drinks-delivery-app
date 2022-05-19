@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registerUserValidate from './validate/registerUserValidate';
+import api from '../../services/api';
 
 function RegisterUserFormAdmin() {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const [userAlreadyExists, setUserAlreadyExists] = useState();
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({
     resolver: yupResolver(registerUserValidate),
     mode: 'onChange',
   });
 
-  const onSubmit = (datas) => console.log(datas);
+  const onSubmit = (datas) => api.post('admin/register', datas,
+    { headers: { Authorization: token } })
+    .then(({ data }) => console.log(data))
+    .catch(({ response }) => {
+      if (response.statusText === 'Conflict') {
+        setUserAlreadyExists(response.data);
+      }
+    });
 
   return (
     <>
@@ -50,13 +60,14 @@ function RegisterUserFormAdmin() {
             data-testid="admin_manage__select-role"
             { ...register('role') }
           >
-            <option value="Vendedor">Vendedor</option>
+            <option selected value="Vendedor">Vendedor</option>
             <option valeu="Cliente">Cliente</option>
           </select>
         </label>
         <button
           type="submit"
           data-testid="admin_manage__button-register"
+          disabled={ !isDirty || !isValid }
         >
           CADASTRAR
         </button>
@@ -66,6 +77,7 @@ function RegisterUserFormAdmin() {
           || errors.password?.message
           || errors.role?.message }
         </strong>
+        <strong>{ userAlreadyExists?.message }</strong>
       </form>
     </>
   );

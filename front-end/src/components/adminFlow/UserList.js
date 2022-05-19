@@ -18,15 +18,19 @@ function UserList() {
           <tr>
             <td data-testid="admin_manage__element-user-table-item-number-">1</td>
             <td data-testid="admin_manage__element-user-table-name-">Fulana Pereira</td>
-            <td data-testid="admin_manage__element-user-table-email-">fulana@deliveryapp.com</td>
+            <td
+              data-testid="admin_manage__element-user-table-email-"
+            >
+              fulana@deliveryapp.com
+            </td>
             <td data-testid="admin_manage__element-user-table-role-">P. Vendedora</td>
             <td>
-              <button
+              {/* <button
                 type="button"
                 data-testid="admin_manage__element-user-table-remove-"
               >
                 Excluir
-              </button>
+              </button> */}
             </td>
           </tr>
         </tbody>
