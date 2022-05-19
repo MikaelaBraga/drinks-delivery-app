@@ -16,7 +16,9 @@ function RegisterUserFormAdmin() {
 
   const onSubmit = (datas) => api.post('admin/register', datas,
     { headers: { Authorization: token } })
-    .then(({ data }) => addNewUser(data))
+    .then(({ data }) => {
+      addNewUser(data);
+    })
     .catch(({ response }) => {
       setUserAlreadyExists(response.data);
     });
@@ -61,7 +63,7 @@ function RegisterUserFormAdmin() {
             { ...register('role') }
           >
             <option selected value="seller">Vendedor</option>
-            <option valeu="customer">Cliente</option>
+            <option value="customer">Cliente</option>
           </select>
         </label>
         <button
@@ -77,7 +79,11 @@ function RegisterUserFormAdmin() {
           || errors.password?.message
           || errors.role?.message }
         </strong>
-        <strong>{ userAlreadyExists?.message }</strong>
+        <strong
+          data-testid="admin_manage__element-invalid-register"
+        >
+          { userAlreadyExists?.message }
+        </strong>
       </form>
     </>
   );
