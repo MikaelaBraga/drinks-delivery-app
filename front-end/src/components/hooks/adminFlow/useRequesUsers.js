@@ -11,7 +11,7 @@ function useRequestUsers() {
     }).catch((err) => console.log(err));
   }, []);
 
-  return [users];
+  return [users, setUsers];
 }
 
 export default useRequestUsers;

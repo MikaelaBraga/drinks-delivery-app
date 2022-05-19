@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registerUserValidate from './validate/registerUserValidate';
 import api from '../../services/api';
+import { AdminContext } from '../../context/AdminProvider';
 
 function RegisterUserFormAdmin() {
+  const { addNewUser } = useContext(AdminContext);
   const [userAlreadyExists, setUserAlreadyExists] = useState();
   const { token } = JSON.parse(localStorage.getItem('user'));
-  const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({
+  const { register, handleSubmit, formState: { errors, isValid } } = useForm({
     resolver: yupResolver(registerUserValidate),
     mode: 'onChange',
   });
 
   const onSubmit = (datas) => api.post('admin/register', datas,
     { headers: { Authorization: token } })
-    .then(({ data }) => console.log(data))
+    .then(({ data }) => addNewUser(data))
     .catch(({ response }) => {
-      if (response.statusText === 'Conflict') {
-        setUserAlreadyExists(response.data);
-      }
+      setUserAlreadyExists(response.data);
     });
 
   return (
@@ -60,14 +60,14 @@ function RegisterUserFormAdmin() {
             data-testid="admin_manage__select-role"
             { ...register('role') }
           >
-            <option selected value="Vendedor">Vendedor</option>
-            <option valeu="Cliente">Cliente</option>
+            <option selected value="seller">Vendedor</option>
+            <option valeu="customer">Cliente</option>
           </select>
         </label>
         <button
           type="submit"
           data-testid="admin_manage__button-register"
-          disabled={ !isDirty || !isValid }
+          disabled={ !isValid }
         >
           CADASTRAR
         </button>

@@ -1,8 +1,22 @@
-import React from 'react';
-import useRequestUsers from '../hooks/adminFlow/useRequesUsers';
+import React, { useContext, useEffect } from 'react';
+import { AdminContext } from '../../context/AdminProvider';
+import api from '../../services/api';
 
 function UserList() {
-  const [users] = useRequestUsers();
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const { users, setUsers } = useContext(AdminContext);
+
+  function handleClick(id) {
+    api.delete(`admin/user/${id}`, { headers: { Authorization: token } })
+      .then(() => {
+        const newUsers = users.filter((p) => p.id !== id);
+
+        setUsers(newUsers);
+      }).catch((err) => console.log(err));
+  }
+
+  useEffect(() => {}, [users]);
+
   return (
     <>
       <h1>Lista de usuários</h1>
@@ -44,6 +58,7 @@ function UserList() {
                 <button
                   type="button"
                   data-testid={ `admin_manage__element-user-table-remove-${index}` }
+                  onClick={ () => handleClick(user.id) }
                 >
                   Excluir
                 </button>
