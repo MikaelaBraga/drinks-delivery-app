@@ -5,7 +5,6 @@ import useStatusOrder from '../hooks/orderDetails/useStatusOrder';
 
 function TableOrderDetails() {
   const [orders, setOrders] = useState({});
-  console.log(orders);
   const [statusOrder, setChangeStatus] = useStatusOrder();
   const { id } = useParams();
   const ten = 10;
