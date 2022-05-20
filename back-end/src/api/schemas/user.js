@@ -37,7 +37,7 @@ const registerCustomer = joi.object({
   }),
 });
 
-module.exports = { 
+module.exports = {
   loginUser,
   registerCustomer,
 };
