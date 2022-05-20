@@ -111,7 +111,7 @@ function TableOrderDetails() {
                     `customer_order_details__element-order-sub-total-${index}`
                   }
                 >
-                  { (op.quantity.quantity) * (op.price) }
+                  { ((op.quantity.quantity) * (op.price)).toFixed(2) }
                 </td>
               </tr>
             ))
