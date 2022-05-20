@@ -1,10 +1,10 @@
 import React from 'react';
 import SaleCardSeller from '../components/sale/saleCardSeller';
-import RequestSalesSeller from '../components/hooks/sales/RequestSalesSeller';
+import useRequestSalesSeller from '../components/hooks/sales/useRequestSalesSeller';
 import Navbar from '../components/navBar/navBar';
 
 function SellerOrders() {
-  const [sales] = RequestSalesSeller();
+  const [sales] = useRequestSalesSeller();
 
   return (
     <div>
