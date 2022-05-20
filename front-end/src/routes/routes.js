@@ -6,6 +6,7 @@ import Login from '../pages/Login';
 import OrderDetails from '../pages/OrderDetails';
 import Register from '../pages/Register';
 import SellerOrders from '../pages/SellerOrders';
+import AdminPage from '../pages/Admin';
 
 function Routers() {
   return (
@@ -18,6 +19,7 @@ function Routers() {
         <Route exact path="/customer/checkout" element={ <CustomerCheckout /> } />
         <Route path="/customer/orders/:id" element={ <OrderDetails /> } />
         <Route path="/seller/orders" element={ <SellerOrders /> } />
+        <Route path="/admin/manage" element={ <AdminPage /> } />
       </Routes>
     </BrowserRouter>
   );
