@@ -6,7 +6,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import SellerOrders from '../pages/SellerOrders';
 import AdminPage from '../pages/Admin';
-import SellerOrderDetail from '../pages/SellerOrderDetail';
+// import SellerOrderDetail from '../pages/SellerOrderDetail';
 
 function Routers() {
   return (
@@ -15,11 +15,10 @@ function Routers() {
         <Route exact path="/" element={ <Navigate to="/login" /> } />
         <Route path="/login" element={ <Login /> } />
         <Route path="/register" element={ <Register /> } />
-        <Route exact path="/customer/checkout" element={ <CustomerCheckout /> } />
-        <Route exact path="/customer/products" element={ <CustomerProductsCards /> } />
         <Route path="/seller/orders" element={ <SellerOrders /> } />
-        <Route path="seller/orders/:id" element={ <SellerOrderDetail /> } />
         <Route path="/admin/manage" element={ <AdminPage /> } />
+        <Route exact path="/customer/products" element={ <CustomerProductsCards /> } />
+        <Route exact path="/customer/checkout" element={ <CustomerCheckout /> } />
       </Routes>
     </BrowserRouter>
   );
