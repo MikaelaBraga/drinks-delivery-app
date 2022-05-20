@@ -9,6 +9,10 @@
   margin-top: 50px;
 }
 
+.saleCard:hover {
+  cursor: pointer;
+}
+
 .statusCard {
   background-color: orange;
   padding: 15px;
