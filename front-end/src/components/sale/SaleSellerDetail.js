@@ -4,6 +4,10 @@ import useRequestSaleById from '../hooks/sales/useRequestSaleById';
 function SaleDetail() {
   const [sale] = useRequestSaleById();
   const { products } = sale;
+  const ten = 10;
+
+  const dateInput = sale.saleDate?.substring(0, ten);
+  const newDate = new Date(dateInput);
   return (
     <div>
       <h1>Detalhe do Pedido</h1>
@@ -11,8 +15,8 @@ function SaleDetail() {
         <thead>
           <tr>
             <th>Pedido 001</th>
-            <th>22/05/2022</th>
-            <th>Status Pendente</th>
+            <th>{ newDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' }) }</th>
+            <th>{ sale?.status }</th>
             <th><button type="button">Preparar Pedido</button></th>
             <th><button type="button">Saiu para entrega</button></th>
           </tr>
@@ -25,9 +29,18 @@ function SaleDetail() {
           </tr>
         </thead>
         <tbody>
-          {}
+          { products && products.map((p, index) => (
+            <tr key={ index }>
+              <td>{ index + 1 }</td>
+              <td>{ p.name }</td>
+              <td>{ p.quantity.quantity }</td>
+              <td>{ p.price }</td>
+              <td>{ ((p.quantity.quantity) * (p.price)).toFixed(2) }</td>
+            </tr>
+          )) }
         </tbody>
       </table>
+      <strong>{ `${sale.totalPrice}`.replace('.', ',') }</strong>
     </div>
   );
 }
