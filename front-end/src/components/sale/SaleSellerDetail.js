@@ -6,41 +6,57 @@ function SaleDetail() {
   const { products } = sale;
   const ten = 10;
 
+  function handleClickPreparingCheck(id) {
+
+  }
+
+  function handleClickDispatchCheck(id) {
+
+  }
+
   const dateInput = sale.saleDate?.substring(0, ten);
   const newDate = new Date(dateInput);
   const dataTestidLabelStatus = 'order-details-label-delivery-status';
   return (
     <div>
       <h1>Detalhe do Pedido</h1>
-      <table>
+
+      <div className="saleDetail">
+        <p
+          data-testid="seller_order_details__element-order-details-label-order-id"
+        >
+          { `Pedido 00${sale.id}` }
+        </p>
+        <p
+          data-testid="seller_order_details__element-order-details-label-order-date"
+        >
+          { newDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' }) }
+        </p>
+        <strong
+          data-testid={ `seller_order_details__element-${dataTestidLabelStatus}` }
+        >
+          { sale?.status }
+        </strong>
+
+        <button
+          type="button"
+          data-testid="seller_order_details__button-preparing-check"
+          onClick={ () => handleClickPreparingCheck(sale.id) }
+        >
+          Preparar Pedido
+        </button>
+
+        <button
+          type="button"
+          data-testid="seller_order_details__button-dispatch-check"
+          onClick={ () => handleClickDispatchCheck(sale.id) }
+        >
+          Saiu para entrega
+        </button>
+      </div>
+
+      <table className="saleProducts">
         <thead>
-          <tr>
-            <th
-              data-testid="seller_order_details__element-order-details-label-order-id"
-            >
-              Pedido 001
-            </th>
-            <th
-              data-testid="seller_order_details__element-order-details-label-order-date"
-            >
-              { newDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' }) }
-            </th>
-            <th
-              data-testid={ `seller_order_details__element-${dataTestidLabelStatus}` }
-            >
-              { sale?.status }
-            </th>
-            <th
-              data-testid="seller_order_details__button-preparing-check"
-            >
-              <button type="button">Preparar Pedido</button>
-            </th>
-            <th
-              data-testid="seller_order_details__button-dispatch-check"
-            >
-              <button type="button">Saiu para entrega</button>
-            </th>
-          </tr>
           <tr>
             <th>Item</th>
             <th>Descrição</th>
@@ -93,7 +109,6 @@ function SaleDetail() {
         data-testid="seller_order_details__element-order-total-price"
       >
         { `${sale.totalPrice}`.replace('.', ',') }
-
       </strong>
     </div>
   );

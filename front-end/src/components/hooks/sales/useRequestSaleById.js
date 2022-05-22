@@ -8,7 +8,7 @@ function useRequestSaleById() {
 
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user'));
-    api.get(`/seller/orders${id}`, { headers: { Authorization: token } })
+    api.get(`/seller/orders/${id}`, { headers: { Authorization: token } })
       .then(({ data }) => {
         setSale(data);
       }).catch((err) => console.log(err));
