@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import useRequestSaleById from '../hooks/sales/useRequestSaleById';
 
 function SaleDetail() {
+  const [sale] = useRequestSaleById();
+  const { products } = sale;
   return (
     <div>
       <h1>Detalhe do Pedido</h1>
