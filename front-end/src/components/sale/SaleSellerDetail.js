@@ -8,17 +8,38 @@ function SaleDetail() {
 
   const dateInput = sale.saleDate?.substring(0, ten);
   const newDate = new Date(dateInput);
+  const dataTestidLabelStatus = 'order-details-label-delivery-status';
   return (
     <div>
       <h1>Detalhe do Pedido</h1>
       <table>
         <thead>
           <tr>
-            <th>Pedido 001</th>
-            <th>{ newDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' }) }</th>
-            <th>{ sale?.status }</th>
-            <th><button type="button">Preparar Pedido</button></th>
-            <th><button type="button">Saiu para entrega</button></th>
+            <th
+              data-testid="seller_order_details__element-order-details-label-order-id"
+            >
+              Pedido 001
+            </th>
+            <th
+              data-testid="seller_order_details__element-order-details-label-order-date"
+            >
+              { newDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' }) }
+            </th>
+            <th
+              data-testid={ `seller_order_details__element-${dataTestidLabelStatus}` }
+            >
+              { sale?.status }
+            </th>
+            <th
+              data-testid="seller_order_details__button-preparing-check"
+            >
+              <button type="button">Preparar Pedido</button>
+            </th>
+            <th
+              data-testid="seller_order_details__button-dispatch-check"
+            >
+              <button type="button">Saiu para entrega</button>
+            </th>
           </tr>
           <tr>
             <th>Item</th>
@@ -31,16 +52,49 @@ function SaleDetail() {
         <tbody>
           { products && products.map((p, index) => (
             <tr key={ index }>
-              <td>{ index + 1 }</td>
-              <td>{ p.name }</td>
-              <td>{ p.quantity.quantity }</td>
-              <td>{ p.price }</td>
-              <td>{ ((p.quantity.quantity) * (p.price)).toFixed(2) }</td>
+              <td
+                data-testid={
+                  `seller_order_details__element-order-table-item-number-${index}`
+                }
+              >
+                { index + 1 }
+              </td>
+              <td
+                data-testid={ `seller_order_details__element-order-table-name-${index}` }
+              >
+                { p.name }
+              </td>
+              <td
+                data-testid={
+                  `seller_order_details__element-order-table-quantity-${index}`
+                }
+              >
+                { p.quantity.quantity }
+              </td>
+              <td
+                data-testid={
+                  `seller_order_details__element-order-table-unit-price-${index}`
+                }
+              >
+                { p.price }
+              </td>
+              <td
+                data-testid={
+                  `seller_order_details__element-order-table-sub-total-${index}`
+                }
+              >
+                { ((p.quantity.quantity) * (p.price)).toFixed(2) }
+              </td>
             </tr>
           )) }
         </tbody>
       </table>
-      <strong>{ `${sale.totalPrice}`.replace('.', ',') }</strong>
+      <strong
+        data-testid="seller_order_details__element-order-total-price"
+      >
+        { `${sale.totalPrice}`.replace('.', ',') }
+
+      </strong>
     </div>
   );
 }
