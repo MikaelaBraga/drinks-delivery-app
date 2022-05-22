@@ -29,6 +29,11 @@ function TableOrderDetails() {
     setChangeStatus(true);
   }
 
+  const labelSellerName = 'order-details-label-seller-name';
+  const labelDeliveryStatus = 'order-details-label-delivery-status';
+  const dateInput = orders.saleDate?.substring(0, ten);
+  const newDate = new Date(dateInput);
+
   return (
     <div>
       <h1>Detalhe do Pedido</h1>
@@ -41,19 +46,18 @@ function TableOrderDetails() {
               {`Pedido ${orders.id}`}
             </th>
             <th
-              data-testid="
-              customer_order_details__element-order-details-label-seller-name"
+              data-testid={ 'customer_order_details__element-'.concat(labelSellerName) }
             >
               {`P.Vend: ${orders.seller?.name}`}
             </th>
             <th
               data-testid="customer_order_details__element-order-details-label-order-date"
             >
-              {orders.saleDate?.substring(0, ten)}
+              { newDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' }) }
             </th>
             <th
-              data-testid="
-              customer_order_details__element-order-details-label-delivery-status"
+              data-testid={ 'customer_order_details__element-'
+                .concat(labelDeliveryStatus) }
             >
               { statusOrder }
             </th>
@@ -61,6 +65,7 @@ function TableOrderDetails() {
               type="button"
               onClick={ () => handleSubmit() }
               data-testid="customer_order_details__button-delivery-check"
+              disabled={ statusOrder === 'Pendente' }
             >
               Marcar como entregue
             </button>
@@ -121,7 +126,7 @@ function TableOrderDetails() {
       <p
         data-testid="customer_order_details__element-order-total-price"
       >
-        { `Total: R$ ${orders.totalPrice}` }
+        { `${orders.totalPrice}`.replace('.', ',') }
       </p>
     </div>
   );
