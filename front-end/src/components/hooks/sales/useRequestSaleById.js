@@ -7,9 +7,11 @@ function useRequestSaleById() {
   const { id } = useParams();
 
   useEffect(() => {
-    api.get(`/seller/orders${id}`).then(({ data }) => {
-      setSale(data);
-    }).catch((err) => console.log(err));
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    api.get(`/seller/orders${id}`, { headers: { Authorization: token } })
+      .then(({ data }) => {
+        setSale(data);
+      }).catch((err) => console.log(err));
   }, [id]);
 
   return [sale];
