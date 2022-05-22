@@ -1,17 +1,21 @@
 import React from 'react';
 import useRequestSaleById from '../hooks/sales/useRequestSaleById';
+import api from '../../services/api';
 
 function SaleDetail() {
+  const { token } = JSON.parse(localStorage.getItem('user'));
   const [sale] = useRequestSaleById();
   const { products } = sale;
   const ten = 10;
 
   function handleClickPreparingCheck(id) {
-
+    const preparing = { status: 'Preparando' };
+    api.put(`/seller/orders/${id}`, preparing, { headers: { Authorization: token } });
   }
 
   function handleClickDispatchCheck(id) {
-
+    const dispatch = { status: 'Em trânsito' };
+    api.put(`/seller/orders/${id}`, dispatch, { headers: { Authorization: token } });
   }
 
   const dateInput = sale.saleDate?.substring(0, ten);
