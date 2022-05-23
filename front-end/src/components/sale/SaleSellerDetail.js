@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useRequestSaleById from '../hooks/sales/useRequestSaleById';
 import api from '../../services/api';
 
@@ -6,24 +6,18 @@ function SaleDetail() {
   const { token } = JSON.parse(localStorage.getItem('user'));
   const [sale] = useRequestSaleById();
   const { products } = sale;
-  const ten = 10;
-
-  const [orderStatus, setOrderStatus] = useState({ status: 'Pendente' });
 
   function handleClickPreparingCheck(id) {
     const preparing = { status: 'Preparando' };
     api.put(`/seller/orders/${id}`, preparing, { headers: { Authorization: token } });
-
-    setOrderStatus({ status: 'Preparando' });
   }
 
   function handleClickDispatchCheck(id) {
-    const dispatch = { status: 'Em trânsito' };
+    const dispatch = { status: 'Em Trânsito' };
     api.put(`/seller/orders/${id}`, dispatch, { headers: { Authorization: token } });
-
-    setOrderStatus({ status: 'Em trânsito' });
   }
 
+  const ten = 10;
   const dateInput = sale.saleDate?.substring(0, ten);
   const newDate = new Date(dateInput);
   const dataTestidLabelStatus = 'order-details-label-delivery-status';
@@ -54,7 +48,7 @@ function SaleDetail() {
             type="button"
             data-testid="seller_order_details__button-preparing-check"
             onClick={ () => handleClickPreparingCheck(sale.id) }
-            disabled={ orderStatus?.status !== 'Pendente' }
+            disabled={ sale?.status !== 'Pendente' }
           >
             Preparar Pedido
           </button>
@@ -63,7 +57,7 @@ function SaleDetail() {
             type="button"
             data-testid="seller_order_details__button-dispatch-check"
             onClick={ () => handleClickDispatchCheck(sale.id) }
-            disabled={ orderStatus?.status === 'Pendente' }
+            disabled={ sale?.status === 'Pendente' || sale?.status === 'Em Trânsito' }
           >
             Saiu para entrega
           </button>

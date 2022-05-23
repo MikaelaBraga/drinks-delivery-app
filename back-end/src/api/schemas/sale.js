@@ -52,7 +52,7 @@ const postSale = joi.object({
 const updateSale = joi.object({
   status: joi.string().valid(SaleStatus.PREPARANDO, SaleStatus.A_CAMINHO).required().messages({
     'string.base': 'status must be a string',
-    'any.only': 'status must be either PREPARANDO OR A CAMINHO',
+    'any.only': 'status must be either Preparando OR Em trânsito',
     'any.required': 'status is required',
   }),
 });
