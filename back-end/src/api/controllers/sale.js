@@ -43,8 +43,8 @@ const getSaleByIdSeller = async (req, res) => {
 
 const getSalesByUser = async (req, res) => {
   try {
-    const { userId } = res.locals;
-    const sales = await saleService.getSalesByUser(userId);
+    const { customerId } = res.locals;
+    const sales = await saleService.getSalesByUser(customerId);
     return res.status(200).json(sales);
   } catch (e) {
     return res.status(500).send(e.message);

@@ -1,28 +1,48 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './saleCard.css';
 
 function SaleCardSeller(props) {
   const { sale, index } = props;
   const { id, status, saleDate, totalPrice, deliveryAddress, deliveryNumber } = sale;
   return (
-    <div className="saleCard" key={ index }>
-      <div data-testid={ `seller_orders__element-order-id-${id}` }>
-        <h1>Pedido</h1>
-        <h2>{id}</h2>
+    <Link
+      to={ `/seller/orders/${id}` }
+      style={ { textDecoration: 'none', color: 'black' } }
+    >
+      <div className="saleCard" key={ index }>
+        <div
+          className="orderId"
+          data-testid={ `seller_orders__element-order-id-${id}` }
+        >
+          <p>Pedido</p>
+          <span>{id}</span>
+        </div>
+        <div
+          className="statusCard"
+          data-testid={ `seller_orders__element-delivery-status-${id}` }
+        >
+          <h2>{status}</h2>
+        </div>
+        <div
+          className="saleInformation"
+          data-testid={ `seller_orders__element-order-date-${id}` }
+        >
+          <strong>{saleDate}</strong>
+          <strong
+            data-testid={ `seller_orders__element-card-price-${id}` }
+          >
+            {`${totalPrice}`.replace('.', ',')}
+          </strong>
+          <p
+            data-testid={ `seller_orders__element-card-address-${id}` }
+          >
+            { `${deliveryAddress}, ${deliveryNumber}`}
+          </p>
+        </div>
       </div>
-      <div data-testid={ `seller_orders__element-delivery-status-${id}` }>
-        <h1>{status}</h1>
-      </div>
-      <div data-testid={ `seller_orders__element-order-date-${id}` }>
-        <h1>{saleDate}</h1>
-      </div>
-      <div data-testid={ `seller_orders__element-card-price-${id}` }>
-        <h1>{`${totalPrice}`.replace('.', ',')}</h1>
-      </div>
-      <div data-testid={ `seller_orders__element-card-address-${id}` }>
-        <h3>{ `${deliveryAddress}, ${deliveryNumber}`}</h3>
-      </div>
-    </div>
+    </Link>
   );
 }
 

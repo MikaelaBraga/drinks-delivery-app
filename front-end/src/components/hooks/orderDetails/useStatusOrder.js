@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import api from '../../../services/api';
 
 function useStatusOrder() {
-  const [statusOrder, setStatusOrder] = useState('PENDENTE');
+  const [statusOrder, setStatusOrder] = useState('Pendente');
   const [changeStatus, setChangeStatus] = useState(false);
   const { id } = useParams();
 
@@ -18,7 +18,7 @@ function useStatusOrder() {
           setStatusOrder(res.data.status);
         });
     }
-  }, [changeStatus]);
+  }, [changeStatus, id, token]);
 
   return [statusOrder, setChangeStatus];
 }

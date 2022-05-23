@@ -1,0 +1,37 @@
+.saleCard {
+  align-items: center;
+  border-left: 3px solid #3bb54a;
+  border-radius: 5px;
+  box-shadow: 7px 7px 13px rgba(50, 50, 50, 0.22);
+  display: inline-flex;
+  justify-content: center;
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
+.saleCard:hover {
+  cursor: pointer;
+}
+
+.statusCard {
+  background-color: orange;
+  padding: 15px;
+}
+
+.orderId {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.saleInformation {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.saleInformation strong {
+  padding: 5px;
+}

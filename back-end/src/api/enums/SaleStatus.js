@@ -1,8 +1,8 @@
 const SaleStatus = {
-  PENDENTE: 'PENDENTE',
-  PREPARANDO: 'PREPARANDO',
-  A_CAMINHO: 'A CAMINHO',
-  ENTREGUE: 'ENTREGUE',
+  PENDENTE: 'Pendente',
+  PREPARANDO: 'Preparando',
+  A_CAMINHO: 'Em Trânsito',
+  ENTREGUE: 'Entregue',
 };
 
 module.exports = { SaleStatus };
