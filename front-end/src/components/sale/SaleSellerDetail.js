@@ -17,8 +17,7 @@ function SaleDetail() {
     api.put(`/seller/orders/${id}`, dispatch, { headers: { Authorization: token } });
   }
 
-  const ten = 10;
-  const dateInput = sale.saleDate?.substring(0, ten);
+  const dateInput = sale.saleDate;
   const newDate = new Date(dateInput);
   const dataTestidLabelStatus = 'order-details-label-delivery-status';
   return (
