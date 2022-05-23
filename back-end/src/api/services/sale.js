@@ -39,10 +39,10 @@ const getById = async (id) => {
   return sale;
 };
 
-const getSalesByUser = async (userId) => {
+const getSalesByUser = async (customerId) => {
   const sales = await Sale.findAll({
     attributes: ['id', 'status', 'saleDate', 'totalPrice'],
-    where: { userId },
+    where: { userId: customerId },
   });
   return sales;
 };
