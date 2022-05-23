@@ -31,8 +31,8 @@ function TableOrderDetails() {
 
   const labelSellerName = 'order-details-label-seller-name';
   const labelDeliveryStatus = 'order-details-label-delivery-status';
-  // const dateInput = orders.saleDate?.substring(0, ten);
-  // const newDate = new Date(dateInput);
+  const dateInput = orders.saleDate;
+  const newDate = new Date(dateInput);
 
   return (
     <div>
@@ -53,7 +53,7 @@ function TableOrderDetails() {
             <th
               data-testid="customer_order_details__element-order-details-label-order-date"
             >
-              { new Date().toLocaleDateString() }
+              { newDate.toLocaleDateString('pt-BR') }
             </th>
             <th
               data-testid={ 'customer_order_details__element-'
