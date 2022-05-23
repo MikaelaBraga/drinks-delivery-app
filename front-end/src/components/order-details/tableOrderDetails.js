@@ -7,7 +7,7 @@ function TableOrderDetails() {
   const [orders, setOrders] = useState({});
   const [statusOrder, setChangeStatus] = useStatusOrder();
   const { id } = useParams();
-  const ten = 10;
+  // const ten = 10;
 
   const { token } = JSON.parse(localStorage.getItem(('user')));
 
@@ -31,8 +31,8 @@ function TableOrderDetails() {
 
   const labelSellerName = 'order-details-label-seller-name';
   const labelDeliveryStatus = 'order-details-label-delivery-status';
-  const dateInput = orders.saleDate?.substring(0, ten);
-  const newDate = new Date(dateInput);
+  // const dateInput = orders.saleDate?.substring(0, ten);
+  // const newDate = new Date(dateInput);
 
   return (
     <div>
@@ -53,7 +53,7 @@ function TableOrderDetails() {
             <th
               data-testid="customer_order_details__element-order-details-label-order-date"
             >
-              { newDate.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }) }
+              { new Date().toLocaleDateString() }
             </th>
             <th
               data-testid={ 'customer_order_details__element-'
