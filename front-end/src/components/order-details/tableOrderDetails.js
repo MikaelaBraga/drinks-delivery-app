@@ -53,7 +53,7 @@ function TableOrderDetails() {
             <th
               data-testid="customer_order_details__element-order-details-label-order-date"
             >
-              { newDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' }) }
+              { newDate.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }) }
             </th>
             <th
               data-testid={ 'customer_order_details__element-'

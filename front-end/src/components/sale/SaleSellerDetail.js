@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useRequestSaleById from '../hooks/sales/useRequestSaleById';
 import api from '../../services/api';
 
@@ -8,14 +8,20 @@ function SaleDetail() {
   const { products } = sale;
   const ten = 10;
 
+  const [orderStatus, setOrderStatus] = useState({ status: 'Pendente' });
+
   function handleClickPreparingCheck(id) {
     const preparing = { status: 'Preparando' };
     api.put(`/seller/orders/${id}`, preparing, { headers: { Authorization: token } });
+
+    setOrderStatus({ status: 'Preparando' });
   }
 
   function handleClickDispatchCheck(id) {
     const dispatch = { status: 'Em trânsito' };
     api.put(`/seller/orders/${id}`, dispatch, { headers: { Authorization: token } });
+
+    setOrderStatus({ status: 'Em trânsito' });
   }
 
   const dateInput = sale.saleDate?.substring(0, ten);
@@ -25,39 +31,44 @@ function SaleDetail() {
     <div>
       <h1>Detalhe do Pedido</h1>
 
-      <div className="saleDetail">
-        <p
-          data-testid="seller_order_details__element-order-details-label-order-id"
-        >
-          { `Pedido 00${sale.id}` }
-        </p>
-        <p
-          data-testid="seller_order_details__element-order-details-label-order-date"
-        >
-          { newDate.toLocaleDateString('pt-BR', { timeZone: 'UTC' }) }
-        </p>
-        <strong
-          data-testid={ `seller_order_details__element-${dataTestidLabelStatus}` }
-        >
-          { sale?.status }
-        </strong>
+      { sale
+      && (
+        <div className="saleDetail">
+          <p
+            data-testid="seller_order_details__element-order-details-label-order-id"
+          >
+            { `Pedido 00${sale.id}` }
+          </p>
+          <p
+            data-testid="seller_order_details__element-order-details-label-order-date"
+          >
+            { newDate.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }) }
+          </p>
+          <strong
+            data-testid={ `seller_order_details__element-${dataTestidLabelStatus}` }
+          >
+            { sale?.status }
+          </strong>
 
-        <button
-          type="button"
-          data-testid="seller_order_details__button-preparing-check"
-          onClick={ () => handleClickPreparingCheck(sale.id) }
-        >
-          Preparar Pedido
-        </button>
+          <button
+            type="button"
+            data-testid="seller_order_details__button-preparing-check"
+            onClick={ () => handleClickPreparingCheck(sale.id) }
+            disabled={ orderStatus?.status !== 'Pendente' }
+          >
+            Preparar Pedido
+          </button>
 
-        <button
-          type="button"
-          data-testid="seller_order_details__button-dispatch-check"
-          onClick={ () => handleClickDispatchCheck(sale.id) }
-        >
-          Saiu para entrega
-        </button>
-      </div>
+          <button
+            type="button"
+            data-testid="seller_order_details__button-dispatch-check"
+            onClick={ () => handleClickDispatchCheck(sale.id) }
+            disabled={ orderStatus?.status === 'Pendente' }
+          >
+            Saiu para entrega
+          </button>
+        </div>
+      )}
 
       <table className="saleProducts">
         <thead>
