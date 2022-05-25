@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate, Link } from 'react-router-dom';
@@ -6,13 +6,22 @@ import loginValidate from './validate/loginValidate';
 import api from '../../services/api';
 
 function Login() {
-  const [invalidLogin, setInvalidLogin] = useState();
   const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm({
     resolver: yupResolver(loginValidate),
     mode: 'onChange',
   });
 
+  const [invalidLogin, setInvalidLogin] = useState();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getUser = JSON.parse(localStorage.getItem('user'));
+
+    if (getUser && getUser.role === 'customer') {
+      navigate('/customer/products');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onSubmit = (datas) => api.post('/login', datas)
     .then(({ data }) => {

@@ -4,7 +4,7 @@ import useRequestOrders from '../hooks/orders/useRequestOrders';
 
 function Orders() {
   const [orders] = useRequestOrders();
-  console.log(orders);
+
   return (
     <div>
       { orders && orders.map((order, index) => (
