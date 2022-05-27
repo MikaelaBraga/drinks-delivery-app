@@ -5,7 +5,7 @@ import useStatusOrder from '../hooks/orderDetails/useStatusOrder';
 
 function TableOrderDetails() {
   const [orders, setOrders] = useState({});
-  const [statusOrder, setChangeStatus] = useStatusOrder();
+  const [setChangeStatus, changeStatus] = useStatusOrder();
   const { id } = useParams();
 
   const { token } = JSON.parse(localStorage.getItem(('user')));
@@ -22,7 +22,7 @@ function TableOrderDetails() {
       .catch((error) => {
         console.error(error);
       });
-  }, [id, token]);
+  }, [id, token, changeStatus]);
 
   function handleSubmit() {
     setChangeStatus(true);
@@ -58,13 +58,14 @@ function TableOrderDetails() {
               data-testid={ 'customer_order_details__element-'
                 .concat(labelDeliveryStatus) }
             >
-              { statusOrder }
+              { orders.status }
             </th>
             <button
               type="button"
               onClick={ () => handleSubmit() }
               data-testid="customer_order_details__button-delivery-check"
-              disabled={ statusOrder === 'Pendente' }
+              disabled={ orders.status === 'Pendente' || orders.status === 'Preparando'
+              || orders.status === 'Entregue' }
             >
               Marcar como entregue
             </button>

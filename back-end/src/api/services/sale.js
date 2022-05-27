@@ -58,7 +58,7 @@ const getSalesBySeller = async (sellerId) => {
 const updateSaleStatusCustomer = async (id) => {
   const sale = await Sale.findOne({ where: { id } });
   if (!sale) return null;
-  sale.status = 'ENTREGUE';
+  sale.status = 'Entregue';
   await sale.save();
   return sale;
 };

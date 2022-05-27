@@ -56,7 +56,8 @@ function SaleDetail() {
             type="button"
             data-testid="seller_order_details__button-dispatch-check"
             onClick={ () => handleClickDispatchCheck(sale.id) }
-            disabled={ sale?.status === 'Pendente' || sale?.status === 'Em Trânsito' }
+            disabled={ sale?.status === 'Pendente' || sale?.status === 'Em Trânsito'
+          || sale?.status === 'Entregue' }
           >
             Saiu para entrega
           </button>

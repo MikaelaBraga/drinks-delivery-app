@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import api from '../../../services/api';
 
 function useStatusOrder() {
-  const [statusOrder, setStatusOrder] = useState('Pendente');
   const [changeStatus, setChangeStatus] = useState(false);
   const { id } = useParams();
 
@@ -13,14 +12,11 @@ function useStatusOrder() {
     if (changeStatus) {
       const updateStatus = { status: 'Entregue' };
       api.put(`/customer/orders/${id}`, updateStatus, {
-        headers: { Authorization: token } })
-        .then((res) => {
-          setStatusOrder(res.data.status);
-        });
+        headers: { Authorization: token } });
     }
   }, [changeStatus, id, token]);
 
-  return [statusOrder, setChangeStatus];
+  return [setChangeStatus, changeStatus];
 }
 
 export default useStatusOrder;
