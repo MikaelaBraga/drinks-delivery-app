@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import registerUserValidate from './validate/registerUserValidate';
@@ -9,10 +9,18 @@ function RegisterUserFormAdmin() {
   const { addNewUser } = useContext(AdminContext);
   const [userAlreadyExists, setUserAlreadyExists] = useState();
   const { token } = JSON.parse(localStorage.getItem('user'));
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm({
+
+  const { register, handleSubmit, reset,
+    formState: { errors, isValid, isSubmitSuccessful } } = useForm({
     resolver: yupResolver(registerUserValidate),
     mode: 'onChange',
   });
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset({ name: '', email: '', password: '', role: 'seller' });
+    }
+  }, [isSubmitSuccessful, reset]);
 
   const onSubmit = (datas) => api.post('admin/register', datas,
     { headers: { Authorization: token } })
