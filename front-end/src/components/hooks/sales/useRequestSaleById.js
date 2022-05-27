@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import api from '../../../services/api';
 
 function useRequestSaleById() {
+  const [chanseStatus, setChangeStatus] = useState(false);
   const [sale, setSale] = useState({});
   const { id } = useParams();
 
@@ -11,10 +12,11 @@ function useRequestSaleById() {
     api.get(`/seller/orders/${id}`, { headers: { Authorization: token } })
       .then(({ data }) => {
         setSale(data);
+        setChangeStatus(false);
       }).catch((err) => console.log(err));
-  }, [id]);
+  }, [id, chanseStatus]);
 
-  return [sale];
+  return [sale, setChangeStatus];
 }
 
 export default useRequestSaleById;

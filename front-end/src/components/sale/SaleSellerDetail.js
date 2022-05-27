@@ -4,17 +4,21 @@ import api from '../../services/api';
 
 function SaleDetail() {
   const { token } = JSON.parse(localStorage.getItem('user'));
-  const [sale] = useRequestSaleById();
+  const [sale, setChangeStatus] = useRequestSaleById();
   const { products } = sale;
 
   function handleClickPreparingCheck(id) {
     const preparing = { status: 'Preparando' };
     api.put(`/seller/orders/${id}`, preparing, { headers: { Authorization: token } });
+
+    setChangeStatus(true);
   }
 
   function handleClickDispatchCheck(id) {
     const dispatch = { status: 'Em Trânsito' };
     api.put(`/seller/orders/${id}`, dispatch, { headers: { Authorization: token } });
+
+    setChangeStatus(true);
   }
 
   const dateInput = sale.saleDate;
