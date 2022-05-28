@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  align-items: center;
+  background-color: #fff;
+  color: #323232;
+  display: flex;
+  justify-content: center;
+  height: 50vh;
+  width: 100%;
+}
+
+/* div de todos os produtos */
+.products {
+  display: flex;
+  padding: 32px;
+}
+
+
+/* card de produto */
+.card {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  max-height: 350px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 10vh;
+  padding: 2rem 2.5rem;
+  width: 300px;
+}
+
+
+/* imagem do produto */
+.image img {
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* nome do produto e preço estão com h3 */
+
+.card h3 {
+  padding: 1px;
+}
+
+
+/* div do contador de produtos */
+.counter-product {
+  display: flex;
+  padding: 1px;
+}
+
+.counter-product button {
+  padding: 2px;
+
+}
+
+.counter-product input {
+  width: 20px;
+}
+
+/* botão do carrinho */
+.cart-button {
+  bottom: 90px;
+  margin-bottom: 0;
+  padding: 15px;
+  position: fixed;
+  right: 50px;
+  z-index: 997;
+}

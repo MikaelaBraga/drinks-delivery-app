@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import '../../App.css';
+import './productsPage.css';
 
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/CartProvider';
@@ -19,11 +19,13 @@ function ProductCard() {
       <div className="products">
         { products.map((product, index) => (
           <div className="card" key={ index }>
-            <img
-              data-testid={ `customer_products__img-card-bg-image-${product.id}` }
-              src={ product.url_image }
-              alt="imagem do produto"
-            />
+            <div className="image">
+              <img
+                data-testid={ `customer_products__img-card-bg-image-${product.id}` }
+                src={ product.url_image }
+                alt="imagem do produto"
+              />
+            </div>
             <h5
               data-testid={ `customer_products__element-card-title-${product.id}` }
             >
