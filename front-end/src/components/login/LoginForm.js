@@ -51,39 +51,37 @@ function Login() {
       <h1 className="title-login">Login</h1>
 
       <form className="form-login" onSubmit={ handleSubmit(onSubmit) }>
-        <div>
-          <label htmlFor="email">
-            Email
-            <input
-              data-testid="common_login__input-email"
-              placeholder="Insira seu email"
-              name="email"
-              type="email"
-              { ...register('email') }
-            />
-          </label>
-          <p>{ errors.email?.message }</p>
-        </div>
-        <div>
-          <label htmlFor="password">
-            Senha
-            <input
-              data-testid="common_login__input-password"
-              placeholder="Insira sua senha"
-              name="password"
-              type="password"
-              { ...register('password') }
-            />
-          </label>
-          <p>{ errors.password?.message }</p>
-        </div>
-        <div>
-          <p
-            data-testid="common_login__element-invalid-email"
-          >
-            { invalidLogin?.message }
-          </p>
-        </div>
+
+        <label htmlFor="email">
+          Email
+          <input
+            data-testid="common_login__input-email"
+            placeholder="Insira seu email"
+            name="email"
+            type="email"
+            { ...register('email') }
+          />
+        </label>
+        <p>{ errors.email?.message }</p>
+
+        <label htmlFor="password">
+          Senha
+          <input
+            data-testid="common_login__input-password"
+            placeholder="Insira sua senha"
+            name="password"
+            type="password"
+            { ...register('password') }
+          />
+        </label>
+        <p>{ errors.password?.message }</p>
+
+        <p
+          data-testid="common_login__element-invalid-email"
+        >
+          { invalidLogin?.message }
+        </p>
+
         <button
           className="button-login"
           data-testid="common_login__button-login"

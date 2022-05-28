@@ -1,0 +1,79 @@
+.container-table {
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  position: relative;
+}
+
+.container-table h1 {
+  margin-left: 15px;
+  margin-top: 50px;
+}
+
+
+.container-table table {
+  border: groove;
+  height: 200px;
+  margin-top: 100px;
+  padding: 15px;
+  position: absolute;
+  width: 100%
+}
+
+.container-table table, th, td {
+  /* border: 1px solid black; */
+  font-size: 20px;
+  text-align: center;
+}
+
+.table-item {
+  background-color: #0C7135;
+  color: #fff;
+  font-weight: bold;
+} 
+
+.table-name {
+  background-color: #a6ddbc;
+}
+
+.table-quantity {
+  background-color: #0C7135;
+  color: #fff;
+  font-weight: bold;
+}
+
+.table-unit-price {
+  background-color: #a6ddbc;
+}
+
+.table-subtotal {
+  background-color: #a6ddbc;
+}
+
+.table-remove-item button {
+  background-color: #e4c70b;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  height: 100%;
+  text-align: center;
+}
+
+.table-remove-item button:hover {
+  background-color: #c9ae02;
+}
+
+.total-price {
+  background-color: #0C7135;
+  border-radius: 15px;
+  color: #fff;
+  font-weight: bold;
+  margin-top: 400px;
+  padding: 20px;
+  position: absolute;
+  right: 30px;
+  text-align: center;
+  width: 300px;
+}

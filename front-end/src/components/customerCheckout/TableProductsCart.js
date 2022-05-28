@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { CartContext } from '../../context/CartProvider';
 import useCartTotalPrice from '../hooks/products/useTotalPrice';
+import './customerCheckout.css';
 
 function TableProductsCart() {
   const { cart, setCart } = useContext(CartContext);
@@ -24,7 +25,7 @@ function TableProductsCart() {
   }, [cart]);
 
   return (
-    <div>
+    <div className="container-table">
       <h1>Finalizar Pedido</h1>
 
       <table>
@@ -42,6 +43,7 @@ function TableProductsCart() {
           { cart && cart.map((product, index) => (
             <tr key={ index }>
               <td
+                className="table-item"
                 data-testid={
                   `customer_checkout__element-order-table-item-number-${index}`
                 }
@@ -49,30 +51,34 @@ function TableProductsCart() {
                 { index + 1 }
               </td>
               <td
+                className="table-name"
                 data-testid={ `customer_checkout__element-order-table-name-${index}` }
               >
                 { product.name }
               </td>
               <td
+                className="table-quantity"
                 data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
               >
                 { product.quantity }
               </td>
               <td
+                className="table-unit-price"
                 data-testid={
                   `customer_checkout__element-order-table-unit-price-${index}`
                 }
               >
-                { `${parseFloat(product.unitPrice).toFixed(2)}`.replace('.', ',') }
+                { `R$ ${parseFloat(product.unitPrice).toFixed(2)}`.replace('.', ',') }
               </td>
               <td
+                className="table-subtotal"
                 data-testid={
                   `customer_checkout__element-order-table-sub-total-${index}`
                 }
               >
-                { `${parseFloat(product.subTotal).toFixed(2)}`.replace('.', ',') }
+                { `R$ ${parseFloat(product.subTotal).toFixed(2)}`.replace('.', ',') }
               </td>
-              <td>
+              <td className="table-remove-item">
                 <button
                   type="button"
                   data-testid={ `customer_checkout__element-order-table-remove-${index}` }
@@ -87,9 +93,10 @@ function TableProductsCart() {
       </table>
 
       <h2
+        className="total-price"
         data-testid="customer_checkout__element-order-total-price"
       >
-        { `${parseFloat(totalPrice).toFixed(2)}`.replace('.', ',') }
+        { `Total: R$ ${parseFloat(totalPrice).toFixed(2)}`.replace('.', ',') }
       </h2>
     </div>
   );
