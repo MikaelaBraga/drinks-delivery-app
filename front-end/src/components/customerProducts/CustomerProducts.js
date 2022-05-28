@@ -26,15 +26,15 @@ function ProductCard() {
                 alt="imagem do produto"
               />
             </div>
-            <h5
+            <h3
               data-testid={ `customer_products__element-card-title-${product.id}` }
             >
               { product.name }
-            </h5>
+            </h3>
             <h5
               data-testid={ `customer_products__element-card-price-${product.id}` }
             >
-              { `${product.price}`.replace('.', ',') }
+              { `R$ ${product.price}`.replace('.', ',') }
             </h5>
             <div className="counter-product">
               <button
@@ -72,7 +72,7 @@ function ProductCard() {
           disabled={ totalPrice === 0 }
         >
           <span data-testid="customer_products__checkout-bottom-value">
-            {`${parseFloat(totalPrice).toFixed(2)}`.replace('.', ',')}
+            {`Carrinho: R$ ${parseFloat(totalPrice).toFixed(2)}`.replace('.', ',')}
           </span>
         </button>
       </Link>

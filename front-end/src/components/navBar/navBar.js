@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useCheckRole from '../hooks/navBar/checkRole';
-import styles from './navBar.module.css';
+import deliveryDrinksLogo from '../../images/drinksDelivery.png';
+import './navBar.module.css';
 
 function Navbar() {
   const [isUser, isSeller, isAdmin] = useCheckRole();
@@ -10,7 +11,7 @@ function Navbar() {
   function navBarUser() {
     return (
       <>
-        <li className={ styles.item }>
+        <li>
           <Link
             data-testid="customer_products__element-navbar-link-products"
             to="/customer/products"
@@ -18,7 +19,7 @@ function Navbar() {
             Produtos
           </Link>
         </li>
-        <li className={ styles.item }>
+        <li>
           <Link
             data-testid="customer_products__element-navbar-link-orders"
             to="/customer/orders"
@@ -32,7 +33,7 @@ function Navbar() {
 
   function navBarSeller() {
     return (
-      <li className={ styles.item }>
+      <li>
         <Link
           data-testid="customer_products__element-navbar-link-orders"
           to="/seller/orders"
@@ -45,7 +46,7 @@ function Navbar() {
 
   function navBarAdmin() {
     return (
-      <li className={ styles.item }>
+      <li>
         <Link
           data-testid="customer_products__element-navbar-link-products"
           to="/admin/manage"
@@ -57,13 +58,14 @@ function Navbar() {
   }
 
   return (
-    <nav className={ styles.navBar }>
-      <ul className={ styles.list }>
+    <nav>
+      <img src={ deliveryDrinksLogo } alt="logo delivery drinks" />
+
+      <ul>
         { isUser && navBarUser() }
         { isSeller && navBarSeller() }
         { isAdmin && navBarAdmin() }
         <li
-          className={ styles.item }
           data-testid="customer_products__element-navbar-user-full-name"
         >
           { name }
@@ -71,7 +73,6 @@ function Navbar() {
       </ul>
       <Link to="/">
         <button
-          className={ styles.item }
           data-testid="customer_products__element-navbar-link-logout"
           type="button"
           onClick={ () => localStorage.clear() }
