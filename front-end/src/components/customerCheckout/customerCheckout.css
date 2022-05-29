@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   height: 500px;
+  max-height: 900px;
   position: relative;
 }
 
@@ -76,4 +77,92 @@
   right: 30px;
   text-align: center;
   width: 300px;
+}
+
+.container-form {
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+}
+
+.container-form h1 {
+  margin-left: 15px;
+  margin-top: 30px;
+}
+
+.delivery-form {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 150px;
+  margin-left: 50px;
+  margin-top: 60px;
+  position: relative;
+}
+
+.delivery-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: .9rem;
+  font-weight: bold;
+  padding-right: 20px;
+}
+
+.delivery-form input {
+  border-bottom: 2px solid #323232;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 15px;
+}
+
+.select-seller {
+  border-bottom: 2px solid #323232;
+  height: 50px;
+  width: 250px;
+}
+
+.select-seller option {
+  font-size: 20px;
+}
+
+.input-adress {
+  width: 500px;
+}
+
+
+.input-number {
+  width: 150px;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 40%;
+  margin-top: 120px;
+  position: absolute;
+  text-align: left;
+}
+
+.end-button {
+  background-color: #0C7135;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  height: 60px;
+  margin-left: 40%;
+  margin-top: 250px;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  width: 400px;
+}
+
+.end-button:hover {
+  background-color: #04461e;
+  transition: .5s;
 }
