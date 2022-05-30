@@ -1,31 +1,41 @@
+.checkout {
+  background-color: #fff;
+  height: 100vh;
+  /* overflow: hidden; */
+  width: 100vw;
+}
+
 .container-table {
-  background-color: #f0f0f0;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
-  height: 500px;
-  max-height: 900px;
+  min-height: 500px;
+  max-height: 800px;
   position: relative;
 }
 
 .container-table h1 {
-  margin-left: 15px;
+  margin-left: 40px;
   margin-top: 50px;
 }
 
 
 .container-table table {
-  border: groove;
+  background-color: #f0f0f0;
+  box-shadow: 7px 7px 13px rgba(50, 50, 50, 0.22);
+  font-size: 20px;
   height: 200px;
+  margin-left: 30px;
   margin-top: 100px;
-  padding: 15px;
+  padding: 20px;
   position: absolute;
-  width: 100%
+  text-align: center;
+  width: 95%
 }
 
-.container-table table, th, td {
-  /* border: 1px solid black; */
-  font-size: 20px;
-  text-align: center;
+.container-table table, td {
+  border-radius: 5px;
+  height: 40px;
 }
 
 .table-item {
@@ -54,6 +64,7 @@
 
 .table-remove-item button {
   background-color: #e4c70b;
+  border-radius: 5px;
   color: #fff;
   cursor: pointer;
   font-size: 20px;
@@ -69,36 +80,40 @@
 .total-price {
   background-color: #0C7135;
   border-radius: 15px;
+  bottom: 20px;
   color: #fff;
   font-weight: bold;
-  margin-top: 400px;
   padding: 20px;
   position: absolute;
-  right: 30px;
+  right: 70px;
   text-align: center;
   width: 300px;
 }
 
 .container-form {
-  background-color: #f0f0f0;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   height: 400px;
 }
 
 .container-form h1 {
-  margin-left: 15px;
-  margin-top: 30px;
+  margin-left: 40px;
+  margin-top: 20px;
 }
 
 .delivery-form {
+  background-color: #f0f0f0;
+  box-shadow: 7px 7px 13px rgba(50, 50, 50, 0.22);
   align-items: center;
   display: flex;
   flex-direction: row;
   margin-bottom: 150px;
-  margin-left: 50px;
-  margin-top: 60px;
+  margin-left: 40px;
+  margin-top: 40px;
+  padding: 50px;
   position: relative;
+  width: 95%;
 }
 
 .delivery-form label {
@@ -154,12 +169,13 @@
   font-size: 16px;
   font-weight: bold;
   height: 60px;
-  margin-left: 40%;
-  margin-top: 250px;
+  left: 50%;
+  margin-left: -200px;
+  margin-top: 300px;
   position: absolute;
   text-align: center;
   text-transform: uppercase;
-  width: 400px;
+  width: 350px;
 }
 
 .end-button:hover {

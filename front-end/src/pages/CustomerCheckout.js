@@ -7,8 +7,10 @@ function CustomerCheckout() {
   return (
     <>
       <Navbar />
-      <TableProductsCart />
-      <DeliveryDetails />
+      <main className="checkout">
+        <TableProductsCart />
+        <DeliveryDetails />
+      </main>
     </>
   );
 }

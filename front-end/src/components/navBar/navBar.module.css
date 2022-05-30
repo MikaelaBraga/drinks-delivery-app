@@ -1,6 +1,4 @@
-nav {
-  align-items: center;
-  border: 2px solid black;
+.navBar {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -10,12 +8,51 @@ nav {
 }
 
 nav img {
-  max-height: 80px;
-  margin: 10px;
+  max-height: 50px;
+  margin: 5px;
   margin-left: 40px;
 }
 
-nav ul, li {
+.div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.item, a {
+  color: black;
+  margin-left: 15px;
   text-decoration: none;
 }
 
+.divButton {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+}
+
+button {
+  margin-right: 50px;
+  color: black;
+  background-color: #F6E266;
+  padding-left: 45px;
+  border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button:hover {
+  color: white;
+}
+
+.item a:hover {
+  color: white;
+  background-color: #105f2f;
+  margin: 20px;
+  border-radius: 10px;
+}

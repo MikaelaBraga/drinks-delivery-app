@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useCheckRole from '../hooks/navBar/checkRole';
 import deliveryDrinksLogo from '../../images/drinksDelivery.png';
-import './navBar.module.css';
+import styles from './navBar.module.css';
 
 function Navbar() {
   const [isUser, isSeller, isAdmin] = useCheckRole();
@@ -11,7 +11,7 @@ function Navbar() {
   function navBarUser() {
     return (
       <>
-        <li>
+        <li className={ styles.item }>
           <Link
             data-testid="customer_products__element-navbar-link-products"
             to="/customer/products"
@@ -19,7 +19,7 @@ function Navbar() {
             Produtos
           </Link>
         </li>
-        <li>
+        <li className={ styles.item }>
           <Link
             data-testid="customer_products__element-navbar-link-orders"
             to="/customer/orders"
@@ -33,7 +33,7 @@ function Navbar() {
 
   function navBarSeller() {
     return (
-      <li>
+      <li className={ styles.item }>
         <Link
           data-testid="customer_products__element-navbar-link-orders"
           to="/seller/orders"
@@ -46,7 +46,7 @@ function Navbar() {
 
   function navBarAdmin() {
     return (
-      <li>
+      <li className={ styles.item }>
         <Link
           data-testid="customer_products__element-navbar-link-products"
           to="/admin/manage"
@@ -58,28 +58,33 @@ function Navbar() {
   }
 
   return (
-    <nav>
+    <nav className={ styles.navBar }>
       <img src={ deliveryDrinksLogo } alt="logo delivery drinks" />
-
-      <ul>
-        { isUser && navBarUser() }
-        { isSeller && navBarSeller() }
-        { isAdmin && navBarAdmin() }
-        <li
-          data-testid="customer_products__element-navbar-user-full-name"
-        >
-          { name }
-        </li>
+      <ul className={ styles.list }>
+        <div className={ styles.div }>
+          { isUser && navBarUser() }
+          { isSeller && navBarSeller() }
+          { isAdmin && navBarAdmin() }
+          <li
+            className={ styles.item }
+            data-testid="customer_products__element-navbar-user-full-name"
+          >
+            { name }
+          </li>
+        </div>
       </ul>
-      <Link to="/">
-        <button
-          data-testid="customer_products__element-navbar-link-logout"
-          type="button"
-          onClick={ () => localStorage.clear() }
-        >
-          Sair
-        </button>
-      </Link>
+      <div className={ styles.divButton }>
+        <Link to="/">
+          <button
+            data-testid="customer_products__element-navbar-link-logout"
+            className={ styles.button }
+            type="button"
+            onClick={ () => localStorage.clear() }
+          >
+            Sair
+          </button>
+        </Link>
+      </div>
     </nav>
   );
 }
