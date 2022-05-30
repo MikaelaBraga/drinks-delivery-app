@@ -6,7 +6,9 @@ function OrderDetails() {
   return (
     <>
       <Navbar />
-      <TableOrderDetails />
+      <div className="order-detail">
+        <TableOrderDetails />
+      </div>
     </>
   );
 }

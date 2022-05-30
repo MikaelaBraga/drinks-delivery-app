@@ -1,7 +1,9 @@
+/* eslint-disable react/jsx-max-depth */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../../services/api';
 import useStatusOrder from '../hooks/orderDetails/useStatusOrder';
+import './orderDetail.css';
 
 function TableOrderDetails() {
   const [orders, setOrders] = useState({});
@@ -34,11 +36,11 @@ function TableOrderDetails() {
   const newDate = new Date(dateInput);
 
   return (
-    <div>
+    <div className="container-order-table">
       <h1>Detalhe do Pedido</h1>
       <table key={ orders.id }>
         <thead>
-          <tr>
+          <tr className="table-order-info">
             <th
               data-testid="customer_order_details__element-order-details-label-order-id"
             >
@@ -60,15 +62,17 @@ function TableOrderDetails() {
             >
               { orders.status }
             </th>
-            <button
-              type="button"
-              onClick={ () => handleSubmit() }
-              data-testid="customer_order_details__button-delivery-check"
-              disabled={ orders.status === 'Pendente' || orders.status === 'Preparando'
+            <th className="change-status-button">
+              <button
+                type="button"
+                onClick={ () => handleSubmit() }
+                data-testid="customer_order_details__button-delivery-check"
+                disabled={ orders.status === 'Pendente' || orders.status === 'Preparando'
               || orders.status === 'Entregue' }
-            >
-              Marcar como entregue
-            </button>
+              >
+                Marcar como entregue
+              </button>
+            </th>
           </tr>
           <tr>
             <th>Item</th>
@@ -83,6 +87,7 @@ function TableOrderDetails() {
             orders.products && orders.products.map((op, index) => (
               <tr key={ index }>
                 <td
+                  className="table-order-item"
                   data-testid={
                     `customer_order_details__element-order-table-item-number-${index}`
                   }
@@ -90,6 +95,7 @@ function TableOrderDetails() {
                   { index + 1 }
                 </td>
                 <td
+                  className="table-order-name"
                   data-testid={
                     `customer_order_details__element-order-table-name-${index}`
                   }
@@ -97,6 +103,7 @@ function TableOrderDetails() {
                   { op.name }
                 </td>
                 <td
+                  className="table-order-quantity"
                   data-testid={
                     `customer_order_details__element-order-table-quantity-${index}`
                   }
@@ -104,30 +111,35 @@ function TableOrderDetails() {
                   { op.quantity.quantity }
                 </td>
                 <td
+                  className="table-order-unitPrice"
                   data-testid={
                     `customer_order_details__element-order-table-unit-price-${index}`
                   }
                 >
-                  { op.price }
+                  { `R$ ${op.price}` }
 
                 </td>
                 <td
+                  className="table-order-subTotal"
                   data-testid={
                     `customer_order_details__element-order-sub-total-${index}`
                   }
                 >
-                  { ((op.quantity.quantity) * (op.price)).toFixed(2) }
+                  { `R$ ${((op.quantity.quantity) * (op.price)).toFixed(2)}` }
                 </td>
               </tr>
             ))
           }
         </tbody>
       </table>
-      <p
-        data-testid="customer_order_details__element-order-total-price"
-      >
-        { `${orders.totalPrice}`.replace('.', ',') }
-      </p>
+      <div className="order-total-price">
+        <p
+          data-testid="customer_order_details__element-order-total-price"
+        >
+          { `Total: R$ ${orders.totalPrice}`.replace('.', ',') }
+        </p>
+
+      </div>
     </div>
   );
 }
