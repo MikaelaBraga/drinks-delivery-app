@@ -7,17 +7,19 @@
   padding: 0;
 }
 
-body, html {
+.login-page {
+  align-items: center;
   background-color: #0C7135;
-  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
 }
 
 .container-login {
   background-color: #fff;
   border-radius: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10vh;
   padding: 20px 30px;
   text-align: center;
   width: 400px

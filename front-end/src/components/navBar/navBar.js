@@ -61,17 +61,15 @@ function Navbar() {
     <nav className={ styles.navBar }>
       <img src={ deliveryDrinksLogo } alt="logo delivery drinks" />
       <ul className={ styles.list }>
-        <div className={ styles.div }>
-          { isUser && navBarUser() }
-          { isSeller && navBarSeller() }
-          { isAdmin && navBarAdmin() }
-          <li
-            className={ styles.item }
-            data-testid="customer_products__element-navbar-user-full-name"
-          >
-            { name }
-          </li>
-        </div>
+        { isUser && navBarUser() }
+        { isSeller && navBarSeller() }
+        { isAdmin && navBarAdmin() }
+        <li
+          className={ styles.item }
+          data-testid="customer_products__element-navbar-user-full-name"
+        >
+          { name }
+        </li>
       </ul>
       <div className={ styles.divButton }>
         <Link to="/">

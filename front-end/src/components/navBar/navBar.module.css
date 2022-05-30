@@ -1,58 +1,63 @@
 .navBar {
+  background-color: #0C7135;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 10px;
-  width: 100%;
-  z-index: 99;
+  justify-content: end;
+  height: 70px;
+  position: relative;
 }
 
-nav img {
-  max-height: 50px;
-  margin: 5px;
-  margin-left: 40px;
-}
-
-.div {
-  display: flex;
-  justify-content: space-between;
-}
+.navBar img {
+    max-height: 50px;
+    margin: 10px;
+    padding: 3px;
+    position: absolute;
+    left: 3%;
+  }
 
 .list {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   list-style: none;
 }
 
 .item, a {
-  color: black;
-  margin-left: 15px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
   text-decoration: none;
 }
 
-.divButton {
-  display: flex;
+.item ul, li {
   align-items: center;
-  margin-right: 50px;
-}
-
-button {
-  margin-right: 50px;
-  color: black;
-  background-color: #F6E266;
-  padding-left: 45px;
-  border-radius: 10px;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-button:hover {
-  color: white;
+  display: flex;
+  justify-content: center;
+  width: 220px;
 }
 
 .item a:hover {
-  color: white;
-  background-color: #105f2f;
-  margin: 20px;
-  border-radius: 10px;
 }
+
+.divButton {
+  background-color: #e4c70b;
+  display: flex;
+  justify-content: center;
+}
+
+.divButton button {
+  background-color: #e4c70b;
+  color: #fff;
+  cursor: pointer;
+  font-size: 26px;
+  font-weight: bold;
+  height: 100%;
+  text-align: center;
+  text-decoration: none;
+  width: 200px;
+}
+
+.divButton button:hover {
+  background-color: #c9ae02;
+}
+

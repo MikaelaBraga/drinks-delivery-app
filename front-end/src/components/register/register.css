@@ -1,12 +1,21 @@
 .container-register {
   background-color: #fff;
   border-radius: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10vh;
+  /* margin-left: auto;
+  margin-right: auto; */
   padding: 20px 30px;
   text-align: center;
   width: 400px
+}
+
+.register-page {
+  align-items: center;
+  background-color: #0C7135;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
 }
 
 .container-register img {

@@ -4,11 +4,12 @@ import Navbar from '../components/navBar/navBar';
 
 function CustomerProductsCards() {
   return (
-    <body>
+    <>
       <Navbar />
-      <ProductCard />
-    </body>
-
+      <div className="products-page">
+        <ProductCard />
+      </div>
+    </>
   );
 }
 

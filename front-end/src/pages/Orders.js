@@ -9,11 +9,11 @@ function OrdersPage() {
   return (
     <>
       <Navbar />
-      <main className="orders">
+      <div className="orders">
         { orders && orders.map((order, index) => (
           <Orders order={ order } index={ index } key={ index } />
         )) }
-      </main>
+      </div>
     </>
   );
 }
