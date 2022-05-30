@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import loginValidate from './validate/loginValidate';
 import api from '../../services/api';
 import deliveryDrinksLogo from '../../images/drinksDelivery.png';
@@ -90,16 +90,14 @@ function Login() {
         >
           Login
         </button>
-
         <button
           className="button-register"
           onClick={ () => navigate('/register') }
           data-testid="common_login__button-register"
           type="button"
         >
-          <Link to="/register">Ainda não tenho conta</Link>
+          Ainda não tenho conta
         </button>
-
       </form>
     </div>
   );
