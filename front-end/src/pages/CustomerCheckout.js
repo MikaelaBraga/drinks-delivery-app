@@ -5,13 +5,11 @@ import DeliveryDetails from '../components/customerCheckout/DeliveryDetails';
 
 function CustomerCheckout() {
   return (
-    <>
+    <div className="checkout">
       <Navbar />
-      <main className="checkout">
-        <TableProductsCart />
-        <DeliveryDetails />
-      </main>
-    </>
+      <TableProductsCart />
+      <DeliveryDetails />
+    </div>
   );
 }
 

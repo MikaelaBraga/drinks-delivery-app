@@ -7,14 +7,12 @@ function OrdersPage() {
   const [orders] = useRequestOrders();
 
   return (
-    <>
+    <div className="orders">
       <Navbar />
-      <div className="orders">
-        { orders && orders.map((order, index) => (
-          <Orders order={ order } index={ index } key={ index } />
-        )) }
-      </div>
-    </>
+      { orders && orders.map((order, index) => (
+        <Orders order={ order } index={ index } key={ index } />
+      )) }
+    </div>
   );
 }
 

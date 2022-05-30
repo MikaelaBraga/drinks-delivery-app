@@ -2,11 +2,12 @@
   background-color: #fff;
   display: flex;
   flex-wrap: wrap;
-  height: 100vh;
-  width: 100vw;
+  /* height: 100vh; */
+  /* width: 100vw; */
 }
 
 .saleCard {
+  border: 1px solid black;
   background-color: #f0f0f0;
   border-left: 3px solid #3bb54a;
   border-radius: 5px;

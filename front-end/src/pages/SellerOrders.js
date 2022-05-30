@@ -7,14 +7,12 @@ function SellerOrders() {
   const [sales] = useRequestSalesSeller();
 
   return (
-    <>
+    <div className="sales">
       <Navbar />
-      <div className="sales">
-        { sales && sales.map((sale, index) => (
-          <SaleCardSeller sale={ sale } index={ index } key={ index } />
-        ))}
-      </div>
-    </>
+      { sales && sales.map((sale, index) => (
+        <SaleCardSeller sale={ sale } index={ index } key={ index } />
+      ))}
+    </div>
   );
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import useRequestSaleById from '../hooks/sales/useRequestSaleById';
 import api from '../../services/api';
+import './saleDetail.css';
 
 function SaleDetail() {
   const { token } = JSON.parse(localStorage.getItem('user'));

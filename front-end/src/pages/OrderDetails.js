@@ -4,12 +4,10 @@ import TableOrderDetails from '../components/order-details/tableOrderDetails';
 
 function OrderDetails() {
   return (
-    <>
+    <div className="order-detail">
       <Navbar />
-      <div className="order-detail">
-        <TableOrderDetails />
-      </div>
-    </>
+      <TableOrderDetails />
+    </div>
   );
 }
 
