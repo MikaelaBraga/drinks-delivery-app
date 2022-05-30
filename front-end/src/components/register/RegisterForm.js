@@ -78,6 +78,12 @@ function Register() {
             </p>
           </label>
         </div>
+        <p
+          className="invalid-register"
+          data-testid="common_register__element-invalid_register"
+        >
+          { invalidRegister?.message }
+        </p>
         <button
           data-testid="common_register__button-register"
           type="submit"
@@ -85,9 +91,6 @@ function Register() {
         >
           CADASTRAR
         </button>
-        <p data-testid="common_register__element-invalid_register">
-          { invalidRegister?.message }
-        </p>
       </form>
 
     </div>
