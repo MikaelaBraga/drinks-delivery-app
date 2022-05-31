@@ -2,8 +2,8 @@
   background-color: #fff;
   display: flex;
   flex-wrap: wrap;
-  height: 100vh;
-  width: 100vw;
+  /* height: 100vh; */
+  /* width: 100vw; */
 }
 
 .order-card {
@@ -13,12 +13,11 @@
   box-shadow: 7px 7px 13px rgba(50, 50, 50, 0.22);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
   justify-content: center;
   margin: 30px;
   min-height: 125px;
   min-width: 250px;
-  width: 350px;
+  width: 400px;
 }
 
 @media (max-width: 330px) {
@@ -29,6 +28,12 @@
   }
 }
 
+.order-card:hover {
+  transition: 0.5s;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
 .order-number {
   align-items: center;
   display: flex;
@@ -37,9 +42,23 @@
 
 .order-status {
   align-items: center;
+  border-radius: 3px;
   display: flex;
   justify-content: center;
   padding: 5px;
+}
+
+.order-status h3 {
+  font-size: 22px;
+  color: #fff;
+  padding: 5px;
+}
+
+.order-number {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .order-number p {

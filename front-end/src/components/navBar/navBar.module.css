@@ -29,15 +29,18 @@
   text-decoration: none;
 }
 
+.item a:hover {
+  transition: 0.5s;
+  opacity: 0.6;
+  font-size: 28px;
+}
+
 .item ul, li {
   align-items: center;
   display: flex;
   justify-content: center;
   width: 220px;
 }
-
-/* .item a:hover {
-} */
 
 .divButton {
   background-color: #e4c70b;

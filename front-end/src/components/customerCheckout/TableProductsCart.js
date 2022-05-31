@@ -92,12 +92,13 @@ function TableProductsCart() {
         </tbody>
       </table>
 
-      <h2
-        className="total-price"
-        data-testid="customer_checkout__element-order-total-price"
-      >
-        { `Total: R$ ${parseFloat(totalPrice).toFixed(2)}`.replace('.', ',') }
-      </h2>
+      <div className="total-price">
+        <h2
+          data-testid="customer_checkout__element-order-total-price"
+        >
+          { `Total: R$ ${parseFloat(totalPrice).toFixed(2)}`.replace('.', ',') }
+        </h2>
+      </div>
     </div>
   );
 }

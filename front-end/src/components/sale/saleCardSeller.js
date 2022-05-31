@@ -9,9 +9,22 @@ function SaleCardSeller(props) {
   const { id, status, saleDate, totalPrice, deliveryAddress, deliveryNumber } = sale;
 
   useEffect(() => {
-    if (status === 'Pendente') setStatusColor('orange');
-    if (status === 'Preparando') setStatusColor('yellow');
-    if (status === 'Em trânsito') setStatusColor('green');
+    switch (status) {
+    case 'Pendente':
+      setStatusColor('orange');
+      break;
+    case 'Preparando':
+      setStatusColor('#e4c70b');
+      break;
+    case 'Em Trânsito':
+      setStatusColor('#2da0ec');
+      break;
+    case 'Entregue':
+      setStatusColor('#3bb54a');
+      break;
+    default:
+      break;
+    }
   }, [status]);
 
   const dateInput = saleDate;

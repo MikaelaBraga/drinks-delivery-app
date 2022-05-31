@@ -6,9 +6,11 @@
 }
 
 .container-sale-detail {
-  background-color: #fff;
+  background-color: #f0f0f0;
+  box-shadow: 7px 7px 13px rgba(50, 50, 50, 0.22);
   display: flex;
   flex-direction: column;
+  margin: 30px;
 }
 
 .container-sale-detail h1 {
@@ -17,12 +19,11 @@
 }
 
 .container-sale-detail table {
-  background-color: #f0f0f0;
-  box-shadow: 7px 7px 13px rgba(50, 50, 50, 0.22);
+  background-color: #fff;
   font-size: 20px;
   height: 200px;
   margin-left: 30px;
-  margin-top: 60px;
+  margin-top: 50px;
   padding: 20px;
   text-align: center;
   width: 95%
@@ -70,7 +71,8 @@
 }
 
 .sale-unitPrice {
-  background-color: #a6ddbc;
+  background-color: #6c946e;
+  color: #fff;
 }
 
 .sale-subTotal {

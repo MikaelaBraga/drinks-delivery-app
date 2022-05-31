@@ -6,12 +6,11 @@
 }
 
 .container-table {
-  background-color: #fff;
+  background-color: #f0f0f0;
+  box-shadow: 7px 7px 13px rgba(50, 50, 50, 0.11);
   display: flex;
   flex-direction: column;
-  min-height: 500px;
-  max-height: 800px;
-  position: relative;
+  margin: 30px;
 }
 
 .container-table h1 {
@@ -21,12 +20,10 @@
 
 
 .container-table table {
-  background-color: #f0f0f0;
-  box-shadow: 7px 7px 13px rgba(50, 50, 50, 0.11);
+  background-color: #fff;
   font-size: 20px;
-  height: 200px;
   margin-left: 30px;
-  margin-top: 100px;
+  margin-top: 50px;
   padding: 20px;
   text-align: center;
   width: 95%
@@ -58,7 +55,8 @@
 }
 
 .table-subtotal {
-  background-color: #a6ddbc;
+  background-color: #6c946e;
+  color: #fff;
 }
 
 .table-remove-item button {
@@ -77,23 +75,28 @@
 }
 
 .total-price {
+  display: flex;
+  justify-content: flex-end;
+  margin: 80px;
+}
+
+.total-price h2 {
   background-color: #0C7135;
   border-radius: 15px;
-  bottom: 20px;
   color: #fff;
   font-weight: bold;
   padding: 20px;
-  position: absolute;
-  right: 70px;
   text-align: center;
   width: 300px;
 }
 
 .container-form {
-  background-color: #fff;
+  background-color: #f0f0f0;
+  box-shadow: 7px 7px 13px rgba(50, 50, 50, 0.22);
   display: flex;
   flex-direction: column;
   height: 400px;
+  margin: 30px;
 }
 
 .container-form h1 {
@@ -102,16 +105,11 @@
 }
 
 .delivery-form {
-  background-color: #f0f0f0;
-  box-shadow: 7px 7px 13px rgba(50, 50, 50, 0.22);
   align-items: center;
   display: flex;
   flex-direction: row;
-  margin-bottom: 150px;
-  margin-left: 40px;
-  margin-top: 40px;
+  flex-wrap: wrap;
   padding: 50px;
-  position: relative;
   width: 95%;
 }
 

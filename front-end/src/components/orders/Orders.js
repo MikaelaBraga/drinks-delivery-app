@@ -9,9 +9,22 @@ function Orders(props) {
   const { id, status, saleDate, totalPrice } = order;
 
   useEffect(() => {
-    if (status === 'Pendente') setStatusColor('orange');
-    if (status === 'Preparando') setStatusColor('yellow');
-    if (status === 'Em trânsito') setStatusColor('green');
+    switch (status) {
+    case 'Pendente':
+      setStatusColor('orange');
+      break;
+    case 'Preparando':
+      setStatusColor('yellow');
+      break;
+    case 'Em Trânsito':
+      setStatusColor('#2da0ec');
+      break;
+    case 'Entregue':
+      setStatusColor('#3bb54a');
+      break;
+    default:
+      break;
+    }
   }, [status]);
 
   const dateInput = saleDate;
@@ -24,12 +37,12 @@ function Orders(props) {
       style={ { textDecoration: 'none', color: 'black' } }
     >
       <div className="order-card" key={ id }>
-        <div className="order-number">
-          <p
-            data-testid={ `customer_orders__element-order-id-${id}` }
-          >
-            { `Pedido 00${index + 1}` }
-          </p>
+        <div
+          className="order-number"
+          data-testid={ `customer_orders__element-order-id-${id}` }
+        >
+          <p>Pedido</p>
+          <span>{ `00${index + 1}` }</span>
         </div>
         <div className="order-status" style={ { backgroundColor: statusColor } }>
           <h3

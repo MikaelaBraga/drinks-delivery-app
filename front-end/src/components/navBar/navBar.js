@@ -11,7 +11,7 @@ function Navbar() {
   function navBarUser() {
     return (
       <>
-        <li className={ styles.item }>
+        <li className={ styles.item } style={ { backgroundColor: '#e5b94c' } }>
           <Link
             data-testid="customer_products__element-navbar-link-products"
             to="/customer/products"
@@ -19,7 +19,7 @@ function Navbar() {
             Produtos
           </Link>
         </li>
-        <li className={ styles.item }>
+        <li className={ styles.item } style={ { backgroundColor: '#6c946e' } }>
           <Link
             data-testid="customer_products__element-navbar-link-orders"
             to="/customer/orders"
@@ -33,7 +33,7 @@ function Navbar() {
 
   function navBarSeller() {
     return (
-      <li className={ styles.item }>
+      <li className={ styles.item } style={ { backgroundColor: '#e5b94c' } }>
         <Link
           data-testid="customer_products__element-navbar-link-orders"
           to="/seller/orders"
@@ -46,7 +46,7 @@ function Navbar() {
 
   function navBarAdmin() {
     return (
-      <li className={ styles.item }>
+      <li className={ styles.item } style={ { backgroundColor: '#e5b94c' } }>
         <Link
           data-testid="customer_products__element-navbar-link-products"
           to="/admin/manage"

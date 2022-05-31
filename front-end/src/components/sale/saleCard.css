@@ -7,7 +7,6 @@
 }
 
 .saleCard {
-  border: 1px solid black;
   background-color: #f0f0f0;
   border-left: 3px solid #3bb54a;
   border-radius: 5px;
@@ -30,6 +29,8 @@
 }
 
 .saleCard:hover {
+  transition: 0.5s;
+  opacity: 0.6;
   cursor: pointer;
 }
 
@@ -42,8 +43,15 @@
 
 .statusCard {
   align-items: center;
+  border-radius: 3px;
   display: flex;
   justify-content: center;
+  padding: 5px;
+}
+
+.statusCard h3 {
+  font-size: 22px;
+  color: #fff;
   padding: 5px;
 }
 
