@@ -4,6 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import registerUserValidate from './validate/registerUserValidate';
 import api from '../../services/api';
 import { AdminContext } from '../../context/AdminProvider';
+import './adminRegisterUser.css';
 
 function RegisterUserFormAdmin() {
   const { addNewUser } = useContext(AdminContext);
@@ -32,10 +33,10 @@ function RegisterUserFormAdmin() {
     });
 
   return (
-    <>
+    <div className="container-admin-register-user">
       <h1>Cadastrar novo usuário</h1>
 
-      <form onSubmit={ handleSubmit(onSubmit) }>
+      <form className="form-register-user" onSubmit={ handleSubmit(onSubmit) }>
         <label htmlFor="name">
           Nome
           <input
@@ -66,6 +67,7 @@ function RegisterUserFormAdmin() {
         <label htmlFor="role">
           Tipo
           <select
+            className="select-typeUser"
             name="role"
             data-testid="admin_manage__select-role"
             { ...register('role') }
@@ -75,25 +77,27 @@ function RegisterUserFormAdmin() {
           </select>
         </label>
         <button
+          className="button-register-user"
           type="submit"
           data-testid="admin_manage__button-register"
           disabled={ !isValid }
         >
           CADASTRAR
         </button>
-        <strong>
-          { errors.name?.message
+      </form>
+      <strong className="form-error-message">
+        { errors.name?.message
           || errors.email?.message
           || errors.password?.message
           || errors.role?.message }
-        </strong>
-        <strong
-          data-testid="admin_manage__element-invalid-register"
-        >
-          { userAlreadyExists?.message }
-        </strong>
-      </form>
-    </>
+      </strong>
+      <strong
+        className="form-error-message"
+        data-testid="admin_manage__element-invalid-register"
+      >
+        { userAlreadyExists?.message }
+      </strong>
+    </div>
   );
 }
 

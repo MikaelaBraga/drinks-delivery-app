@@ -1,0 +1,78 @@
+.admin-page {
+
+}
+
+.container-admin-register-user {
+  background-color: #f0f0f0;
+  box-shadow: 7px 7px 13px rgba(50, 50, 50, 0.22);
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+
+.container-admin-register-user h1 {
+  margin-left: 40px;
+  margin-top: 20px;
+}
+
+.container-admin-register-user strong {
+  text-align: center;
+  padding: 8px;
+}
+
+.form-register-user {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+  margin-left: 30px;
+  margin-top: 40px;
+  padding: 10px;
+  width: 95%;
+}
+
+.form-register-user label {
+  display: flex;
+  flex-direction: column;
+  font-size: .9rem;
+  font-weight: bold;
+  padding-right: 10px;
+}
+
+.form-register-user input {
+  border-bottom: 2px solid #323232;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 15px;
+}
+
+.select-typeUser {
+  border-bottom: 2px solid #323232;
+  font-size: 16px;
+  height: 50px;
+  width: 250px;
+}
+
+.select-typeUser option {
+  font-size: 16px;
+}
+
+.form-error-message {
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.button-register-user {
+  background-color: #0C7135;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  height: 60px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 250px;
+}
