@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import React from 'react';
 import useRequestSaleById from '../hooks/sales/useRequestSaleById';
 import api from '../../services/api';
@@ -26,51 +27,49 @@ function SaleDetail() {
   const newDate = new Date(dateInput);
   const dataTestidLabelStatus = 'order-details-label-delivery-status';
   return (
-    <div>
+    <div className="container-sale-detail">
       <h1>Detalhe do Pedido</h1>
 
-      { sale
-      && (
-        <div className="saleDetail">
-          <p
-            data-testid="seller_order_details__element-order-details-label-order-id"
-          >
-            { `Pedido 00${sale.id}` }
-          </p>
-          <p
-            data-testid="seller_order_details__element-order-details-label-order-date"
-          >
-            { newDate.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }) }
-          </p>
-          <strong
-            data-testid={ `seller_order_details__element-${dataTestidLabelStatus}` }
-          >
-            { sale?.status }
-          </strong>
-
-          <button
-            type="button"
-            data-testid="seller_order_details__button-preparing-check"
-            onClick={ () => handleClickPreparingCheck(sale.id) }
-            disabled={ sale?.status !== 'Pendente' }
-          >
-            Preparar Pedido
-          </button>
-
-          <button
-            type="button"
-            data-testid="seller_order_details__button-dispatch-check"
-            onClick={ () => handleClickDispatchCheck(sale.id) }
-            disabled={ sale?.status === 'Pendente' || sale?.status === 'Em Trânsito'
-          || sale?.status === 'Entregue' }
-          >
-            Saiu para entrega
-          </button>
-        </div>
-      )}
-
-      <table className="saleProducts">
+      <table>
         <thead>
+          <tr className="sale-detail-info">
+            <th
+              data-testid="seller_order_details__element-order-details-label-order-id"
+            >
+              { `Pedido 00${sale.id}` }
+            </th>
+            <th
+              data-testid="seller_order_details__element-order-details-label-order-date"
+            >
+              { newDate.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' }) }
+            </th>
+            <th
+              data-testid={ `seller_order_details__element-${dataTestidLabelStatus}` }
+            >
+              { sale?.status }
+            </th>
+            <th className="change-status-button">
+              <button
+                type="button"
+                data-testid="seller_order_details__button-preparing-check"
+                onClick={ () => handleClickPreparingCheck(sale.id) }
+                disabled={ sale?.status !== 'Pendente' }
+              >
+                Preparar Pedido
+              </button>
+            </th>
+            <th className="change-status-button">
+              <button
+                type="button"
+                data-testid="seller_order_details__button-dispatch-check"
+                onClick={ () => handleClickDispatchCheck(sale.id) }
+                disabled={ sale?.status === 'Pendente' || sale?.status === 'Em Trânsito'
+          || sale?.status === 'Entregue' }
+              >
+                Saiu para entrega
+              </button>
+            </th>
+          </tr>
           <tr>
             <th>Item</th>
             <th>Descrição</th>
@@ -83,6 +82,7 @@ function SaleDetail() {
           { products && products.map((p, index) => (
             <tr key={ index }>
               <td
+                className="sale-item"
                 data-testid={
                   `seller_order_details__element-order-table-item-number-${index}`
                 }
@@ -90,11 +90,13 @@ function SaleDetail() {
                 { index + 1 }
               </td>
               <td
+                className="sale-name"
                 data-testid={ `seller_order_details__element-order-table-name-${index}` }
               >
                 { p.name }
               </td>
               <td
+                className="sale-quantity"
                 data-testid={
                   `seller_order_details__element-order-table-quantity-${index}`
                 }
@@ -102,28 +104,32 @@ function SaleDetail() {
                 { p.quantity.quantity }
               </td>
               <td
+                className="sale-unitPrice"
                 data-testid={
                   `seller_order_details__element-order-table-unit-price-${index}`
                 }
               >
-                { p.price }
+                { `R$ ${p.price}` }
               </td>
               <td
+                className="sale-subTotal"
                 data-testid={
                   `seller_order_details__element-order-table-sub-total-${index}`
                 }
               >
-                { ((p.quantity.quantity) * (p.price)).toFixed(2) }
+                { `R$ ${((p.quantity.quantity) * (p.price)).toFixed(2)}` }
               </td>
             </tr>
           )) }
         </tbody>
       </table>
-      <strong
-        data-testid="seller_order_details__element-order-total-price"
-      >
-        { `${sale.totalPrice}`.replace('.', ',') }
-      </strong>
+      <div className="sale-totalPrice">
+        <strong
+          data-testid="seller_order_details__element-order-total-price"
+        >
+          { `Total: R$ ${sale.totalPrice}`.replace('.', ',') }
+        </strong>
+      </div>
     </div>
   );
 }

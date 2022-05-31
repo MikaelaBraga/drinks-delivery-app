@@ -4,3 +4,96 @@
   overflow: hidden;
   width: 100vw;
 }
+
+.container-sale-detail {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-sale-detail h1 {
+  margin-left: 40px;
+  margin-top: 50px;
+}
+
+.container-sale-detail table {
+  background-color: #f0f0f0;
+  box-shadow: 7px 7px 13px rgba(50, 50, 50, 0.22);
+  font-size: 20px;
+  height: 200px;
+  margin-left: 30px;
+  margin-top: 60px;
+  padding: 20px;
+  text-align: center;
+  width: 95%
+}
+
+.container-sale-detail table, th {
+  border-radius: 5px;
+  height: 40px;
+}
+
+.sale-detail-info th {
+  background-color: #a6ddbc;
+}
+
+.change-status-button button {
+  background-color: #e9c009;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  height: 100%;
+  text-align: center;
+}
+
+.container-sale-detail table, td {
+  border-radius: 5px;
+  height: 40px;
+}
+
+.sale-item {
+  background-color: #0C7135;
+  color: #fff;
+  font-weight: bold;
+}
+
+.sale-name {
+  background-color: #a6ddbc;
+}
+
+.sale-quantity {
+  background-color: #0C7135;
+  color: #fff;
+  font-weight: bold;
+}
+
+.sale-unitPrice {
+  background-color: #a6ddbc;
+}
+
+.sale-subTotal {
+  background-color: #e9c009;
+  color: #fff;
+  font-weight: bold;
+}
+
+.sale-totalPrice {
+  display: flex;
+  justify-content: flex-end;
+  margin: 80px;
+}
+
+.sale-totalPrice strong {
+  background-color: #0C7135;
+  border-radius: 15px;
+  /* bottom: 20px; */
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 15px;
+  right: 70px;
+  text-align: center;
+  width: 250px;
+}
