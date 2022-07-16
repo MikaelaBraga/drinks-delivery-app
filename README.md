@@ -43,10 +43,5 @@ Você pode conferir a apresentação em [slide neste link](https://www.canva.com
 ```cd drinks-delivery-app```
 3. Instale as dependências
 ```npm install```
-4. Faça o checkout para a branch
-```git checkout main-group-3-delivery-app```
 5. Inicie o client
 ```npm run dev```
-
----
-## Agradecimentos
