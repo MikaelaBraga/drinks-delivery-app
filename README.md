@@ -43,5 +43,7 @@ Você pode conferir a apresentação em [slide neste link](https://www.canva.com
 ```cd drinks-delivery-app```
 3. Instale as dependências
 ```npm install```
+> set as variáveis de ambiente do banco no arquivo back-end/.env com as configuraçãoes do seu banco (MySql) localmente (Workbench, Docker, etc.).
 5. Inicie o client
 ```npm run dev```
+
